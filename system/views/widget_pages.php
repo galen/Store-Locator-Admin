@@ -1,0 +1,1 @@
+<p><?php if( $vars['prev_page'] ): ?><a href="<?php e( sprintf( '%s/page/%s/', URL_PAGE_BASE, $vars['prev_page'] ) ) ?>"><</a> <?php endif; ?>Page <?php e( $vars['current_page'] ) ?> of <?php e( $vars['total_pages'] ) ?><?php if( $vars['next_page'] ): ?> <a href="<?php e( sprintf( '%s/page/%s/' , URL_PAGE_BASE, $vars['next_page'] ) ) ?>">></a><?php endif; ?></p>

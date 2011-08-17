@@ -1,9 +1,7 @@
 <?php
 
 if ( isset( $_POST['save'] ) ) {
-	
-	$store_save = new Store( COLUMN_ID, COLUMN_LAT, COLUMN_LNG,array_intersect_key( $_POST,array_combine( $vars['table_columns'], array_fill( 0, count( $vars['table_columns'] ), '!' ) ) ) );
-
+	$store_save = new Store( $config['column_map'], array_intersect_key( $_POST,array_combine( $vars['table_columns'], array_fill( 0, count( $vars['table_columns'] ), '!' ) ) ) );
 	if ( $stg->saveStore( $store_save ) ) {
 		$status_message->setStatus( 'success' );
 		$status_message->setMessage( 'The store has been saved' );
@@ -12,7 +10,6 @@ if ( isset( $_POST['save'] ) ) {
 		$status_message->setStatus( 'error' );
 		$status_message->setMessage( 'Error saving the store' );
 	}
-	
 }
 
 $store = $stg->getStore( $vars['store_id'] );
@@ -20,7 +17,9 @@ $store = $stg->getStore( $vars['store_id'] );
 require( DIR_LIB . '/PHPGoogleMaps/Core/Autoloader.php' );
 $map_loader = new SplClassLoader( 'PHPGoogleMaps', DIR_LIB );
 $map_loader->register();
+
 $map = new \PHPGoogleMaps\Map( array( 'width' => '600px', 'height' => '300px' ) );
+
 if ( $store->isGeocoded() ) {
 	$marker = \PHPGoogleMaps\Overlay\Marker::createFromPosition( new \PHPGoogleMaps\Core\LatLng( $store->getLat(), $store->getLng() ), array( 'draggable' => true ) );
 	$marker_map = $map->addObject( $marker );
@@ -31,9 +30,16 @@ if ( $store->isGeocoded() ) {
 	$map->setZoom( 14 );
 }
 else {
-	$map->setCenter( \PHPGoogleMaps\Service\Geocoder::geocode( 'USA' ) );
+	$location = sprintf( "%s, %s%s",  $store->getCity(), $store->getState() ? $store->getState().', ' : '', $store->getCountry() );
+	if ( ( $geocode = \PHPGoogleMaps\Service\Geocoder::geocode( $location ) ) instanceof \PHPGoogleMaps\Service\GeocodeResult ) {
+		$map->setCenter( $geocode );
+		$map->setZoom( 9 );
+	}
+	else {
+		$map->setCenter( new \PHPGoogleMaps\Core\LatLng( 23, 23 ) );
+		$map->setZoom( 1 );
+	}
 	$map->disableAutoEncompass();
-	$map->setZoom( 1 );
 }
 
 

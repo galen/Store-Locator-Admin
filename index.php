@@ -8,12 +8,7 @@ define( 'REQUEST_IS_AJAX',			(bool)isset( $_SERVER['HTTP_X_REQUESTED_WITH'] ) &&
 
 // Connect to the database
 require( DIR_SYSTEM . '/core/Db.php' );
-try {
-	$db = new PDO( sprintf( 'mysql:dbname=%s;host=%s', 'development', 'localhost' ), 'mysql', 'mariokartyoshi' );
-}
-catch ( PDOException $e ) {
-	print_r( $e );
-}
+$db = Db::connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME ) or die( 'error connecting to database' );
 
 // Require necessary files
 require( DIR_SYSTEM . '/models/StoreTableGateway.php' );
@@ -26,11 +21,11 @@ require( DIR_LIB . '/FormStatusMessage/FormStatusMessage.php' );
 $status_message = new FormStatusMessage;
 
 // Create a new table gateway
-$stg = new StoreTableGateway( $db, STORE_LOCATIONS_TABLE );
+$stg = new StoreTableGateway( $db, STORE_LOCATIONS_TABLE, $config['column_map'] );
 
 // Get the column names from the table
 $vars['table_columns'] = $stg->getColumns();
-$vars['table_columns_list'] = array_diff( $vars['table_columns'], array( COLUMN_ID, COLUMN_LAT, COLUMN_LNG ) );
+$vars['table_columns_list'] = array_diff( $vars['table_columns'], array( $config['column_map']['id'],$config['column_map']['lat'],$config['column_map']['lng'] ) );
 
 // find appropriate route
 foreach( $routes as $url => $action ) {

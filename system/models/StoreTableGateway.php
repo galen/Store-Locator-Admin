@@ -4,12 +4,12 @@ class StoreTableGateway {
 
 	protected $db;
 	protected $table;
+	protected $column_map;
 	
-	public function __construct( PDO $db, $table ) {
-	
+	public function __construct( PDO $db, $table, array $column_map ) {
 		$this->db = $db;
 		$this->table = $table;
-	
+		$this->column_map = $column_map;
 	}
 
 	public function getCount( array $search_params=null ) {
@@ -38,7 +38,7 @@ class StoreTableGateway {
 			}
 		}
 		$stmnt->execute();
-		return $stmnt->fetchAll( PDO::FETCH_CLASS, 'Store', array( COLUMN_ID, COLUMN_LAT, COLUMN_LNG ) );
+		return $stmnt->fetchAll( PDO::FETCH_CLASS, 'Store', array( $this->column_map ) );
 	
 	}
 
@@ -54,18 +54,16 @@ class StoreTableGateway {
 	}
 
 	public function getStore( $id ) {
-		
 		$sql = sprintf( 'select * from %s where id=:id', $this->table );
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->bindValue( ':id', $id, PDO::PARAM_INT );
 		$stmnt->execute();
-		return $stmnt->fetchObject( 'Store', array( COLUMN_ID, COLUMN_LAT, COLUMN_LNG ) );
-
+		return $stmnt->fetchObject( 'Store', array( $this->column_map ) );
 	}
 
 	function deleteStore( $id ) {
 	
-		$sql = sprintf( 'delete from %s where %s = :id', $this->table, COLUMN_ID );
+		$sql = sprintf( 'delete from %s where %s = :id', $this->table, $this->column_map['id'] );
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->bindValue( ':id', $id );
 		if( $stmnt->execute() && $stmnt->rowCount() ) {

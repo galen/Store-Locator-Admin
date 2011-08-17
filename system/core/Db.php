@@ -15,9 +15,14 @@ class Db extends PDO {
 			return parent::__construct($dsn, $user, $pw, $driver_options);
 		}
 		catch (PDOException $e) {
-			throw $e;
+			return false;
 		}
 
+	}
+
+	static function connect( $host, $user, $pw, $db, $persistent=false, $charset='utf8' ) {
+		$dsn = sprintf( 'mysql:dbname=%s;host=%s', $db, $host );
+		return new self( $host, $user, $pw, $db, $persistent, $charset );
 	}
 
 }

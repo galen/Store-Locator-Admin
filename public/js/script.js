@@ -1,5 +1,21 @@
 $(document).ready(function(){
 
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
 
 $(".delete_store").click(function(){
 	var answer = confirm( "Delete store #" + $(this).data("id") + "?" );
@@ -26,16 +42,20 @@ $(".delete_store").click(function(){
 
 $(".geocode").click(function(){
 
-	obj = $(this);
+	var obj = $(this);
+	var form_data = {};
+
 	$.get(
 		"/admin/system/ajax/geocode.php",
-		{ address: $("#address1").val() + " " + $("#city").val() + " " + $("#country").val() },
+		$("#store_edit input:text").serializeObject(),
 		function(data) {
 			if ( data.status == 1 ) {
 				$("#lat").val( data.lat );
 				$("#lng").val( data.lng );
 				if ( map.markers ) {
 					map.markers[0].setPosition( new google.maps.LatLng( data.lat, data.lng ) );
+					map.map.setCenter( new google.maps.LatLng( data.lat, data.lng ) );
+					map.map.setZoom( 14 );
 				}
 				else {
 					var marker = new google.maps.Marker({

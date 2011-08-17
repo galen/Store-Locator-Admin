@@ -2,13 +2,13 @@
 <?php require( DIR_SYSTEM . '/views/widget_navigation.php' ) ?>
 
 <h2>Editing Store #<?php echo $store->getID() ?></h2>
-<form action="" method="post">
+<form action="" method="post" id="store_edit">
 
 	<fieldset>
 		<?php if ( $status_message->getStatus() ): ?>
 		<p id="status_message" class="<?php echo $status_message->getStatuses() ?>"><?php echo $status_message->getMessage(); ?></p>
 		<?php endif; ?>
-		<input type="hidden" name="<?php echo COLUMN_ID ?>" value="<?php echo $store->getID() ?>">
+		<input type="hidden" name="<?php echo $config['column_map']['id'] ?>" value="<?php echo $store->getID() ?>" id="store_id">
 		<?php foreach( $store->getEditableProperties() as $property ): ?>
 		<div>
 			<label><?php echo prettify_var( $property ) ?></label>

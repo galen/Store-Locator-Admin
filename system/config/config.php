@@ -6,9 +6,20 @@ ini_set( 'display_errors', 'On' );
 define( 'STORE_LOCATIONS_TABLE',	'store_locations' );
 define( 'STORES_PER_PAGE',			100 );
 
-define( 'COLUMN_LAT',				'lat' );
-define( 'COLUMN_LNG',				'lng' );
-define( 'COLUMN_ID',				'id' );
+$config['column_map'] = array (
+	'lat'		=> 'lat',
+	'lng'		=> 'lng',
+	'id'		=> 'id',
+	'address1'	=> 'address1',
+	'city'		=> 'city',
+	'state'		=> 'state',
+	'country'	=> 'country'
+);
+
+define( 'DB_USER',					'dev' );
+define( 'DB_PASSWORD',				'devenvpw!' );
+define( 'DB_HOST',					'localhost' );
+define( 'DB_NAME',					'development' );
 
 define( 'DIR_BASE',		 			dirname( dirname( __DIR__ ) ) );
 define( 'DIR_SYSTEM',	 			dirname( __DIR__ ) );

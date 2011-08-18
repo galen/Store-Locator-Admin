@@ -1,22 +1,16 @@
 <?php
 
-/*
-$search_params = array (
-	array( 'country', '=', 'US' ),
-	array( 'state', '=', 'CT' )
-);
-*/
+$vars['search_params'] = isset( $_GET['search_params'] ) ? array_filter( $_GET['search_params'], function($s){ return !empty( $s[1] ) && !empty( $s[2] ); } ) : null;
+$vars['geocode_status'] = isset( $_GET['geocode_status'] ) && ( $_GET['geocode_status'] == '0' || $_GET['geocode_status'] == '1' ) ? (int)$_GET['geocode_status'] : null;
 
-$search_params = isset( $_GET['search_params'] ) ? $_GET['search_params'] : null;
-
-$vars['total_store_count'] = $stg->getCount( $search_params );
+$vars['total_store_count'] = $stg->getCount( $vars['search_params'], $vars['geocode_status'] );
 $vars['total_pages'] = ceil( $vars['total_store_count'] / STORES_PER_PAGE );
 
 $vars['prev_page'] = $vars['page_number'] != 1 ? $vars['page_number'] - 1 : null;
 
 $vars['next_page'] = $vars['page_number'] + 1 <= $vars['total_pages'] ? $vars['page_number'] + 1 : null;
 
-$vars['stores'] = $stg->getStores( ($vars['page_number']-1)*STORES_PER_PAGE, STORES_PER_PAGE, $search_params );
+$vars['stores'] = $stg->getStores( ($vars['page_number']-1)*STORES_PER_PAGE, STORES_PER_PAGE, $vars['search_params'], $vars['geocode_status'] );
 $vars['page_store_count'] = count( $vars['stores'] );
 
 $vars['page_store_first_num'] = ($vars['page_number']-1)*STORES_PER_PAGE+1;

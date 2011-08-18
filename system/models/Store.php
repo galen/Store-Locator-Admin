@@ -11,17 +11,35 @@ class Store {
 				$this->$var = $val;
 			}
 		}
+		/*
+		 * These next lines set the lat/lng to '' if the lat/lng is null or 0.000000
+		 * This helps to account for the default values of more table structures
+		 *
+		 * Also assumes that there will be no stores at 0,0
+		 */
+		if ( !(int)$this->getLat() ) {
+			$this->setLat( '' );
+		}
+		if ( !(int)$this->getLng() ) {
+			$this->setLng( '' );
+		}
 	}
 
 	function isGeocoded() {
-		return !( is_null( $this->getLat() ) || is_null( $this->getLng() ) );
+		return ( $this->getLat() && $this->getLng() );
 	}
 
-	function __call( $method, $args ) {
+	function __call( $method, array $args ) {
 		if ( strpos( $method, 'get' ) === 0 ) {
 			$var = strtolower( substr( $method, 3 ) );
+			return isset( $this->{$this->column_map[$var]} ) ? $this->{$this->column_map[$var]} : null;
 		}
-		return isset( $this->{$this->column_map[$var]} ) ? $this->{$this->column_map[$var]} : null;
+		if ( strpos( $method, 'set' ) === 0 ) {
+			$var = strtolower( substr( $method, 3 ) );
+			if ( $var != 'id' ) {
+				$this->{$this->column_map[$var]} = $args[0];
+			}			
+		}
 	}
 
 	function getEditableProperties() {

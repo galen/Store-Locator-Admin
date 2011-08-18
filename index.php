@@ -16,6 +16,7 @@ require( DIR_SYSTEM . '/models/Store.php' );
 require( DIR_SYSTEM . '/helpers/view_helpers.php' );
 require( DIR_SYSTEM . '/config/routes.php' );
 require( DIR_LIB . '/FormStatusMessage/FormStatusMessage.php' );
+require( DIR_LIB . '/Breadcrumbs/Breadcrumbs.php' );
 
 // Create a new Form status message
 $status_message = new FormStatusMessage;
@@ -25,7 +26,7 @@ $stg = new StoreTableGateway( $db, STORE_LOCATIONS_TABLE, $config['column_map'] 
 
 // Get the column names from the table
 $vars['table_columns'] = $stg->getColumns();
-$vars['table_columns_list'] = array_diff( $vars['table_columns'], array( $config['column_map']['id'],$config['column_map']['lat'],$config['column_map']['lng'] ) );
+$vars['table_columns_list'] = array_values( array_diff( $vars['table_columns'], array( $config['column_map']['id'],$config['column_map']['lat'],$config['column_map']['lng'] ) ) );
 
 // find appropriate route
 foreach( $routes as $url => $action ) {

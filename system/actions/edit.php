@@ -1,5 +1,6 @@
 <?php
 
+// Save store
 if ( isset( $_POST['save'] ) ) {
 	$store_save = new Store( $config['column_map'], array_intersect_key( $_POST,array_combine( $vars['table_columns'], array_fill( 0, count( $vars['table_columns'] ), '!' ) ) ) );
 	if ( $stg->saveStore( $store_save ) ) {
@@ -14,10 +15,10 @@ if ( isset( $_POST['save'] ) ) {
 
 $store = $stg->getStore( $vars['store_id'] );
 
+// Create the map
 require( DIR_LIB . '/PHPGoogleMaps/Core/Autoloader.php' );
 $map_loader = new SplClassLoader( 'PHPGoogleMaps', DIR_LIB );
 $map_loader->register();
-
 $map = new \PHPGoogleMaps\Map( array( 'width' => '600px', 'height' => '300px' ) );
 
 if ( $store->isGeocoded() ) {
@@ -41,7 +42,6 @@ else {
 	}
 	$map->disableAutoEncompass();
 }
-
 
 require( DIR_SYSTEM . '/views/edit.php' );
 

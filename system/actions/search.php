@@ -1,7 +1,7 @@
 <?php
 
 $vars['search_params'] = isset( $_GET['search_params'] ) ? array_filter( $_GET['search_params'], function($s){ return !empty( $s[1] ) && !empty( $s[2] ); } ) : null;
-$vars['geocode_status'] = isset( $_GET['geocode_status'] ) && ( $_GET['geocode_status'] == '0' || $_GET['geocode_status'] == '1' ) ? (int)$_GET['geocode_status'] : null;
+$vars['geocode_status'] = isset( $_GET['geocode_status'] ) && ( $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_FALSE || $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_TRUE ) ? (int)$_GET['geocode_status'] : null;
 
 $vars['total_store_count'] = $stg->getCount( $vars['search_params'], $vars['geocode_status'] );
 $vars['total_pages'] = ceil( $vars['total_store_count'] / STORES_PER_PAGE );

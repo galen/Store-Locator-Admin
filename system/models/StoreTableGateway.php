@@ -6,6 +6,9 @@ class StoreTableGateway {
 	protected $table;
 	protected $column_map;
 	
+	const GEOCODE_STATUS_TRUE = 1;
+	const GEOCODE_STATUS_FALSE = 0;
+	
 	public function __construct( PDO $db, $table, array $column_map ) {
 		$this->db = $db;
 		$this->table = $table;
@@ -48,15 +51,14 @@ class StoreTableGateway {
 	private function buildSearchString( array $search_params, $geocode_status ) {
 
 		$sql = 'where 1 = 1 and ' . implode( ' and ', array_map( function($a){ return sprintf( '%s %s :%s', $a[0], $a[1], $a[0] ); }, $search_params ) );
-		switch( $geocode_status ) {
-			case '0':
-				$sql .= sprintf( ' and ( %1$s is null or %1$s = 0 and %2$s is null or %2$s = 0 )', $this->column_map['lat'], $this->column_map['lng'] );
-				break;
-			case '1':
-				$sql .= sprintf( ' and ( %1$s is not null and %1$s != 0 and %2$s is not null and %2$s != 0 )', $this->column_map['lat'], $this->column_map['lng'] );
-				break;
-			default:
+
+		if ( $geocode_status === self::GEOCODE_STATUS_FALSE ) {
+			$sql .= sprintf( ' and ( %1$s is null or %1$s = 0 and %2$s is null or %2$s = 0 )', $this->column_map['lat'], $this->column_map['lng'] );
 		}
+		elseif ( $geocode_status === self::GEOCODE_STATUS_TRUE ) {
+			$sql .= sprintf( ' and ( %1$s is not null and %1$s != 0 and %2$s is not null and %2$s != 0 )', $this->column_map['lat'], $this->column_map['lng'] );
+		}
+		
 		return $sql;
 	}
 

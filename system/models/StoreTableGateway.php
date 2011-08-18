@@ -32,7 +32,6 @@ class StoreTableGateway {
 	public function getStores( $start, $length, array $search_params=null, $geocode_status=null ) {
 	
 		$sql = sprintf( 'select * from %s %s limit :start, :length', $this->table, isset( $search_params ) ? $this->buildSearchString( $search_params, $geocode_status ) : '' );
-		echo $sql;
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->bindValue( ':start', $start, PDO::PARAM_INT );
 		$stmnt->bindValue( ':length', $length, PDO::PARAM_INT );
@@ -111,10 +110,6 @@ class StoreTableGateway {
 			return true;
 		}
 		return false;
-	}
-
-	private function bindLatLng( $stmnt ) {
-	
 	}
 
 }

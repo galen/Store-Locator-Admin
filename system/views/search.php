@@ -26,7 +26,10 @@
 	</fieldset>
 </form>
 
+<?php if( $vars['total_store_count'] > 0 ): ?>
 <?php require( DIR_SYSTEM . '/views/widget_result_numbers.php' ) ?>
 <?php require( DIR_SYSTEM . '/views/widget_pages.php' ) ?>
-
 <?php require( DIR_SYSTEM . '/views/widget_store_listing.php' ) ?>
+<?php else: ?>
+<p class="no_result">No Stores match your search criteria</p>
+<?php endif; ?>

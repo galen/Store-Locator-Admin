@@ -1,7 +1,7 @@
 <table>
 	<thead>
 		<tr>
-			<?php foreach( $vars['table_columns_list'] as $tc ): ?>
+			<?php foreach( $vars['columns_list'] as $tc ): ?>
 				<td><?php e( prettify_var( $tc ) ) ?></td>
 			<?php endforeach; ?>
 			<td>Geocoded</td>
@@ -12,7 +12,7 @@
 	<tbody>
 	<?php foreach( $vars['stores'] as $store ): ?>
 	<tr>
-		<?php foreach( $vars['table_columns_list'] as $tc ): ?>
+		<?php foreach( $vars['columns_list'] as $tc ): ?>
 			<td><?php e( $store->$tc ) ?></td>
 		<?php endforeach; ?>
 		<td><?php if( $store->isGeocoded() ): ?>Yes<?php else: ?>No<?php endif; ?></td>

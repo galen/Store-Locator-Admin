@@ -5,10 +5,10 @@
 
 <form action="" method="get">
 	<fieldset>
-<?php for( $i=0;$i<count($vars['table_columns_list']);$i++ ): ?>
+<?php for( $i=0;$i<count($vars['columns_list']);$i++ ): ?>
 		<div>
-			<?php e( prettify_var( $vars['table_columns_list'][$i] ) ) ?>
-			<input type="hidden" name="search_params[<?php echo $i ?>][0]" value="<?php echo $vars['table_columns_list'][$i] ?>">
+			<?php e( prettify_var( $vars['columns_list'][$i] ) ) ?>
+			<input type="hidden" name="search_params[<?php echo $i ?>][0]" value="<?php echo $vars['columns_list'][$i] ?>">
 			<input type="text" name="search_params[<?php echo $i ?>][1]" value="<?php if( isset( $vars['search_params'][$i][1] ) ): ?><?php echo $vars['search_params'][$i][1] ?><?php endif; ?>">
 			<input type="text" name="search_params[<?php echo $i ?>][2]" value="<?php if( isset( $vars['search_params'][$i][2] ) ): ?><?php echo $vars['search_params'][$i][2] ?><?php endif; ?>">
 		</div>

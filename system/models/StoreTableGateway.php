@@ -33,14 +33,14 @@ class StoreTableGateway {
 	}
 
 	public function getStores( $start, $length, array $search_params=null, $geocode_status=null ) {
-	
 		$sql = sprintf( 'select * from %s %s limit :start, :length', $this->table, isset( $search_params ) ? $this->buildSearchString( $search_params, $geocode_status ) : '' );
+echo $sql;
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->bindValue( ':start', $start, PDO::PARAM_INT );
 		$stmnt->bindValue( ':length', $length, PDO::PARAM_INT );
 		if ( is_array( $search_params ) ) {
 			foreach( $search_params as $sp ) {
-				$stmnt->bindParam( ':'.$sp[0], $sp[2] );
+				$stmnt->bindValue( ':'.$sp[0], $sp[2] );
 			}
 		}
 		$stmnt->execute();
@@ -50,7 +50,8 @@ class StoreTableGateway {
 
 	private function buildSearchString( array $search_params, $geocode_status ) {
 
-		$sql = 'where 1 = 1 and ' . implode( ' and ', array_map( function($a){ return sprintf( '%s %s :%s', $a[0], $a[1], $a[0] ); }, $search_params ) );
+		$columns = implode( ' and ', array_map( function($a){ return sprintf( '%s %s :%s', $a[0], $a[1], $a[0] ); }, $search_params ) );
+		$sql = sprintf( 'where 1 = 1%s', $columns ? ' and ' : '' ); 
 
 		if ( $geocode_status === self::GEOCODE_STATUS_FALSE ) {
 			$sql .= sprintf( ' and ( %1$s is null or %1$s = 0 and %2$s is null or %2$s = 0 )', $this->column_map['lat'], $this->column_map['lng'] );
@@ -89,8 +90,23 @@ class StoreTableGateway {
 	
 	}
 
+	function createStore( Store $store ) {
+	
+		$vars = get_object_vars($store);
+		unset( $vars['id'] );
+		$sql = sprintf( 'insert into %s (%s) values(%s)', $this->table, implode( ',', array_keys( $vars ) ), implode( ',', array_map( function( $v ) { return ':'.$v; }, array_keys( $vars ) ) ) );
+		$stmnt = $this->db->prepare( $sql );
+		foreach( $vars as $var => $val ) {
+			$stmnt->bindValue( ':'.$var, $val );
+		}
+		if( $stmnt->execute() && $stmnt->rowCount() ) {
+			return $this->db->lastInsertId();
+		}
+		return false;
+	}
+
 	function saveStore( Store $store ) {
-		$id = $store->id;
+		$id = $store->getID();
 		$store_array = get_object_vars( $store );
 		unset( $store_array['id'] );
 		foreach( $store_array as $property => $value ) {

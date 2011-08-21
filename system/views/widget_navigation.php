@@ -1,4 +1,5 @@
 <ul>
 	<li><a href="<?php echo URL_ROOT ?>/list/">List</a></li>
-	<li><a href="<?php echo URL_ROOT ?>/search/?search_params[0][0]=name&search_params[0][1]=&search_params[0][2]=&search_params[1][0]=address1&search_params[1][1]=&search_params[1][2]=&search_params[2][0]=address2&search_params[2][1]=&search_params[2][2]=&search_params[3][0]=city&search_params[3][1]=&search_params[3][2]=&search_params[4][0]=state&search_params[4][1]=%3D&search_params[4][2]=CT&search_params[5][0]=postal_code&search_params[5][1]=&search_params[5][2]=&search_params[6][0]=country&search_params[6][1]=&search_params[6][2]=&search_params[7][0]=phone_number&search_params[7][1]=&search_params[7][2]=&geocode_status=">Search</a></li>
+	<li><a href="<?php echo URL_ROOT ?>/search/">Search</a></li>
+	<li><a href="<?php echo URL_ROOT ?>/create/">Create Store</a></li>
 </ul>

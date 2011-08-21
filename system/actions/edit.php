@@ -2,7 +2,7 @@
 
 // Save store
 if ( isset( $_POST['save'] ) ) {
-	$store_save = new Store( $config['column_map'], array_intersect_key( $_POST,array_combine( $vars['table_columns'], array_fill( 0, count( $vars['table_columns'] ), '!' ) ) ) );
+	$store_save = new Store( $config['column_map'], array_intersect_key( $_POST,array_combine( $vars['columns'], array_fill( 0, count( $vars['columns'] ), '!' ) ) ) );
 	if ( $stg->saveStore( $store_save ) ) {
 		$status_message->setStatus( 'success' );
 		$status_message->setMessage( 'The store has been saved' );

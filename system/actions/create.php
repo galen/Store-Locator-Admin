@@ -2,9 +2,9 @@
 
 // Save store
 if ( isset( $_POST['create'] ) ) {
-	$store_save = new Store( $config['column_map'], array_intersect_key( $_POST,array_combine( $vars['table_columns'], array_fill( 0, count( $vars['table_columns'] ), '!' ) ) ) );
+	$store_save = new Store( $config['column_map'], array_intersect_key( $_POST,array_combine( $vars['columns'], array_fill( 0, count( $vars['columns'] ), '!' ) ) ) );
 	if ( $created_id = $stg->createStore( $store_save ) ) {
-		header( 'Location: ' . URL_EDIT . '/' . $created_id . '/' );
+		header( 'Location: ' . URL_EDIT . '/' . $created_id . '/?status=success&message=Store+created+successfully' );
 		exit;
 	}
 	else {

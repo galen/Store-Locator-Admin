@@ -2,12 +2,12 @@
 <?php require( DIR_SYSTEM . '/views/widget_navigation.php' ) ?>
 
 <h2>Editing Store #</h2>
-<form action="" method="post" id="store_edit">
+
+<?php require( DIR_SYSTEM . '/views/widget_page_status_message.php' ) ?>
+
+<form action="<?php echo URL_EDIT ?>/<?php echo $vars['store_id'] ?>/" method="post" id="store_edit">
 
 	<fieldset>
-		<?php if ( $status_message->getStatus() ): ?>
-		<p id="status_message" class="<?php echo $status_message->getStatuses() ?>"><?php echo $status_message->getMessage(); ?></p>
-		<?php endif; ?>
 		<?php if ( isset( $store ) ): ?>
 		<input type="hidden" name="<?php echo $config['column_map']['id'] ?>" value="<?php echo $store->getID() ?>" id="store_id">
 		<?php endif; ?>
@@ -18,7 +18,7 @@
 		</div>
 		<?php endforeach; ?>
 		
-		<p><a href="#" class="geocode">Geocode</a></p>
+		<p><a href="#" class="geocode_form">Geocode</a></p>
 		<?php $map->printMap() ?>
 	
 		<input type="submit" value="<?php if( $vars['action'] == 'create' ): ?>Create<?php else: ?>Save<?php endif; ?>" name="<?php if( $vars['action'] == 'create' ): ?>create<?php else: ?>save<?php endif; ?>">

@@ -14,10 +14,8 @@ $vars['page_store_first_num'] = ($vars['page_number']-1)*STORES_PER_PAGE+1;
 $vars['page_store_last_num'] = ($vars['page_number']-1)*STORES_PER_PAGE + ( $vars['page_store_count'] < STORES_PER_PAGE ? $vars['page_store_count'] : STORES_PER_PAGE );
 
 if ( isset( $_GET['status'], $_GET['message'] ) ) {
-
 	$status_message->setStatus( $_GET['status'] );
 	$status_message->setMessage($_GET['message'] );
-
 }
 
 require( DIR_SYSTEM . '/views/list.php' );

@@ -34,7 +34,6 @@ class StoreTableGateway {
 
 	public function getStores( $start, $length, array $search_params=null, $geocode_status=null ) {
 		$sql = sprintf( 'select * from %s %s limit :start, :length', $this->table, isset( $search_params ) ? $this->buildSearchString( $search_params, $geocode_status ) : '' );
-echo $sql;
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->bindValue( ':start', $start, PDO::PARAM_INT );
 		$stmnt->bindValue( ':length', $length, PDO::PARAM_INT );
@@ -45,13 +44,12 @@ echo $sql;
 		}
 		$stmnt->execute();
 		return $stmnt->fetchAll( PDO::FETCH_CLASS, 'Store', array( $this->column_map ) );
-	
 	}
 
 	private function buildSearchString( array $search_params, $geocode_status ) {
 
 		$columns = implode( ' and ', array_map( function($a){ return sprintf( '%s %s :%s', $a[0], $a[1], $a[0] ); }, $search_params ) );
-		$sql = sprintf( 'where 1 = 1%s', $columns ? ' and ' : '' ); 
+		$sql = sprintf( 'where 1 = 1%s', $columns ? ' and ' : '' ) . $columns; 
 
 		if ( $geocode_status === self::GEOCODE_STATUS_FALSE ) {
 			$sql .= sprintf( ' and ( %1$s is null or %1$s = 0 and %2$s is null or %2$s = 0 )', $this->column_map['lat'], $this->column_map['lng'] );
@@ -64,10 +62,28 @@ echo $sql;
 	}
 
 	function getColumns() {
-		return array_map(
-			function( $c ){ return $c['Field']; },
-			$this->db->query( sprintf( 'show columns from %s', $this->table ) )->fetchAll( PDO::FETCH_ASSOC )
-		);
+		$tmp_columns = $this->db->query( sprintf( 'show columns from %s', $this->table ) )->fetchAll( PDO::FETCH_ASSOC );
+		foreach( $tmp_columns as $column ) {
+			$type = $column['Type'];
+			if ( strpos( $type, 'text' ) !== FALSE ) {
+				$columns[$column['Field']] = array (
+					'type'		=> 'textarea'
+				);
+			}
+			elseif ( strpos( $type, 'enum' ) !== FALSE ) {
+				$columns[$column['Field']] = array (
+					'type'		=> 'select',
+					'values'	=> array_map( function( $v ) use( $type ){ return str_replace( "'", '', $v ); }, explode( ',', end( explode( '(', trim( $type, ')' ) ) ) ) )
+				);
+				sort( $columns[$column['Field']]['values'] );
+			}
+			else {
+				$columns[$column['Field']] = array (
+					'type'		=> 'textbox'
+				);
+			}
+		}
+		return $columns;
 	}
 
 	function getStore( $id ) {

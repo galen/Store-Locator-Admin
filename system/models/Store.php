@@ -46,4 +46,15 @@ class Store {
 		return array_diff( array_keys( get_object_vars( $this ) ), array( $this->column_map['id'], 'column_map' ) );
 	}
 
+	function getQueryString() {
+		$str = '?';
+		foreach( get_object_vars( $this ) as $k => $v ) {
+			if ( in_array( $k, array( 'column_map' ) ) ) {
+				continue;
+			}
+			$str .= sprintf( '%s=%s&', $k, urlencode( $v ) );
+		}
+		return $str;
+	}
+
 }

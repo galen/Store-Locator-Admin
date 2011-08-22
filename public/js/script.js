@@ -40,7 +40,7 @@ $(".delete_store").click(function(){
 	return false;
 });
 
-$(".geocode").click(function(){
+$(".geocode_form").click(function(){
 
 	var obj = $(this);
 	var form_data = {};
@@ -75,5 +75,39 @@ $(".geocode").click(function(){
 	);
 	return false;
 });
+
+$(".geocode_table").click(function( event, all ){
+
+	var obj = $(this);
+	obj.html('<img src="' + $("#store_table").data('ajax-loader-image') + '">');
+	var data = $(this).parent().parent().data('geocode') + '&save_store=1';
+	$.get(
+		"/admin/system/ajax/geocode.php" + data,
+		{},
+		function(data) {
+			if ( data.status == 1 ) {
+				obj.parent().html("Yes");
+				obj.remove();
+				if ( !all ) {
+					alert( data.message );
+				}
+			}
+			else {
+				obj.html("No");
+				if ( !all ) {
+					alert( data.message );
+				}
+			}
+		},
+		'json'
+	);
+	return false;
+});
+
+$("#geocode_all").click(function(){
+	$(".geocode_table").trigger('click', [true]);
+	return false;
+});
+
 
 });

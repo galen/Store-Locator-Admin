@@ -1,8 +1,5 @@
 <?php
 
-error_reporting( E_ALL );
-ini_set( 'display_errors', 'On' );
-
 define( 'STORE_LOCATIONS_TABLE',	'store_locations' );
 define( 'STORES_PER_PAGE',			100 );
 
@@ -15,6 +12,8 @@ $config['column_map'] = array (
 	'state'		=> 'state',
 	'country'	=> 'country'
 );
+
+$config['geocode_string'] = '{address1}, {city}, {state}';
 
 define( 'DB_USER',					'' );
 define( 'DB_PASSWORD',				'' );

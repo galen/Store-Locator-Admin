@@ -2,10 +2,6 @@
 
 require( 'system/config/config.php' );
 
-define( 'REQUEST',					trim( str_replace( dirname( $_SERVER['PHP_SELF'] ), '', preg_replace( '~/+~', '/' , parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ) ) ), '/' ) );
-define( 'REQUEST_METHOD',			$_SERVER['REQUEST_METHOD'] );
-define( 'REQUEST_IS_AJAX',			(bool)isset( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' );
-
 // Connect to the database
 require( DIR_SYSTEM . '/core/Db.php' );
 $db = Db::connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME ) or die( 'error connecting to database' );
@@ -16,7 +12,6 @@ require( DIR_SYSTEM . '/models/Store.php' );
 require( DIR_SYSTEM . '/helpers/view_helpers.php' );
 require( DIR_SYSTEM . '/config/routes.php' );
 require( DIR_LIB . '/FormStatusMessage/FormStatusMessage.php' );
-require( DIR_LIB . '/Breadcrumbs/Breadcrumbs.php' );
 
 // Create a new Form status message
 $status_message = new FormStatusMessage;
@@ -25,7 +20,8 @@ $status_message = new FormStatusMessage;
 $stg = new StoreTableGateway( $db, STORE_LOCATIONS_TABLE, $config['column_map'] );
 
 // Get the column names from the table
-$vars['columns'] = $stg->getColumns();
+$vars['column_info'] = $stg->getColumns();
+$vars['columns'] = array_keys( $vars['column_info'] );
 $vars['columns_list'] = array_values( array_diff( $vars['columns'], array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) );
 $vars['columns_edit'] = array_values( array_diff( $vars['columns'], array( $config['column_map']['id'] ) ) );
 

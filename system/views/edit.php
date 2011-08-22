@@ -1,7 +1,7 @@
 <?php require( DIR_SYSTEM . '/views/header.php' ) ?>
 <?php require( DIR_SYSTEM . '/views/widget_navigation.php' ) ?>
 
-<h2>Editing Store #</h2>
+<h2><?php if ( isset( $store ) ): ?>Editing Store #<?php echo $vars['store_id'] ?><?php else: ?>Create Store<?php endif; ?></h2>
 
 <?php require( DIR_SYSTEM . '/views/widget_page_status_message.php' ) ?>
 

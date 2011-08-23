@@ -41,6 +41,12 @@ foreach( $routes as $url => $action ) {
 }
 
 // Redirect to the list
-header( 'Location:' . URL_LIST );
+header("HTTP/1.0 404 Not Found");
+$status_message->setStatus( 'error' );
+$status_message->setMessage( "This page doesn't exist" );
+require( DIR_SYSTEM . '/views/header.php' );
+require( DIR_SYSTEM . '/views/widget_navigation.php' );
+require( DIR_SYSTEM . '/views/widget_page_status_message.php' );
+require( DIR_SYSTEM . '/views/footer.php' );
 exit;
 

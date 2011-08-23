@@ -39,7 +39,7 @@
 			</select>
 		</div>
 <input type="submit" value="Search">
-<input type="reset" value="Reset">
+<input type="reset" value="Reset" onclick="window.location='<?php echo URL_SEARCH ?>'">
 	</fieldset>
 </form>
 

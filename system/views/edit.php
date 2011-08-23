@@ -30,3 +30,4 @@
 	<input type="submit" value="Delete this store" name="delete">
 </form>
 <?php endif; ?>
+<?php require( DIR_SYSTEM . '/views/footer.php' ) ?>

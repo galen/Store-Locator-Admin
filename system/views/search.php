@@ -50,3 +50,5 @@
 <?php else: ?>
 <p class="no_result">No Stores match your search criteria</p>
 <?php endif; ?>
+
+<?php require( DIR_SYSTEM . '/views/footer.php' ) ?>

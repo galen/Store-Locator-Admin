@@ -1,6 +1,5 @@
 <?php
 
-// Handle an AJAX request
 if ( REQUEST_IS_AJAX ) {
 	require( '../config/config.php' );
 	require( DIR_SYSTEM . '/core/Db.php' );
@@ -8,7 +7,7 @@ if ( REQUEST_IS_AJAX ) {
 	require( DIR_SYSTEM . '/models/StoreTableGateway.php' );
 	$stg = new StoreTableGateway( $db, STORE_LOCATIONS_TABLE, $config['column_map'] );
 	
-	if ( $stg->deleteStore( (int)$_POST['id'] ) ) {
+	if ( $stg->deleteStore( $_POST['id'] ) ) {
 		$json = array( 'status' => 1, 'message' => 'Store deleted Successfully' );
 	}
 	else {
@@ -17,7 +16,6 @@ if ( REQUEST_IS_AJAX ) {
 	die( json_encode( $json ) );
 }
 
-// Normal request
 if ( isset( $_POST['referrer'] ) ) {
 	if ( isset( $_POST['cancel'] ) ) {
 		$b = isset( $_GET['b'] ) ? $_GET['b'] : URL_LIST;
@@ -25,7 +23,7 @@ if ( isset( $_POST['referrer'] ) ) {
 		exit;
 	}
 	if ( isset( $_POST['delete'] ) ) {
-		if ( $stg->deleteStore( (int)$vars['store_id'] ) ) {
+		if ( $stg->deleteStore( $vars['store_id'] ) ) {
 			header( 'Location: ' . URL_LIST . sprintf( '?status=success&message=Store+%s+deleted+successfully', $vars['store_id'] ) );
 			exit;
 		}

@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Store Admin</title>
-	<?php if( $vars['action'] == 'edit' || $vars['action'] == 'create' ): ?>
+	<?php if( isset( $map ) ): ?>
 		<?php $map->printHeaderJS() ?>
 		<?php $map->printMapJS() ?>
 	<?php endif; ?>

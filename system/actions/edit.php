@@ -6,8 +6,8 @@ if ( REQUEST_IS_AJAX ) {
 	$db = Db::connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME ) or die( json_encode( array( 'status' => 0, 'message' => 'Error connecting to database' ) ) );
 	require( DIR_SYSTEM . '/models/StoreTableGateway.php' );
 	$stg = new StoreTableGateway( $db, STORE_LOCATIONS_TABLE, $config['column_map'] );
-	$store_save = new Store( $config['column_map'], array_intersect_key( $_POST,array_combine( $vars['columns'], array_fill( 0, count( $vars['columns'] ), '!' ) ) ) );
-	if ( $stg->saveStore( $store_save ) ) {
+	$store = new Store( $config['column_map'], array_intersect_key( $_POST,array_combine( $vars['columns'], array_fill( 0, count( $vars['columns'] ), '!' ) ) ) );
+	if ( $stg->saveStore( $store ) ) {
 		$json = array( 'status' => 1, 'message' => 'Store saved successfully' );
 	}
 	else {
@@ -16,7 +16,6 @@ if ( REQUEST_IS_AJAX ) {
 	die( json_encode( $json ) );
 }
 
-// Save store
 if ( isset( $_POST['save'] ) ) {
 	$store_save = new Store( $config['column_map'], array_intersect_key( $_POST,array_combine( $vars['columns'], array_fill( 0, count( $vars['columns'] ), '!' ) ) ) );
 	if ( $stg->saveStore( $store_save ) ) {
@@ -31,12 +30,22 @@ if ( isset( $_POST['save'] ) ) {
 
 if ( isset( $_GET['status'], $_GET['message'] ) ) {
 	$status_message->setStatus( $_GET['status'] );
-	$status_message->setMessage($_GET['message'] );
+	$status_message->setMessage( $_GET['message'] );
 }
 
 $store = $stg->getStore( $vars['store_id'] );
 
-// Create the map
+if ( !$store ) {
+	header("HTTP/1.0 404 Not Found");
+	$status_message->setStatus( 'error' );
+	$status_message->setMessage( 'Invalid Store ID' );
+	require( DIR_SYSTEM . '/views/header.php' );
+	require( DIR_SYSTEM . '/views/widget_navigation.php' );
+	require( DIR_SYSTEM . '/views/widget_page_status_message.php' );
+	require( DIR_SYSTEM . '/views/footer.php' );
+	exit;
+}
+
 require( DIR_LIB . '/PHPGoogleMaps/Core/Autoloader.php' );
 $map_loader = new SplClassLoader( 'PHPGoogleMaps', DIR_LIB );
 $map_loader->register();

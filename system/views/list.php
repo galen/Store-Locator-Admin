@@ -12,3 +12,5 @@
 <?php else: ?>
 <p class="no_result">No Stores</p>
 <?php endif; ?>
+
+<?php require( DIR_SYSTEM . '/views/footer.php' ) ?>

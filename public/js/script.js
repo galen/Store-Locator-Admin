@@ -24,8 +24,8 @@ $(".delete_store").click(function(){
 	}
 	obj = $(this);
 	$.post(
-		"/admin/system/actions/delete.php",
-		{ id: $(this).data("id") },
+		"/admin/delete/" + $(this).data("id"),
+		{},
 		function(data) {
 			if ( data.status == 1 ) {
 				alert( data.message );

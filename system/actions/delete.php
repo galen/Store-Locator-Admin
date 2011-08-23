@@ -1,13 +1,7 @@
 <?php
 
 if ( REQUEST_IS_AJAX ) {
-	require( '../config/config.php' );
-	require( DIR_SYSTEM . '/core/Db.php' );
-	$db = Db::connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME ) or die( json_encode( array( 'status' => 0, 'message' => 'Error connecting to database' ) ) );
-	require( DIR_SYSTEM . '/models/StoreTableGateway.php' );
-	$stg = new StoreTableGateway( $db, STORE_LOCATIONS_TABLE, $config['column_map'] );
-	
-	if ( $stg->deleteStore( $_POST['id'] ) ) {
+	if ( $stg->deleteStore( $vars['store_id'] ) ) {
 		$json = array( 'status' => 1, 'message' => 'Store deleted Successfully' );
 	}
 	else {

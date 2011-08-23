@@ -9,12 +9,15 @@ $db = Db::connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME ) or die( 'error conne
 // Require necessary files
 require( DIR_SYSTEM . '/models/StoreTableGateway.php' );
 require( DIR_SYSTEM . '/models/Store.php' );
-require( DIR_SYSTEM . '/helpers/view_helpers.php' );
 require( DIR_SYSTEM . '/config/routes.php' );
-require( DIR_LIB . '/FormStatusMessage/FormStatusMessage.php' );
 
-// Create a new Form status message
-$status_message = new FormStatusMessage;
+// Only need these if this isn't an AJAX request
+if ( !REQUEST_IS_AJAX ) {
+	require( DIR_LIB . '/FormStatusMessage/FormStatusMessage.php' );
+	require( DIR_SYSTEM . '/helpers/view_helpers.php' );
+	// Create a new Form status message
+	$status_message = new FormStatusMessage;
+}
 
 // Create a new table gateway
 $stg = new StoreTableGateway( $db, STORE_LOCATIONS_TABLE, $config['column_map'] );

@@ -12,8 +12,8 @@ if ( REQUEST_IS_AJAX ) {
 
 if ( isset( $_POST['referrer'] ) ) {
 	if ( isset( $_POST['cancel'] ) ) {
-		$b = isset( $_GET['b'] ) ? $_GET['b'] : URL_LIST;
-		header( 'Location: ' . $b );
+		$c = isset( $_GET['c'] ) ? $_GET['c'] : URL_LIST;
+		header( 'Location: ' . $c );
 		exit;
 	}
 	if ( isset( $_POST['delete'] ) ) {

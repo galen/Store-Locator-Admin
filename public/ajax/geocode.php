@@ -1,21 +1,16 @@
 <?php
+
 require( '../../system/config/config.php' );
+
+// This turns {address}, {city}, {state} from the config
+// into 123 main st, san diego, ca for geocoding
+$address = preg_replace_callback( '~\{(.*?)\}~', function( $m ) use( $_GET ){ return $_GET[$m[1]]; }, $config['geocode_string'] );
 
 require( DIR_LIB . '/PHPGoogleMaps/Core/Autoloader.php' );
 $map_loader = new SplClassLoader( 'PHPGoogleMaps', DIR_LIB );
 $map_loader->register();
 
-// This turns {address}, {city}, {state} from the config
-// into 123 main st, san diego, ca
-preg_match_all( '~{(.*?)}~', $config['geocode_string'], $gs );
-$geocode_string = $config['geocode_string'];
-foreach( $_GET as $k => $v ) {
-	if ( in_array( $k, $gs[1] ) ) {
-		$geocode_string = preg_replace( "~\{$k\}~", $v, $geocode_string );
-	}
-}
-
-$geocode = \PHPGoogleMaps\Service\Geocoder::geocode( $geocode_string );
+$geocode = \PHPGoogleMaps\Service\Geocoder::geocode( $address );
 
 if ( $geocode instanceof \PHPGoogleMaps\Service\GeocodeResult ) {
 	if ( isset( $_GET['save_store'] ) ) {
@@ -40,4 +35,3 @@ else {
 	$json = array( 'status' => 0, 'message' => 'Unable to geocode address' );
 }
 die( json_encode( $json ) );
-?>

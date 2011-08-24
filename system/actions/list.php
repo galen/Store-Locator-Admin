@@ -1,5 +1,6 @@
 <?php
 
+$vars['page_number'] = isset( $vars['page_number'] ) ? $vars['page_number'] : 1;
 $vars['total_store_count'] = $stg->getCount();
 $vars['total_pages'] = ceil( $vars['total_store_count'] / STORES_PER_PAGE );
 

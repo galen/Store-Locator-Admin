@@ -1,5 +1,6 @@
 <?php
 
+$vars['page_number'] = isset( $vars['page_number'] ) ? $vars['page_number'] : 1;
 $vars['search_params'] = isset( $_GET['search_params'] ) ? array_filter( $_GET['search_params'], function($s){ return !empty( $s[1] ) && !empty( $s[2] ); } ) : null;
 $vars['geocode_status'] = isset( $_GET['geocode_status'] ) && ( $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_FALSE || $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_TRUE ) ? (int)$_GET['geocode_status'] : null;
 

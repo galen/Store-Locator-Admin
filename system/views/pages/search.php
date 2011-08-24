@@ -3,7 +3,7 @@
 
 <h2>Search Stores</h2>
 
-<form action="" method="get">
+<form action="<?php echo URL_SEARCH ?>" method="get">
 	<fieldset>
 <?php for( $i=0;$i<count($vars['columns_list']);$i++ ): ?>
 		<div>

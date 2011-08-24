@@ -16,4 +16,4 @@ $vars['page_store_count'] = count( $vars['stores'] );
 $vars['page_store_first_num'] = ($vars['page_number']-1)*STORES_PER_PAGE+1;
 $vars['page_store_last_num'] = ($vars['page_number']-1)*STORES_PER_PAGE + ( $vars['page_store_count'] < STORES_PER_PAGE ? $vars['page_store_count'] : STORES_PER_PAGE );
 
-require( DIR_SYSTEM . '/views/search.php' );
+require( DIR_VIEWS . '/search.php' );

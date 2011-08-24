@@ -18,4 +18,4 @@ if ( isset( $_GET['status'], $_GET['message'] ) ) {
 	$status_message->setMessage($_GET['message'] );
 }
 
-require( DIR_SYSTEM . '/views/list.php' );
+require( DIR_VIEWS . '/list.php' );

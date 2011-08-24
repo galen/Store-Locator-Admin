@@ -4,7 +4,13 @@ require( 'system/config/config.php' );
 
 // Connect to the database
 require( DIR_SYSTEM . '/core/Db.php' );
-$db = Db::connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME ) or die( 'error connecting to database' );
+if ( !$db = Db::connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME ) ) {
+	header("HTTP/1.1 500 Internal Server Error");
+	$status_message->setStatus( 'error' );
+	$status_message->setMessage( "Unable to connect to the database" );
+	require( DIR_VIEWS . '/error.php' );
+}
+
 
 // Require necessary files
 require( DIR_SYSTEM . '/models/StoreTableGateway.php' );
@@ -41,12 +47,9 @@ foreach( $routes as $url => $action ) {
 }
 
 // Redirect to the list
-header("HTTP/1.0 404 Not Found");
+header("HTTP/1.1 404 Not Found");
 $status_message->setStatus( 'error' );
 $status_message->setMessage( "This page doesn't exist" );
-require( DIR_SYSTEM . '/views/header.php' );
-require( DIR_SYSTEM . '/views/widget_navigation.php' );
-require( DIR_SYSTEM . '/views/widget_page_status_message.php' );
-require( DIR_SYSTEM . '/views/footer.php' );
+require( DIR_VIEWS . '/error.php' );
 exit;
 

@@ -22,4 +22,4 @@ $map->setCenter( new \PHPGoogleMaps\Core\LatLng( 23, 23 ) );
 $map->setZoom( 1 );
 $map->disableAutoEncompass();
 
-require( DIR_SYSTEM . '/views/edit.php' );
+require( DIR_VIEWS . '/edit.php' );

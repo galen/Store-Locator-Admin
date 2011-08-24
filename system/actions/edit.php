@@ -20,14 +20,10 @@ if ( isset( $_GET['status'], $_GET['message'] ) ) {
 $store = $stg->getStore( $vars['store_id'] );
 
 if ( !$store ) {
-	header("HTTP/1.0 404 Not Found");
+	header("HTTP/1.1 404 Not Found");
 	$status_message->setStatus( 'error' );
-	$status_message->setMessage( 'Invalid Store ID' );
-	require( DIR_SYSTEM . '/views/header.php' );
-	require( DIR_SYSTEM . '/views/widget_navigation.php' );
-	require( DIR_SYSTEM . '/views/widget_page_status_message.php' );
-	require( DIR_SYSTEM . '/views/footer.php' );
-	exit;
+	$status_message->setMessage( "Store does not exist" );
+	require( DIR_VIEWS . '/error.php' );
 }
 
 require( DIR_LIB . '/PHPGoogleMaps/Core/Autoloader.php' );
@@ -57,6 +53,6 @@ else {
 	$map->disableAutoEncompass();
 }
 
-require( DIR_SYSTEM . '/views/edit.php' );
+require( DIR_VIEWS . '/edit.php' );
 
 ?>

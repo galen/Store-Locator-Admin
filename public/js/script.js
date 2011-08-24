@@ -24,7 +24,7 @@ $(".delete_store").click(function(){
 	}
 	obj = $(this);
 	$.post(
-		"/admin/delete/" + $(this).data("id"),
+		url_delete + "/" + $(this).data("id"),
 		{},
 		function(data) {
 			if ( data.status == 1 ) {
@@ -46,7 +46,7 @@ $(".geocode_form").click(function(){
 	var form_data = {};
 
 	$.get(
-		"/admin/system/ajax/geocode.php",
+		url_geocode,
 		$("#store_edit input:text").serializeObject(),
 		function(data) {
 			if ( data.status == 1 ) {

@@ -1,5 +1,5 @@
-<?php require( DIR_SYSTEM . '/views/header.php' ) ?>
-<?php require( DIR_SYSTEM . '/views/widget_navigation.php' ) ?>
+<?php require( DIR_VIEWS . '/header.php' ) ?>
+<?php require( DIR_VIEWS . '/widget_navigation.php' ) ?>
 
 <h2>Search Stores</h2>
 
@@ -44,11 +44,11 @@
 </form>
 
 <?php if( $vars['total_store_count'] > 0 ): ?>
-<?php require( DIR_SYSTEM . '/views/widget_result_numbers.php' ) ?>
-<?php require( DIR_SYSTEM . '/views/widget_pages.php' ) ?>
-<?php require( DIR_SYSTEM . '/views/widget_store_listing.php' ) ?>
+<?php require( DIR_VIEWS . '/widget_result_numbers.php' ) ?>
+<?php require( DIR_VIEWS . '/widget_pages.php' ) ?>
+<?php require( DIR_VIEWS . '/widget_store_listing.php' ) ?>
 <?php else: ?>
 <p class="no_result">No Stores match your search criteria</p>
 <?php endif; ?>
 
-<?php require( DIR_SYSTEM . '/views/footer.php' ) ?>
+<?php require( DIR_VIEWS . '/footer.php' ) ?>

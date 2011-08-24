@@ -6,5 +6,6 @@ $routes = array (
 	'edit/(?P<store_id>\d+)'				=> 'edit',
 	'delete/(?P<store_id>\d+)'				=> 'delete',
 	'create'								=> 'create',
+	'tools'									=> 'tools',
 	''										=> 'list'
 );

@@ -1,9 +1,9 @@
-<?php require( DIR_SYSTEM . '/views/header.php' ) ?>
-<?php require( DIR_SYSTEM . '/views/widget_navigation.php' ) ?>
+<?php require( DIR_VIEWS . '/header.php' ) ?>
+<?php require( DIR_VIEWS . '/widget_navigation.php' ) ?>
 
 <h2><?php if ( isset( $store ) ): ?>Editing Store #<?php echo $vars['store_id'] ?><?php else: ?>Create Store<?php endif; ?></h2>
 
-<?php require( DIR_SYSTEM . '/views/widget_page_status_message.php' ) ?>
+<?php require( DIR_VIEWS . '/widget_page_status_message.php' ) ?>
 
 <form action="<?php echo URL_EDIT ?>/<?php echo $vars['store_id'] ?>/" method="post" id="store_edit">
 
@@ -31,4 +31,4 @@
 	<input type="submit" value="Delete this store">
 </form>
 <?php endif; ?>
-<?php require( DIR_SYSTEM . '/views/footer.php' ) ?>
+<?php require( DIR_VIEWS . '/footer.php' ) ?>

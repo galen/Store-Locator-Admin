@@ -8,7 +8,25 @@ class StoreTableGateway {
 	
 	const GEOCODE_STATUS_TRUE = 1;
 	const GEOCODE_STATUS_FALSE = 0;
-	
+
+	public function backup( $file ) {
+		$sql = sprintf( sprintf( 'select * into outfile :file from %s', $this->table ) );
+		$stmnt = $this->db->prepare( $sql );
+		$stmnt->bindValue( ':file', $file );
+		if ( $stmnt->execute() ) {
+			return true;
+		}
+		return false;
+	}
+	public function restore( $file ) {
+		$sql = sprintf( sprintf( 'load data infile :file into table %s', $this->table ) );
+		$stmnt = $this->db->prepare( $sql );
+		$stmnt->bindValue( ':file', $file );
+		if ( $stmnt->execute() ) {
+			return true;
+		}
+		return false;
+	}
 	public function __construct( PDO $db, $table, array $column_map ) {
 		$this->db = $db;
 		$this->table = $table;
@@ -23,7 +41,7 @@ class StoreTableGateway {
 		if ( is_array( $search_params ) ) {
 			foreach( $search_params as $sp ) {
 				if ( strtolower( $sp[2] ) != 'null' && strtolower( $sp[2] ) != 'not null' ) {
-					$stmnt->bindParam( ':'.$sp[0], $sp[2] );
+					$stmnt->bindValue( ':'.$sp[0], $sp[2] );
 				}
 			}
 		}

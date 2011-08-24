@@ -12,7 +12,7 @@
 
 <form action="" method="post">
 <fieldset>
-	<p>Restore from backup</p>
+	<p>Restore from backup. This will delete all existing data.</p>
 	<label for="restore_file">Restore File</label>
 	<select name="restore_file" id="restore_file">
 	<?php foreach( $vars['restore_files'] as $restore_file ): ?>

@@ -26,8 +26,9 @@
 
 </form>
 <?php if ( isset( $store ) ): ?>
-<form action="<?php echo URL_DELETE ?>/<?php echo $store->getID() ?>/?c=<?php echo URL_EDIT ?>/<?php echo $store->getID() ?>/" method="post">
-	<input type="submit" value="Delete this store" name="delete">
+<form action="<?php echo URL_DELETE ?>/<?php echo $store->getID() ?>/" method="get">
+	<input type="hidden" name="c" value="<?php echo URL_EDIT ?>/<?php echo $store->getID() ?>/">
+	<input type="submit" value="Delete this store">
 </form>
 <?php endif; ?>
 <?php require( DIR_SYSTEM . '/views/footer.php' ) ?>

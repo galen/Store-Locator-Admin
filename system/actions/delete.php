@@ -1,5 +1,6 @@
 <?php
 
+// AJAX request
 if ( REQUEST_IS_AJAX ) {
 	if ( $stg->deleteStore( $vars['store_id'] ) ) {
 		$json = array( 'status' => 1, 'message' => 'Store deleted Successfully' );
@@ -10,7 +11,8 @@ if ( REQUEST_IS_AJAX ) {
 	die( json_encode( $json ) );
 }
 
-if ( isset( $_POST['referrer'] ) ) {
+// Delete the store
+if ( isset( $_POST['delete'] ) || isset( $_POST['cancel'] ) ) {
 	if ( isset( $_POST['cancel'] ) ) {
 		$c = isset( $_GET['c'] ) ? $_GET['c'] : URL_LIST;
 		header( 'Location: ' . $c );
@@ -18,7 +20,7 @@ if ( isset( $_POST['referrer'] ) ) {
 	}
 	if ( isset( $_POST['delete'] ) ) {
 		if ( $stg->deleteStore( $vars['store_id'] ) ) {
-			header( 'Location: ' . URL_LIST . sprintf( '?status=success&message=Store+%s+deleted+successfully', $vars['store_id'] ) );
+			header( sprintf( 'Location: %s?status=success&message=Store+%s+deleted+successfully', URL_LIST, $vars['store_id'] ) );
 			exit;
 		}
 		else {
@@ -28,13 +30,4 @@ if ( isset( $_POST['referrer'] ) ) {
 	}
 }
 
-?>
-<h2>Delete Store <?php echo $vars['store_id'] ?></h2>
-<form action="" method="post">
-	<fieldset>
-		<input type="hidden" name="referrer" value="<?php echo $_SERVER['HTTP_REFERER'] ?>">
-		<p>Are you sure you want to delete this store?</p>
-		<input type="submit" value="Yes" name="delete">
-		<input type="submit" value="Cancel" name="cancel">
-	</fieldset>
-</form>
+require( DIR_VIEWS . '/delete.php' );

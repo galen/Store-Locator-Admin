@@ -82,7 +82,7 @@ $(".geocode_table").click(function( event, all ){
 	obj.html('<img src="' + $("#store_table").data('ajax-loader-image') + '">');
 	var data = $(this).parent().parent().data('geocode') + '&save_store=1';
 	$.get(
-		"/admin/system/ajax/geocode.php" + data,
+		url_geocode + data,
 		{},
 		function(data) {
 			if ( data.status == 1 ) {

@@ -1,7 +1,8 @@
 <?php
 
+// Save the store
 if ( isset( $_POST['save'] ) ) {
-	$store_save = new Store( $config['column_map'], array_intersect_key( $_POST,array_combine( $vars['columns'], array_fill( 0, count( $vars['columns'] ), '!' ) ) ) );
+	$store_save = new Store( $config['column_map'], array_intersect_key( $_POST, array_flip( $vars['columns'] ) ) );
 	if ( $stg->saveStore( $store_save ) ) {
 		$status_message->setStatus( 'success' );
 		$status_message->setMessage( 'Store saved successfully' );
@@ -12,20 +13,25 @@ if ( isset( $_POST['save'] ) ) {
 	}
 }
 
+// Set the status message
 if ( isset( $_GET['status'], $_GET['message'] ) ) {
 	$status_message->setStatus( $_GET['status'] );
 	$status_message->setMessage( $_GET['message'] );
 }
 
+// Get the store
 $store = $stg->getStore( $vars['store_id'] );
 
+// Invalid store, send 404
 if ( !$store ) {
 	header("HTTP/1.1 404 Not Found");
 	$status_message->setStatus( 'error' );
 	$status_message->setMessage( "Store does not exist" );
 	require( DIR_VIEWS . '/error.php' );
+	exit;
 }
 
+// Map code
 require( DIR_LIB . '/PHPGoogleMaps/Core/Autoloader.php' );
 $map_loader = new SplClassLoader( 'PHPGoogleMaps', DIR_LIB );
 $map_loader->register();

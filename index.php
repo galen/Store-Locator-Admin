@@ -28,7 +28,7 @@ require( DIR_SYSTEM . '/config/routes.php' );
 // Create a new table gateway
 $stg = new StoreTableGateway( $db, STORE_LOCATIONS_TABLE, $config['column_map'] );
 
-// Get the column names from the table
+// Get columns
 $vars['column_info'] = $stg->getColumns();
 $vars['columns'] = array_keys( $vars['column_info'] );
 $vars['columns_list'] = array_values( array_diff( $vars['columns'], array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) );
@@ -49,7 +49,7 @@ foreach( $routes as $url => $action ) {
 	}
 }
 
-// Redirect to the list
+// No route found, send 404
 header("HTTP/1.1 404 Not Found");
 $status_message->setStatus( 'error' );
 $status_message->setMessage( "This page doesn't exist" );

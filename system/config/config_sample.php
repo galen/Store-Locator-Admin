@@ -1,8 +1,19 @@
 <?php
 
-define( 'STORE_LOCATIONS_TABLE',	'store_locations' );
-define( 'STORES_PER_PAGE',			100 );
+error_reporting( E_ALL );
+ini_set( 'display_errors', 'On' );
 
+// Database configuration
+$config['db_user'] = '';
+$config['db_password'] = '';
+$config['db_host'] = 'localhost';
+$config['db_name'] = '';
+$config['db_table'] = '';
+
+// Number of stores to display on the list/search page
+$config['stores_per_page'] = 100;
+
+// Edit this to reflect your table columns
 $config['column_map'] = array (
 	'lat'		=> 'lat',
 	'lng'		=> 'lng',
@@ -10,25 +21,33 @@ $config['column_map'] = array (
 	'address1'	=> 'address1',
 	'city'		=> 'city',
 	'state'		=> 'state',
-	'country'	=> 'country'
+	'country'	=> 'country',
+	'name'		=> 'name'
 );
 
 $config['geocode_string'] = '{address1}, {city}, {state}';
 
-define( 'DB_USER',					'' );
-define( 'DB_PASSWORD',				'' );
-define( 'DB_HOST',					'' );
-define( 'DB_NAME',					'' );
+/**
+ * Do not edit below
+ */
 
+// Directories
 define( 'DIR_BASE',		 			dirname( dirname( __DIR__ ) ) );
 define( 'DIR_SYSTEM',	 			dirname( __DIR__ ) );
 define( 'DIR_LIB',	 				DIR_SYSTEM . '/lib' );
+define( 'DIR_VIEWS', 				DIR_SYSTEM . '/views' );
 
+// URLs
 define( 'URL_ROOT',					dirname( $_SERVER['SCRIPT_NAME'] ) );
 define( 'URL_LIST',					URL_ROOT . '/list' );
 define( 'URL_DELETE',				URL_ROOT . '/delete' );
 define( 'URL_EDIT',					URL_ROOT . '/edit' );
 define( 'URL_SEARCH',				URL_ROOT . '/search' );
 define( 'URL_PUBLIC',				URL_ROOT . '/public' );
-define( 'URL_PAGE_BASE',			'/'. implode( '/', array_slice( explode( '/', trim( $_SERVER['REQUEST_URI'], '/' ) ), 0, 2 ) ) );
-define( 'URL_PAGE_BASE_WITH_QUERY',	URL_PAGE_BASE . '?' . $_SERVER['QUERY_STRING'] );
+define( 'URL_AJAX',					URL_PUBLIC . '/ajax' );
+define( 'URL_GEOCODE',				URL_AJAX . '/geocode.php' );
+
+// Requests
+define( 'REQUEST',					trim( str_replace( dirname( $_SERVER['PHP_SELF'] ), '', preg_replace( '~/+~', '/' , parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ) ) ), '/' ) );
+define( 'REQUEST_METHOD',			$_SERVER['REQUEST_METHOD'] );
+define( 'REQUEST_IS_AJAX',			(bool)isset( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' );

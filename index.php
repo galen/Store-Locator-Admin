@@ -12,7 +12,7 @@ if ( !REQUEST_IS_AJAX ) {
 
 // Connect to the database
 require( DIR_SYSTEM . '/core/Db.php' );
-if ( !$db = Db::connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME ) ) {
+if ( !$db = Db::connect( $config['db_host'], $config['db_user'], $config['db_password'], $config['db_name'] ) ) {
 	header("HTTP/1.1 500 Internal Server Error");
 	$status_message->setStatus( 'error' );
 	$status_message->setMessage( "Unable to connect to the database" );
@@ -26,7 +26,7 @@ require( DIR_SYSTEM . '/models/Store.php' );
 require( DIR_SYSTEM . '/config/routes.php' );
 
 // Create a new table gateway
-$stg = new StoreTableGateway( $db, STORE_LOCATIONS_TABLE, $config['column_map'] );
+$stg = new StoreTableGateway( $db, $config['db_table'], $config['column_map'] );
 
 // Get columns
 $vars['column_info'] = $stg->getColumns();

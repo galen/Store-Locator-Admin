@@ -30,8 +30,4 @@ class Router {
 		return self::$vars;
 	}
 
-	static function test() {
-		print_r( self::$routes );
-	}
-
 }

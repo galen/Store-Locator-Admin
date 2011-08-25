@@ -2,6 +2,13 @@
 
 require( 'system/config/config.php' );
 
+// Only need these if this isn't an AJAX request
+if ( !REQUEST_IS_AJAX ) {
+	require( DIR_LIB . '/FormStatusMessage/FormStatusMessage.php' );
+	require( DIR_HELPERS . '/view_helpers.php' );
+	$status_message = new FormStatusMessage;
+}
+
 // Require necessary files
 require( DIR_CORE . '/Router.php' );
 require( DIR_CONFIG . '/routes.php' );
@@ -16,14 +23,6 @@ if ( $controller = Router::route( REQUEST ) ) {
 		$status_message->setMessage( "Unable to connect to the database" );
 		require( DIR_VIEWS . '/pages/error.php' );
 		exit;
-	}
-
-	// Only need these if this isn't an AJAX request
-	if ( !REQUEST_IS_AJAX ) {
-		require( DIR_LIB . '/FormStatusMessage/FormStatusMessage.php' );
-		require( DIR_HELPERS . '/view_helpers.php' );
-		// Create a new Form status message
-		$status_message = new FormStatusMessage;
 	}
 
 	// We will use a store table gateway on every page so we will create one here

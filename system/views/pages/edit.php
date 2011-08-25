@@ -5,7 +5,7 @@
 
 <?php require( DIR_VIEWS . '/widgets/page_status_message.php' ) ?>
 
-<form action="<?php echo URL_EDIT ?>/<?php echo $vars['store_id'] ?>/" method="post" id="store_edit">
+<form action="<?php if( $vars['controller'] == 'edit' ): ?><?php echo URL_EDIT ?>/<?php echo $vars['store_id'] ?>/<?php else: ?><?php echo URL_CREATE ?>/<?php endif; ?>" method="post" id="store_edit">
 
 	<fieldset>
 		<?php if ( isset( $store ) ): ?>

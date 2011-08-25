@@ -16,7 +16,7 @@ if ( isset( $_POST['backup_file'] ) ) {
 if ( isset( $_POST['restore_file'] ) ) {
 	if ( $stg->restore( DIR_BACKUPS . '/' . basename( $_POST['restore_file'] ) ) ) {
 		$status_message->setStatus( 'success' );
-		$status_message->setMessage( 'Table restored successfully' );
+		$status_message->setMessage( 'Backup restored successfully' );
 	}
 	else {
 		$status_message->setStatus( 'error' );

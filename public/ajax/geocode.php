@@ -16,7 +16,7 @@ if ( $geocode instanceof \PHPGoogleMaps\Service\GeocodeResult ) {
 	if ( isset( $_GET['save_store'] ) ) {
 		require( DIR_SYSTEM . '/models/StoreTableGateway.php' );
 		require( DIR_SYSTEM . '/models/Store.php' );
-		require( DIR_SYSTEM . '/core/Db.php' );
+		require( DIR_CORE . '/Db.php' );
 		$db = $db = Db::connect( $config['db_host'], $config['db_user'], $config['db_password'], $config['db_name'] ) or die( json_encode( array( 'status' => 0, 'message' => 'Unable to connect to database' ) ) );
 		$stg = new StoreTableGateway( $db, $config['db_table'], $config['column_map'] );
 		$store = new Store( $config['column_map'], array( $config['column_map']['id'] => $_GET[$config['column_map']['id']], $config['column_map']['lat'] => $geocode->getLat(), $config['column_map']['lng'] => $geocode->getLng() ) );

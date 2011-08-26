@@ -36,7 +36,6 @@ class StoreTableGateway {
 	}
 
 	public function getCount( array $search_params=null, $geocode_status=null ) {
-	
 		$sql = sprintf( 'select count(id) from %s %s', $this->table,isset( $search_params ) ? $this->buildSearchString( $search_params, $geocode_status ) : '' );
 		unset( $search_params['geocode_status'] );
 		$stmnt = $this->db->prepare( $sql );
@@ -49,7 +48,6 @@ class StoreTableGateway {
 		}
 		$stmnt->execute();
 		return $stmnt->fetchColumn();
-	
 	}
 
 	public function getStores( $start, $length, array $search_params=null, $geocode_status=null ) {
@@ -67,7 +65,6 @@ class StoreTableGateway {
 	}
 
 	private function buildSearchString( array $search_params, $geocode_status ) {
-
 		$columns = implode( ' and ', array_map( function($a){ return sprintf( '%s %s :%s', $a[0], $a[1], $a[0] ); }, $search_params ) );
 		$sql = sprintf( 'where 1 = 1%s', $columns ? ' and ' : '' ) . $columns; 
 
@@ -115,7 +112,6 @@ class StoreTableGateway {
 	}
 
 	function deleteStore( $id ) {
-	
 		$sql = sprintf( 'delete from %s where %s = :id', $this->table, $this->column_map['id'] );
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->bindValue( ':id', $id );
@@ -123,11 +119,9 @@ class StoreTableGateway {
 			return true;
 		}
 		return false;
-	
 	}
 
 	function createStore( Store $store ) {
-	
 		$vars = get_object_vars($store);
 		unset( $vars['id'] );
 		$sql = sprintf( 'insert into %s (%s) values(%s)', $this->table, implode( ',', array_keys( $vars ) ), implode( ',', array_map( function( $v ) { return ':'.$v; }, array_keys( $vars ) ) ) );
@@ -164,6 +158,13 @@ class StoreTableGateway {
 			return true;
 		}
 		return false;
+	}
+
+	function validateTable() {
+		foreach( $this->db->query( sprintf( 'show columns from %s', $this->table ) )->fetchAll( PDO::FETCH_ASSOC ) as $c ) {
+			$columns[$c['Field']] = true;
+		}
+		return isset( $columns[$this->column_map['id']], $columns[$this->column_map['lat']], $columns[$this->column_map['lng']] );
 	}
 
 }

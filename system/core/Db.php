@@ -2,9 +2,11 @@
 
 class Db extends PDO {
 
-	function __construct( $user, $pw, $db, $host='localhost', $type='mysql', $persistent=false, $charset='utf8' ) {
+	public $type, $charset;
 
-		$dsn = sprintf( '%s:dbname=%s;host=%s', $type, $db, $host );
+	function __construct( $user, $password, $name, $host='localhost', $type='mysql', $persistent=false, $charset='utf8' ) {
+
+		$dsn = sprintf( '%s:dbname=%s;host=%s', $type, $name, $host );
 
 		if ( $persistent ) {
 			$driver_options[PDO::ATTR_PERSISTENT] = TRUE;
@@ -12,7 +14,9 @@ class Db extends PDO {
 		
 		try {
 			$driver_options[PDO::MYSQL_ATTR_INIT_COMMAND] = sprintf( "SET NAMES %s", $charset );
-			return parent::__construct($dsn, $user, $pw, $driver_options);
+			$this->type = $type;
+			$this->charset = $charset;
+			return parent::__construct($dsn, $user, $password, $driver_options);
 		}
 		catch (PDOException $e) {
 			return false;
@@ -20,9 +24,8 @@ class Db extends PDO {
 
 	}
 
-	static function connect( $host, $user, $pw, $db, $persistent=false, $charset='utf8' ) {
-		$dsn = sprintf( 'mysql:dbname=%s;host=%s', $db, $host );
-		return new self( $host, $user, $pw, $db, $persistent, $charset );
+	static function connect( $user, $password, $name, $host='localhost', $type='mysql', $persistent=false, $charset='utf8' ) {
+		return new self( $user, $password, $name, $host, $type, $persistent, $charset );
 	}
 
 }

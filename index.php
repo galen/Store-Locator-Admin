@@ -30,6 +30,14 @@ if ( $controller = Router::route( REQUEST ) ) {
 	require( DIR_MODELS . '/Store.php' );
 	$stg = new StoreTableGateway( $db, $config['db_table'], $config['column_map'] );
 
+	if ( !$stg->validateTable() ) {
+		header("HTTP/1.1 500 Internal Server Error");
+		$status_message->setStatus( 'error' );
+		$status_message->setMessage( "Invalid table setup" );
+		require( DIR_VIEWS . '/pages/error.php' );
+		exit;
+	}
+
 	// Set variables
 	$vars = Router::getVars();
 	$vars['controller'] = $controller;

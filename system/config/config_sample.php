@@ -6,7 +6,7 @@ ini_set( 'display_errors', 'On' );
 // Database configuration
 $config['db_user'] = '';
 $config['db_password'] = '';
-$config['db_host'] = 'localhost';
+$config['db_host'] = '';
 $config['db_name'] = '';
 $config['db_table'] = '';
 
@@ -35,12 +35,20 @@ $config['geocode_string'] = '{address1}, {city}, {state}';
 define( 'DIR_BASE',		 			dirname( dirname( __DIR__ ) ) );
 define( 'DIR_SYSTEM',	 			dirname( __DIR__ ) );
 define( 'DIR_LIB',	 				DIR_SYSTEM . '/lib' );
+define( 'DIR_CORE',	 				DIR_SYSTEM . '/core' );
+define( 'DIR_CONTROLLERS',			DIR_SYSTEM . '/controllers' );
+define( 'DIR_MODELS',				DIR_SYSTEM . '/models' );
+define( 'DIR_HELPERS',				DIR_SYSTEM . '/helpers' );
+define( 'DIR_BACKUPS',				DIR_SYSTEM . '/backups' );
+define( 'DIR_CONFIG', 				DIR_SYSTEM . '/config' );
 define( 'DIR_VIEWS', 				DIR_SYSTEM . '/views' );
+
 
 // URLs
 define( 'URL_ROOT',					dirname( $_SERVER['SCRIPT_NAME'] ) );
 define( 'URL_LIST',					URL_ROOT . '/list' );
 define( 'URL_DELETE',				URL_ROOT . '/delete' );
+define( 'URL_CREATE',				URL_ROOT . '/create' );
 define( 'URL_EDIT',					URL_ROOT . '/edit' );
 define( 'URL_SEARCH',				URL_ROOT . '/search' );
 define( 'URL_PUBLIC',				URL_ROOT . '/public' );

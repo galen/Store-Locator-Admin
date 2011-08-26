@@ -17,7 +17,7 @@
 			<?php if( $vars['column_info'][$vars['columns_list'][$i]]['type'] == 'select' ): ?>
 			<select name="search_params[<?php echo $i ?>][2]">
 				<option value="select_<?php e( $vars['columns_list'][$i] ) ?>">Select <?php e( $vars['columns_list'][$i] ) ?></option>
-				<option value=""></option>
+				<option value=""<?php if( isset( $vars['search_params'][$i][2] ) && $vars['search_params'][$i][2] == '' ): ?> selected="selected"<?php endif; ?>></option>
 				<?php foreach( $vars['column_info'][$vars['columns_list'][$i]]['values'] as $option ): ?>
 				<option value="<?php echo $option ?>"<?php if( isset( $vars['search_params'][$i][2] ) && $vars['search_params'][$i][2] == $option ): ?> selected="selected"<?php endif; ?>><?php echo $option ?></option>
 				<?php endforeach; ?>

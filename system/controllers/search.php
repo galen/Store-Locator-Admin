@@ -1,8 +1,6 @@
 <?php
-//$vars['column_info']['country']['type']
 $vars['page_number'] = isset( $vars['page_number'] ) ? $vars['page_number'] : 1;
-//$vars['search_params'] = isset( $_GET['search_params'] ) ? array_filter( $_GET['search_params'], function($s){ return !empty( $s[1] ); } ) : null;
-$vars['search_params'] = null;
+
 if ( isset( $_GET['search_params'] ) ) {
 	foreach( $_GET['search_params'] as $index => $search_param ) {
 		if ( $vars['column_info'][$search_param[0]]['type'] == 'select' && $search_param[2] != sprintf( 'select_%s', $search_param[0] ) ) {
@@ -17,7 +15,9 @@ if ( isset( $_GET['search_params'] ) ) {
 		}
 		
 	}
-print_r($vars['search_params']);
+}
+else {
+	$vars['search_params'] = null;
 }
 
 $vars['geocode_status'] = isset( $_GET['geocode_status'] ) && ( $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_FALSE || $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_TRUE ) ? (int)$_GET['geocode_status'] : null;

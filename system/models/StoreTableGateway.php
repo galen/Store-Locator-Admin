@@ -79,7 +79,6 @@ class StoreTableGateway {
 		elseif ( $geocode_status === self::GEOCODE_STATUS_TRUE ) {
 			$sql .= sprintf( ' and ( %1$s is not null and %1$s != 0 and %2$s is not null and %2$s != 0 )', $this->column_map['lat'], $this->column_map['lng'] );
 		}
-		
 		return $sql;
 	}
 

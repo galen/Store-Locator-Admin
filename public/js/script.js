@@ -17,10 +17,12 @@ $.fn.serializeObject = function()
     return o;
 };
 
-$(".delete_store").click(function(){
-	var answer = confirm( "Delete store #" + $(this).data("id") + "?" );
-	if ( !answer ) {
-		return false
+$(".delete_store").click(function( event, all ){
+	if ( !all ) {
+		var answer = confirm( "Delete store #" + $(this).data("id") + "?" );
+		if ( !answer ) {
+			return false
+		}
 	}
 	obj = $(this);
 	$.post(
@@ -28,11 +30,15 @@ $(".delete_store").click(function(){
 		{},
 		function(data) {
 			if ( data.status == 1 ) {
-				alert( data.message );
-				obj.parent().parent().fadeOut();
+				obj.parent().parent().hide();
+				if ( !all ) {
+					alert( data.message );
+				}
 			}
 			else {
-				alert( data.message );
+				if ( !all ) {
+					alert( data.message );
+				}
 			}
 		},
 		'json'

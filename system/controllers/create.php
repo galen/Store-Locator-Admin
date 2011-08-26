@@ -14,8 +14,8 @@ if ( isset( $_POST['create'] ) ) {
 }
 
 // Create map
-require( DIR_LIB . '/PHPGoogleMaps/Core/Autoloader.php' );
-$map_loader = new SplClassLoader( 'PHPGoogleMaps', DIR_LIB );
+require( DIR_LIB . '/PHPGoogleMaps/PHPGoogleMaps/Core/Autoloader.php' );
+$map_loader = new SplClassLoader( 'PHPGoogleMaps', DIR_LIB . '/PHPGoogleMaps' );
 $map_loader->register();
 $map = new \PHPGoogleMaps\Map( array( 'width' => '600px', 'height' => '300px' ) );
 $map->setCenter( new \PHPGoogleMaps\Core\LatLng( 23, 23 ) );

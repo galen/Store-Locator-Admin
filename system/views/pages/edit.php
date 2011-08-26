@@ -14,7 +14,7 @@
 		<?php foreach( $vars['columns_edit'] as $property ): ?>
 		<div>
 			<label><?php echo prettify_var( $property ) ?></label>
-			<input type="text" name="<?php echo $property ?>" id="<?php echo $property ?>" value="<?php if( isset( $store->$property ) ): ?><?php echo $store->$property ?><?php endif; ?>">
+			<input type="text" name="<?php echo $property ?>" id="<?php echo $property ?>" value="<?php if ( isset( $store ) ): ?><?php echo $store->raw( $property ) ?><?php endif; ?>">
 		</div>
 		<?php endforeach; ?>
 		

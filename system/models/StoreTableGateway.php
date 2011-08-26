@@ -11,6 +11,7 @@ class StoreTableGateway {
 
 	public function backup( $file ) {
 		$sql = sprintf( sprintf( 'select * into outfile :file from %s', $this->table ) );
+		echo $sql . $file;
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->bindValue( ':file', $file );
 		if ( $stmnt->execute() ) {
@@ -61,7 +62,11 @@ class StoreTableGateway {
 			}
 		}
 		$stmnt->execute();
-		return $stmnt->fetchAll( PDO::FETCH_CLASS, 'Store', array( $this->column_map ) );
+		$stores = array();
+		foreach( $stmnt->fetchAll( PDO::FETCH_ASSOC ) as $data ) {
+			$stores[] = new Store( $this->column_map, $data );
+		}
+		return $stores;
 	}
 
 	private function buildSearchString( array $search_params, $geocode_status ) {
@@ -108,7 +113,8 @@ class StoreTableGateway {
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->bindValue( ':id', $id, PDO::PARAM_INT );
 		$stmnt->execute();
-		return $stmnt->fetchObject( 'Store', array( $this->column_map ) );
+		$data = current( $stmnt->fetchAll( PDO::FETCH_ASSOC ) );
+		return new Store( $this->column_map, $data );
 	}
 
 	function deleteStore( $id ) {
@@ -122,7 +128,7 @@ class StoreTableGateway {
 	}
 
 	function createStore( Store $store ) {
-		$vars = get_object_vars($store);
+		$vars = $store->getData();
 		unset( $vars['id'] );
 		$sql = sprintf( 'insert into %s (%s) values(%s)', $this->table, implode( ',', array_keys( $vars ) ), implode( ',', array_map( function( $v ) { return ':'.$v; }, array_keys( $vars ) ) ) );
 		$stmnt = $this->db->prepare( $sql );
@@ -137,7 +143,7 @@ class StoreTableGateway {
 
 	function saveStore( Store $store ) {
 		$id = $store->getID();
-		$store_array = get_object_vars( $store );
+		$store_array = $store->getData();
 		unset( $store_array['id'] );
 		foreach( $store_array as $property => $value ) {
 			if ( strpos( $property, '_' ) === 0 ) {

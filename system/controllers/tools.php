@@ -34,5 +34,5 @@ while( file_exists( DIR_BACKUPS . '/' . $vars['backup_file_suggestion'] . '.sql'
 	$vars['backup_file_suggestion'] = sprintf( '%s_%s', current( explode( '_', $vars['backup_file_suggestion'] ) ), $i++ );
 }
 $vars['backup_file_suggestion'] .= '.sql';
-
+$vars['backup_dir_perms'] = substr( decoct( fileperms( DIR_BACKUPS ) ), 2 );
 require( DIR_VIEWS . '/pages/tools.php' );

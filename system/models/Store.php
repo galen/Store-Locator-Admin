@@ -3,12 +3,13 @@
 class Store {
 
 	private $column_map;
+	private $data = array();
 
 	function __construct( array $column_map, array $data = null ) {
 		$this->column_map = $column_map;
 		if ( $data ) {
 			foreach( $data as $var => $val ) {
-				$this->$var = $val;
+				$this->data[$var] = $val;
 			}
 		}
 		/*
@@ -32,23 +33,35 @@ class Store {
 	function __call( $method, array $args ) {
 		if ( strpos( $method, 'get' ) === 0 ) {
 			$var = strtolower( substr( $method, 3 ) );
-			return isset( $this->{$this->column_map[$var]} ) ? $this->{$this->column_map[$var]} : null;
+			return isset( $this->data[$this->column_map[$var]] ) ? $this->data[$this->column_map[$var]] : null;
 		}
 		if ( strpos( $method, 'set' ) === 0 ) {
 			$var = strtolower( substr( $method, 3 ) );
 			if ( $var != 'id' ) {
-				$this->{$this->column_map[$var]} = $args[0];
+				$this->data[$this->column_map[$var]] = $args[0];
 			}			
 		}
 	}
 
+	function getData() {
+		return $this->data;
+	}
+
+	function raw( $var ) {
+		return isset( $this->data[$var] ) ? $this->data[$var] : null;
+	}
+
+	function __get( $var ) {
+		return $this->raw( $var );
+	}
+
 	function getEditableProperties() {
-		return array_diff( array_keys( get_object_vars( $this ) ), array( $this->column_map['id'], 'column_map' ) );
+		return array_diff( array_keys( $this->data ), array( $this->column_map['id'], 'column_map' ) );
 	}
 
 	function getQueryString() {
 		$str = '?';
-		foreach( get_object_vars( $this ) as $k => $v ) {
+		foreach( $this->data as $k => $v ) {
 			if ( in_array( $k, array( 'column_map' ) ) ) {
 				continue;
 			}

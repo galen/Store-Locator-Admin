@@ -2,6 +2,8 @@
 <?php require( DIR_VIEWS . '/widgets/navigation.php' ) ?>
 <?php require( DIR_VIEWS . '/widgets/page_status_message.php' ) ?>
 
+<h2>Backup</h2>
+<?php if( $vars['backup_dir_perms'] == '777' ): ?>
 <form action="" method="post">
 <fieldset>
 	<p>Backup your table</p>
@@ -9,6 +11,9 @@
 	<input type="submit" value="Backup">
 </fieldset>
 </form>
+<?php else: ?>
+<p>You must chmod the backup directory to 777.</p>
+<?php endif; ?>
 
 <form action="" method="post">
 <fieldset>

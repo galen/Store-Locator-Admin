@@ -2,9 +2,9 @@
 
 class Db extends PDO {
 
-	function __construct( $user, $pw, $db, $host='localhost', $persistent=false, $charset='utf8' ) {
+	function __construct( $user, $pw, $db, $host='localhost', $type='mysql', $persistent=false, $charset='utf8' ) {
 
-		$dsn = sprintf( 'mysql:dbname=%s;host=%s', $db, $host );
+		$dsn = sprintf( '%s:dbname=%s;host=%s', $type, $db, $host );
 
 		if ( $persistent ) {
 			$driver_options[PDO::ATTR_PERSISTENT] = TRUE;

@@ -6,8 +6,8 @@ require( '../../system/config/config.php' );
 // into 123 main st, san diego, ca for geocoding
 $address = preg_replace_callback( '~\{(.*?)\}~', function( $m ) use( $_GET ){ return $_GET[$m[1]]; }, $config['geocode_string'] );
 
-require( DIR_LIB . '/PHPGoogleMaps/Core/Autoloader.php' );
-$map_loader = new SplClassLoader( 'PHPGoogleMaps', DIR_LIB );
+require( DIR_LIB . '/PHPGoogleMaps/PHPGoogleMaps/Core/Autoloader.php' );
+$map_loader = new SplClassLoader( 'PHPGoogleMaps', DIR_LIB . '/PHPGoogleMaps' );
 $map_loader->register();
 
 $geocode = \PHPGoogleMaps\Service\Geocoder::geocode( $address );
@@ -17,7 +17,7 @@ if ( $geocode instanceof \PHPGoogleMaps\Service\GeocodeResult ) {
 		require( DIR_SYSTEM . '/models/StoreTableGateway.php' );
 		require( DIR_SYSTEM . '/models/Store.php' );
 		require( DIR_CORE . '/Db.php' );
-		$db = $db = Db::connect( $config['db_user'], $config['db_password'], $config['db_name'], $config['db_host'] ) or die( json_encode( array( 'status' => 0, 'message' => 'Unable to connect to database' ) ) );
+		$db = $db = Db::connect( $config['db_user'], $config['db_password'], $config['db_name'], $config['db_host'], $config['db_type'] ) or die( json_encode( array( 'status' => 0, 'message' => 'Unable to connect to database' ) ) );
 		$stg = new StoreTableGateway( $db, $config['db_table'], $config['column_map'] );
 		$store = new Store( $config['column_map'], array( $config['column_map']['id'] => $_GET[$config['column_map']['id']], $config['column_map']['lat'] => $geocode->getLat(), $config['column_map']['lng'] => $geocode->getLng() ) );
 		if ( $stg->saveStore( $store ) ) {

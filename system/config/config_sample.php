@@ -8,7 +8,9 @@ $config['db_user'] = '';
 $config['db_password'] = '';
 $config['db_host'] = '';
 $config['db_name'] = '';
+$config['db_type'] = '';
 $config['db_table'] = '';
+
 
 // Number of stores to display on the list/search page
 $config['stores_per_page'] = 100;

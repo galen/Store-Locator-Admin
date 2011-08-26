@@ -15,6 +15,7 @@
 <p>You must chmod the backup directory to 777.</p>
 <?php endif; ?>
 
+<h2>Restore</h2>
 <form action="" method="post">
 <fieldset>
 	<p>Restore from backup. This will delete all existing data.</p>

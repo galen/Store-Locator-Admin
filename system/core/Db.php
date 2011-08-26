@@ -2,7 +2,7 @@
 
 class Db extends PDO {
 
-	function __construct( $host, $user, $pw, $db, $persistent=false, $charset='utf8' ) {
+	function __construct( $user, $pw, $db, $host='localhost', $persistent=false, $charset='utf8' ) {
 
 		$dsn = sprintf( 'mysql:dbname=%s;host=%s', $db, $host );
 

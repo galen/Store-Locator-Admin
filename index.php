@@ -17,7 +17,7 @@ if ( $controller = Router::route( REQUEST ) ) {
 
 	// Connect to the database
 	require( DIR_CORE . '/Db.php' );
-	if ( !$db = Db::connect( $config['db_host'], $config['db_user'], $config['db_password'], $config['db_name'] ) ) {
+	if ( !$db = Db::connect( $config['db_user'], $config['db_password'], $config['db_name'], $config['db_host'] ) ) {
 		header("HTTP/1.1 500 Internal Server Error");
 		$status_message->setStatus( 'error' );
 		$status_message->setMessage( "Unable to connect to the database" );

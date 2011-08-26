@@ -12,6 +12,8 @@
 	</script>
 	<script type="text/javascript" src="<?php echo URL_PUBLIC ?>/js/jquery.js"></script>
 	<script type="text/javascript" src="<?php echo URL_PUBLIC ?>/js/script.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="<?php echo URL_PUBLIC ?>/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" media="all" href="<?php echo URL_PUBLIC ?>/css/style.css">
 </head>
 <h1>Admin</h1>
 <body>

@@ -30,4 +30,4 @@ if ( isset( $_POST['delete'] ) || isset( $_POST['cancel'] ) ) {
 	}
 }
 
-require( DIR_VIEWS . '/delete.php' );
+require( DIR_VIEWS . '/pages/delete.php' );

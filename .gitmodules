@@ -1,0 +1,6 @@
+[submodule "system/lib/PHPGoogleMaps"]
+	path = system/lib/PHPGoogleMaps
+	url = git@github.com:galen/PHP-Google-Maps.git
+[submodule "system/lib/FormStatusMessage"]
+	path = system/lib/FormStatusMessage
+	url = git@github.com:galen/FormStatusMessage.git

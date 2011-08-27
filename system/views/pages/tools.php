@@ -2,13 +2,15 @@
 <?php require( DIR_VIEWS . '/widgets/navigation.php' ) ?>
 <?php require( DIR_VIEWS . '/widgets/page_status_message.php' ) ?>
 
+<h1>Tools</h1>
+
 <h2>Backup</h2>
 <?php if( $vars['backup_dir_perms'] == '777' ): ?>
 <form action="" method="post">
 <fieldset>
 	<p>Backup your table</p>
 	<label for="backup_file">File name</label><input type="text" name="backup_file" value="<?php e( $vars['backup_file_suggestion'] ) ?>" id="backup_file">
-	<input type="submit" value="Backup">
+	<input type="submit" value="Backup" class="btn primary">
 </fieldset>
 </form>
 <?php else: ?>
@@ -25,7 +27,7 @@
 		<option value="<?php e( $restore_file ) ?>"><?php e( $restore_file ) ?></option>
 	<?php endforeach; ?>
 	</select>
-	<input type="submit" value="Restore">
+	<input type="submit" value="Restore" class="btn primary">
 </fieldset>
 </form>
 

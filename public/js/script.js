@@ -50,7 +50,6 @@ $(".geocode_form").click(function(){
 
 	var obj = $(this);
 	var form_data = {};
-
 	$.get(
 		url_geocode,
 		$("#store_edit input:text").serializeObject(),
@@ -115,5 +114,16 @@ $("#geocode_all").click(function(){
 	return false;
 });
 
+$(".show_search_form").click(function(){
+	$("#search_modal").show();
+})
+
+$("#search_modal .close").click(function(){
+	$("#search_modal").hide();
+})
+
+if ( $(".no_results").length == 0 ) {
+	$("#search_modal").hide();
+}
 
 });

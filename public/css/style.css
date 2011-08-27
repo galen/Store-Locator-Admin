@@ -1,3 +1,89 @@
 body {
-	padding: 20px 50px;
+	padding: 60px 50px 20px 50px;
+}
+
+form div {
+	margin-bottom: 10px;
+}
+label {
+	margin-right:10px;
+	text-align:left;
+}
+
+#wrapper {
+	width:960px;
+	margin: 0 auto;
+}
+
+thead td {
+	font-weight:bold;
+}
+
+td.actions_cell {
+	white-space:nowrap;
+}
+
+.topbar h3 {
+	position:relative;
+	top: 2px;
+	left:-10px;
+}
+
+#store_listing_header {
+	position:relative;
+	overflow:hidden;
+	margin-bottom:30px;
+}
+.pagination {
+	position:absolute;
+	right:0;
+	top: 0px;
+}
+.pagination .active a {
+	background:#f3f3f3 !important;
+	color:#999;
+}
+
+.pagination a:hover {
+	background: #f7f7f7 !important;
+}
+
+.search_compare {
+	width: 50px !important;
+}
+div.search_compare {
+	float:left;
+	text-align:center;
+	padding: 7px;
+}
+#geocode_status {
+	width: 60px;
+}
+
+#form_fields {
+	width:400px;
+	float:left;
+	overflow:auto;
+}
+
+#store_edit #map {
+	float:left;
+	margin-left:25px;
+}
+
+#store_edit_actions {
+	clear:both;
+	margin-top: 40px;
+}
+
+/* Search Modal */
+
+.no_results {
+	text-align:center;
+	color: #aa0000;
+	font-weight:bold;
+}
+
+#search_modal form, #search_modal fieldset {
+	margin:0;
 }

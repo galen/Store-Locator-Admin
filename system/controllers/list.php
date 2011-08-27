@@ -4,8 +4,7 @@ $vars['page_number'] = isset( $vars['page_number'] ) ? $vars['page_number'] : 1;
 $vars['total_store_count'] = $stg->getCount();
 $vars['total_pages'] = ceil( $vars['total_store_count'] / $config['stores_per_page'] );
 
-$vars['page_array'] = array_slice( range( 1, $vars['total_pages'] ), $vars['page_number']-5 > 0 ? $vars['page_number']-5 : 0, 10 );
-
+$vars['page_array'] = array_slice( range( 1, $vars['total_pages'] ), $vars['page_number']-ceil($config['pagination_size']/2) > 0 ? $vars['page_number']-ceil($config['pagination_size']/2) : 0, $config['pagination_size'] );
 
 $vars['prev_page'] = $vars['page_number'] != 1 ? $vars['page_number'] - 1 : null;
 

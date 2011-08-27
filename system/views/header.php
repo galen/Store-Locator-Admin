@@ -15,5 +15,6 @@
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo URL_PUBLIC ?>/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo URL_PUBLIC ?>/css/style.css">
 </head>
-<h1>Admin</h1>
-<body>
+<body id="<?php echo $vars['controller'] ?>">
+
+<div id="wrapper">

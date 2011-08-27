@@ -18,6 +18,7 @@
 <?php endif; ?>
 
 <h2>Restore</h2>
+<?php if ( count( $vars['restore_files'] ) ): ?>
 <form action="" method="post">
 <fieldset>
 	<p>Restore from backup. This will delete all existing data.</p>
@@ -30,5 +31,8 @@
 	<input type="submit" value="Restore" class="btn primary">
 </fieldset>
 </form>
+<?php else: ?>
+<p>No backups exist</p>
+<?php endif; ?>
 
 <?php require( DIR_VIEWS . '/footer.php' ) ?>

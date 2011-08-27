@@ -122,6 +122,13 @@ $("#search_modal .close").click(function(){
 	$("#search_modal").hide();
 })
 
+$(".alert-message .close").click(function(){
+	$(this).parent().fadeOut();
+	return false;
+})
+
+
+
 if ( $(".no_results").length == 0 ) {
 	$("#search_modal").hide();
 }

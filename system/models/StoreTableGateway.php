@@ -11,7 +11,6 @@ class StoreTableGateway {
 
 	public function backup( $file ) {
 		$sql = sprintf( sprintf( 'select * into outfile :file from %s', $this->table ) );
-		echo $sql . $file;
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->bindValue( ':file', $file );
 		if ( $stmnt->execute() ) {

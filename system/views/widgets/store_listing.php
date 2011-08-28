@@ -29,7 +29,9 @@
 	</tbody>
 </table>
 
+<?php if( $vars['page_store_count'] > 20 ): ?>
 <div class="table_actions well">
 	<a href="#" class="btn success geocode_all" title="Geocode all stores on the page">Geocode all stores</a>
 	<a href="#" class="btn danger" title="Delete all stores on the page">Delete all stores</a>
 </div>
+<?php endif; ?>

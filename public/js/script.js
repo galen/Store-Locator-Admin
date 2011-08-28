@@ -145,4 +145,8 @@ if ( $(".no_results").length == 0 && $(".show_search_modal").length == 0 ) {
 	$("#search_modal").hide();
 }
 
+if ( $(".autoremove_statuses").length ) {
+	$(".alert-message").delay($("body").data("autoremove-statuses-time")).fadeOut();
+}
+
 });

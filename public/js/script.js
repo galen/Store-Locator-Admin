@@ -17,6 +17,17 @@ $.fn.serializeObject = function()
     return o;
 };
 
+$(".delete_all").click(function(){
+	var answer = confirm( "This will delete all store on this page. Are you sure?" );
+	if ( !answer ) {
+		return false
+	}
+	$(".delete_store").each(function(){
+	alert('asdf');
+		$(this).trigger( 'click', [true] );
+	});
+})
+
 $(".delete_store").click(function( event, all ){
 	if ( !all ) {
 		var answer = confirm( "Delete store #" + $(this).data("id") + "?" );
@@ -30,10 +41,7 @@ $(".delete_store").click(function( event, all ){
 		{},
 		function(data) {
 			if ( data.status == 1 ) {
-				obj.parent().parent().hide();
-				if ( !all ) {
-					alert( data.message );
-				}
+				obj.parent().parent().fadeOut();
 			}
 			else {
 				if ( !all ) {
@@ -109,13 +117,14 @@ $(".geocode_table").click(function( event, all ){
 	return false;
 });
 
-$("#geocode_all").click(function(){
+$(".geocode_all").click(function(){
 	$(".geocode_table").trigger('click', [true]);
 	return false;
 });
 
 $(".show_search_form").click(function(){
 	$("#search_modal").show();
+	return false;
 })
 
 $("#search_modal .close").click(function(){
@@ -129,7 +138,7 @@ $(".alert-message .close").click(function(){
 
 
 
-if ( $(".no_results").length == 0 ) {
+if ( $(".no_results").length == 0 && $(".show_search_modal").length == 0 ) {
 	$("#search_modal").hide();
 }
 

@@ -23,7 +23,7 @@
 		
 		<div class="well" id="store_edit_actions">
 			<input type="submit" class="btn primary" value="<?php if( $vars['controller'] == 'create' ): ?>Create<?php else: ?>Save<?php endif; ?>" name="<?php if( $vars['controller'] == 'create' ): ?>create<?php else: ?>save<?php endif; ?>">
-			<a href="#" class="geocode_form btn primary">Geocode</a>
+			<a href="#" class="geocode_form btn success">Geocode</a>
 			<?php if( isset( $store ) ): ?><a href="<?php echo URL_DELETE ?>/<?php echo $store->getID() ?>/" id="delete_store" class="btn danger">Delete this store</a><?php endif; ?>
 		</div>
 	</fieldset>

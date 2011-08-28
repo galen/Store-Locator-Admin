@@ -14,9 +14,22 @@ label {
 	width:960px;
 	margin: 0 auto;
 }
-
+#map {
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+thead {
+	-webkit-border-top-left-radius: 4px;
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 4px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
 thead td {
 	font-weight:bold;
+	background: #fafafa;
 }
 
 td.actions_cell {
@@ -94,4 +107,14 @@ div.search_compare {
 
 #search_modal form, #search_modal fieldset {
 	margin:0;
+}
+.table_actions {
+	text-align:right;
+}
+.table_actions p {
+	font-weight:bold;
+	float:right;
+	line-height: 30px;
+	padding-right: 20px;
+	color: #ccc;
 }

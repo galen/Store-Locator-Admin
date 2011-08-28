@@ -5,9 +5,10 @@ class StoreTableGateway {
 	protected $db;
 	protected $table;
 	protected $column_map;
-	
-	const GEOCODE_STATUS_TRUE = 1;
-	const GEOCODE_STATUS_FALSE = 0;
+
+	const GEOCODE_STATUS_ALL = 3;
+	const GEOCODE_STATUS_TRUE = 2;
+	const GEOCODE_STATUS_FALSE = 1;
 
 	public function backup( $file ) {
 		$sql = sprintf( sprintf( 'select * into outfile :file from %s', $this->table ) );
@@ -51,7 +52,7 @@ class StoreTableGateway {
 	}
 
 	public function getStores( $start, $length, array $search_params=null, $geocode_status=null ) {
-		$sql = sprintf( 'select * from %s %s limit :start, :length', $this->table, isset( $search_params ) ? $this->buildSearchString( $search_params, $geocode_status ) : '' );
+		$sql = sprintf( 'select * from %s %s limit :start, :length', $this->table, isset( $search_params ) || isset( $geocode_status ) ? $this->buildSearchString( (array)$search_params, $geocode_status ) : '' );
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->bindValue( ':start', $start, PDO::PARAM_INT );
 		$stmnt->bindValue( ':length', $length, PDO::PARAM_INT );

@@ -1,5 +1,7 @@
 <?php
 $vars['page_number'] = isset( $vars['page_number'] ) ? $vars['page_number'] : 1;
+$vars['geocode_status'] = isset( $_GET['geocode_status'] ) && ( $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_FALSE || $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_TRUE ) ? (int)$_GET['geocode_status'] : null;
+$vars['search_params'] = null;
 
 if ( isset( $_GET['search_params'] ) ) {
 	foreach( $_GET['search_params'] as $index => $search_param ) {
@@ -13,14 +15,8 @@ if ( isset( $_GET['search_params'] ) ) {
 		elseif ( !empty( $search_param[0] ) && !empty( $search_param[1] ) ) {
 			$vars['search_params'][$index] = $search_param;
 		}
-		
 	}
 }
-else {
-	$vars['search_params'] = null;
-}
-
-$vars['geocode_status'] = isset( $_GET['geocode_status'] ) && ( $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_FALSE || $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_TRUE ) ? (int)$_GET['geocode_status'] : null;
 
 $vars['total_store_count'] = $stg->getCount( $vars['search_params'], $vars['geocode_status'] );
 $vars['total_pages'] = ceil( $vars['total_store_count'] / $config['stores_per_page'] );

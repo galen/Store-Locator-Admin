@@ -1,7 +1,7 @@
 <?php require( DIR_VIEWS . '/header.php' ) ?>
 <?php require( DIR_VIEWS . '/widgets/navigation.php' ) ?>
-<div id="search_modal" class="modal">
-<div class="modal-header"><h2>Search Parameters</h2><a href="#" class="close">&times;</a></div>
+<div id="search_modal" class="modal<?php if( !isset( $vars['search_params'] ) && !isset( $vars['geocode_status'] ) ): ?> show_search_modal<?php endif; ?>">
+<div class="modal-header"><h2>Search Parameters</h2><?php if( $vars['total_store_count'] > 0 ): ?><a href="#" class="close">&times;</a><?php endif; ?></div>
 <form action="<?php echo URL_SEARCH ?>" method="get" id="search_form">
 	<fieldset>
 		<div class="modal-body">
@@ -38,9 +38,9 @@
 			<div>
 				<label for="geocode_status">Geocoded</label>
 				<select name="geocode_status" id="geocode_status">
-					<option value="2"<?php if( $vars['geocode_status'] == null ): ?> selected="selected"<?php endif; ?>>All</option>
-					<option value="1"<?php if( $vars['geocode_status'] == '1' ): ?> selected="selected"<?php endif; ?>>Yes</option>
-					<option value="0"<?php if( $vars['geocode_status'] == '0' ): ?> selected="selected"<?php endif; ?>>No</option>
+					<option value="<?php echo StoreTableGateway::GEOCODE_STATUS_ALL ?>"<?php if( $vars['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_ALL ): ?> selected="selected"<?php endif; ?>>All</option>
+					<option value="<?php echo StoreTableGateway::GEOCODE_STATUS_TRUE ?>"<?php if( $vars['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_TRUE ): ?> selected="selected"<?php endif; ?>>Yes</option>
+					<option value="<?php echo StoreTableGateway::GEOCODE_STATUS_FALSE ?>"<?php if( $vars['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_FALSE ): ?> selected="selected"<?php endif; ?>>No</option>
 				</select>
 			</div>
 		</div>

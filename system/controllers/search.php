@@ -18,6 +18,8 @@ if ( isset( $_GET['search_params'] ) ) {
 	}
 }
 
+$vars['search_status'] = $vars['geocode_status'] || $vars['search_params'];
+
 $vars['total_store_count'] = $stg->getCount( $vars['search_params'], $vars['geocode_status'] );
 $vars['total_pages'] = ceil( $vars['total_store_count'] / $config['stores_per_page'] );
 

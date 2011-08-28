@@ -5,9 +5,6 @@
 <form action="<?php echo URL_SEARCH ?>" method="get" id="search_form">
 	<fieldset>
 		<div class="modal-body">
-		<?php if( $vars['total_store_count'] == 0 ): ?>
-			<p class="no_results">No Stores match your search criteria</p>
-		<?php endif; ?>
 	<?php for( $i=0;$i<count($vars['columns_list']);$i++ ): ?>
 			<div>
 				<label><?php e( prettify_var( $vars['columns_list'][$i] ) ) ?></label>
@@ -43,8 +40,10 @@
 			</div>
 		</div>
 		<div class="modal-footer">
+		
+			<?php if( $vars['total_store_count'] == 0 ): ?><p class="no_results">No Stores match your search criteria</p><?php endif; ?>
 			<?php if( $vars['total_store_count'] > 0 ): ?><a href="" class="close btn danger">Close</a><?php endif; ?>
-			<input type="reset" value="Reset" onclick="window.location='<?php echo URL_SEARCH ?>'" class="btn">
+			<?php if( $vars['search_status'] ): ?><input type="reset" value="Reset" onclick="window.location='<?php echo URL_SEARCH ?>'" class="btn"><?php endif; ?>
 			<input type="submit" value="Search" class="btn primary">
 		</div>
 	</fieldset>

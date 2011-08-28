@@ -17,7 +17,7 @@ if ( isset( $_POST['create'] ) ) {
 require( DIR_LIB . '/PHPGoogleMaps/PHPGoogleMaps/Core/Autoloader.php' );
 $map_loader = new SplClassLoader( 'PHPGoogleMaps', DIR_LIB . '/PHPGoogleMaps' );
 $map_loader->register();
-$map = new \PHPGoogleMaps\Map( array( 'width' => '525px', 'height' => '350px' ) );
+$map = new \PHPGoogleMaps\Map( array( 'width' => '525px', 'height' => '525px' ) );
 $map->setCenter( new \PHPGoogleMaps\Core\LatLng( 23, 23 ) );
 $map->setZoom( 1 );
 $map->disableAutoEncompass();

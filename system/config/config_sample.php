@@ -11,6 +11,8 @@ $config['db_name'] = '';
 $config['db_type'] = '';
 $config['db_table'] = '';
 
+// Max number of pages to show in the pagination
+$config['pagination_size'] = 10;
 
 // Number of stores to display on the list/search page
 $config['stores_per_page'] = 100;
@@ -20,14 +22,26 @@ $config['column_map'] = array (
 	'lat'		=> 'lat',
 	'lng'		=> 'lng',
 	'id'		=> 'id',
-	'address1'	=> 'address1',
+	'address'	=> 'address',
 	'city'		=> 'city',
 	'state'		=> 'state',
 	'country'	=> 'country',
 	'name'		=> 'name'
 );
 
-$config['geocode_string'] = '{address1}, {city}, {state}';
+/**
+ * This gets translated into the address that will be geocoded
+ *
+ * Put table column names in {}
+ */
+$config['geocode_string'] = '{address}, {city}, {state}';
+
+/**
+ * Time in milliseconds for the status messages to remain before being faded out
+ *
+ * Set to 0 to disable
+ */
+$config['autoremove_statuses'] = 3000;
 
 /**
  * Do not edit below

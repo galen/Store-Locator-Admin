@@ -35,7 +35,7 @@ if ( !$store ) {
 require( DIR_LIB . '/PHPGoogleMaps/PHPGoogleMaps/Core/Autoloader.php' );
 $map_loader = new SplClassLoader( 'PHPGoogleMaps', DIR_LIB . '/PHPGoogleMaps' );
 $map_loader->register();
-$map = new \PHPGoogleMaps\Map( array( 'width' => '525px', 'height' => '350px' ) );
+$map = new \PHPGoogleMaps\Map( array( 'width' => '550px', 'height' => '500px' ) );
 $map->enableStreetView();
 
 if ( $store->isGeocoded() ) {

@@ -1,7 +1,9 @@
 body {
 	padding: 60px 50px 20px 50px;
 }
-
+hr {
+	border-bottom: 1px dotted #eee;
+}
 form div {
 	margin-bottom: 10px;
 }
@@ -9,7 +11,11 @@ label {
 	margin-right:10px;
 	text-align:left;
 }
-
+.topbar h3 {
+	position:relative;
+	top: 2px;
+	left:-10px;
+}
 #wrapper {
 	width:960px;
 	margin: 0 auto;
@@ -18,7 +24,10 @@ label {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+	border:1px solid #ccc;
 }
+
+/* Store listing table */
 thead {
 	-webkit-border-top-left-radius: 4px;
 	-webkit-border-top-right-radius: 4px;
@@ -36,16 +45,11 @@ td.actions_cell {
 	white-space:nowrap;
 }
 
-.topbar h3 {
-	position:relative;
-	top: 2px;
-	left:-10px;
-}
 
 #store_listing_header {
 	position:relative;
 	overflow:hidden;
-	margin-bottom:30px;
+	margin-bottom:15px;
 }
 
 /* Pagination */
@@ -80,8 +84,9 @@ div.search_compare {
 	width: 60px;
 }
 
+/* Store edit/create */
 #form_fields {
-	width:400px;
+	width:375px;
 	float:left;
 	overflow:auto;
 }
@@ -104,14 +109,19 @@ div.search_compare {
 	text-align:center;
 }
 
-/* Search Modal */
+/* Tools */
 
+#tools form, #tools fieldset {
+	padding-top:0px !important;
+}
+
+/* Search Modal */
 .no_results {
 	text-align:center;
 	color: #aa0000;
 	font-weight:bold;
+	float:left;
 }
-
 #search_modal form, #search_modal fieldset {
 	margin:0;
 }

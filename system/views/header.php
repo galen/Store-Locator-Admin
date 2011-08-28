@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Store Admin</title>
+	<title>Store Admin - <?php echo ucwords( $vars['controller'] ) ?></title>
 	<?php if( isset( $map ) ): ?>
 		<?php $map->printHeaderJS() ?>
 		<?php $map->printMapJS() ?>

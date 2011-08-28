@@ -47,6 +47,8 @@ td.actions_cell {
 	overflow:hidden;
 	margin-bottom:30px;
 }
+
+/* Pagination */
 .pagination {
 	position:absolute;
 	right:0;
@@ -56,7 +58,12 @@ td.actions_cell {
 	background:#f3f3f3 !important;
 	color:#999;
 }
-
+.pagination .disabled a {
+	cursor: default;
+}
+.pagination .disabled a:hover {
+	background:#fff !important;
+}
 .pagination a:hover {
 	background: #f7f7f7 !important;
 }
@@ -117,4 +124,25 @@ div.search_compare {
 	line-height: 30px;
 	padding-right: 20px;
 	color: #ccc;
+}
+
+/* Footer */
+#footer {
+	border-top: 1px solid #eee;
+	overflow:hidden;
+}
+#footer ul {
+	list-style:none;
+	margin:10px 0;
+	padding:0;
+}
+#footer ul li {
+	float:left;
+}
+#footer ul a {
+	display:block;
+	padding: 3px 6px;
+}
+#support {
+	float:right !important;
 }

@@ -125,18 +125,21 @@ $(".geocode_all").click(function(){
 $(".show_search_form").click(function(){
 	$("#search_modal").show();
 	return false;
-})
+});
 
-$("#search_modal .close").click(function(){
+$("#search_modal .close, ").click(function(){
 	$("#search_modal").hide();
-})
+	return false;
+});
 
 $(".alert-message .close").click(function(){
 	$(this).parent().fadeOut();
 	return false;
-})
+});
 
-
+$(".pagination .disabled a").click(function(){
+	return false;
+});
 
 if ( $(".no_results").length == 0 && $(".show_search_modal").length == 0 ) {
 	$("#search_modal").hide();

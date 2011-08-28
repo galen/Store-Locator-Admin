@@ -37,7 +37,7 @@ class StoreTableGateway {
 	}
 
 	public function getCount( array $search_params=null, $geocode_status=null ) {
-		$sql = sprintf( 'select count(id) from %s %s', $this->table,isset( $search_params ) ? $this->buildSearchString( $search_params, $geocode_status ) : '' );
+		$sql = sprintf( 'select count(id) from %s %s', $this->table, isset( $search_params ) || isset( $geocode_status ) ? $this->buildSearchString( (array)$search_params, $geocode_status ) : '' );
 		unset( $search_params['geocode_status'] );
 		$stmnt = $this->db->prepare( $sql );
 		if ( is_array( $search_params ) ) {

@@ -1,7 +1,7 @@
 <?php require( DIR_VIEWS . '/header.php' ) ?>
 <?php require( DIR_VIEWS . '/widgets/navigation.php' ) ?>
 <div id="search_modal" class="modal<?php if( !isset( $vars['search_params'] ) && !isset( $vars['geocode_status'] ) ): ?> show_search_modal<?php endif; ?>">
-<div class="modal-header"><h2>Search Parameters</h2><?php if( $vars['total_store_count'] > 0 ): ?><a href="#" class="close">&times;</a><?php endif; ?></div>
+<div class="modal-header"><h2>Search Parameters</h2><?php if( $vars['total_store_count'] > 0 ): ?><a href="" class="close">&times;</a><?php endif; ?></div>
 <form action="<?php echo URL_SEARCH ?>" method="get" id="search_form">
 	<fieldset>
 		<div class="modal-body">
@@ -12,8 +12,6 @@
 			<div>
 				<label><?php e( prettify_var( $vars['columns_list'][$i] ) ) ?></label>
 				<input type="hidden" name="search_params[<?php echo $i ?>][0]" value="<?php echo $vars['columns_list'][$i] ?>">
-	
-	
 				<?php if( $vars['column_info'][$vars['columns_list'][$i]]['type'] == 'select' ): ?>
 					<div class="search_compare">=</div>
 				<?php else: ?>
@@ -45,8 +43,9 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-		<input type="submit" value="Search" class="btn primary">
-		<input type="reset" value="Reset" onclick="window.location='<?php echo URL_SEARCH ?>'" class="btn">
+			<?php if( $vars['total_store_count'] > 0 ): ?><a href="" class="close btn danger">Close</a><?php endif; ?>
+			<input type="reset" value="Reset" onclick="window.location='<?php echo URL_SEARCH ?>'" class="btn">
+			<input type="submit" value="Search" class="btn primary">
 		</div>
 	</fieldset>
 </form>
@@ -55,7 +54,7 @@
 <h2>Search Stores</h2>
 <?php if( $vars['total_store_count'] > 0 ): ?>
 <?php require( DIR_VIEWS . '/widgets/result_numbers.php' ) ?>
-<?php require( DIR_VIEWS . '/widgets/pages_navigation.php' ) ?>
+<?php if( $vars['total_pages'] > 1 ): ?><?php require( DIR_VIEWS . '/widgets/pages_navigation.php' ) ?><?php endif; ?>
 <p><a href="#" class="show_search_form">Show search form</a></p>
 </div>
 <?php require( DIR_VIEWS . '/widgets/store_listing.php' ) ?>

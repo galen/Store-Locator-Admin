@@ -8,15 +8,12 @@ if ( isset( $_POST['save'] ) ) {
 		$status_message->setMessage( 'Store saved successfully' );
 	}
 	else {
-		$status_message->setStatus( 'error' );
+		header("HTTP/1.1 500 Internal Server Error");
+		$status_message->setStatuses( array( 'error', 'remain' ) );
 		$status_message->setMessage( 'Error saving the store' );
+		require( DIR_VIEWS . '/pages/error.php' );
+		exit;
 	}
-}
-
-// Set the status message
-if ( isset( $_GET['status'], $_GET['message'] ) ) {
-	$status_message->setStatus( $_GET['status'] );
-	$status_message->setMessage( $_GET['message'] );
 }
 
 // Get the store
@@ -25,7 +22,7 @@ $store = $stg->getStore( $vars['store_id'] );
 // Invalid store, send 404
 if ( !$store ) {
 	header("HTTP/1.1 404 Not Found");
-	$status_message->setStatus( 'error' );
+	$status_message->setStatuses( array( 'error', 'important' ) );
 	$status_message->setMessage( "Store does not exist" );
 	require( DIR_VIEWS . '/pages/error.php' );
 	exit;
@@ -55,7 +52,7 @@ else {
 	}
 	else {
 		$map->setCenter( new \PHPGoogleMaps\Core\LatLng( 23, 23 ) );
-		$map->setZoom( 1 );
+		$map->setZoom( 2 );
 	}
 	$map->disableAutoEncompass();
 }

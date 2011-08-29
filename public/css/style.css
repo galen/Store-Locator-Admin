@@ -27,6 +27,11 @@ label {
 	border:1px solid #ccc;
 }
 
+/* Status messages */
+.alert-message.remain .close {
+	display:none !important;
+}
+
 /* Store listing table */
 thead {
 	-webkit-border-top-left-radius: 4px;

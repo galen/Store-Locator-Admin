@@ -19,7 +19,7 @@ if ( $controller = Router::route( REQUEST ) ) {
 	require( DIR_CORE . '/Db.php' );
 	if ( !$db = Db::connect( $config['db_user'], $config['db_password'], $config['db_name'], $config['db_host'], $config['db_type'] ) ) {
 		header("HTTP/1.1 500 Internal Server Error");
-		$status_message->setStatuses( array( 'error',  'important' ) );
+		$status_message->setStatuses( array( 'error',  'remain' ) );
 		$status_message->setMessage( "Unable to connect to the database" );
 		require( DIR_VIEWS . '/pages/error.php' );
 		exit;
@@ -32,7 +32,7 @@ if ( $controller = Router::route( REQUEST ) ) {
 
 	if ( !$stg->validateTable() ) {
 		header("HTTP/1.1 500 Internal Server Error");
-		$status_message->setStatus( array('error', 'important' ) );
+		$status_message->setStatuses( array('error', 'remain' ) );
 		$status_message->setMessage( "Invalid table setup" );
 		require( DIR_VIEWS . '/pages/error.php' );
 		exit;
@@ -46,6 +46,11 @@ if ( $controller = Router::route( REQUEST ) ) {
 	$vars['columns_list'] = array_values( array_diff( $vars['columns'], array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) );
 	$vars['columns_edit'] = array_values( array_diff( $vars['columns'], array( $config['column_map']['id'] ) ) );
 
+	if ( isset( $_GET['status'], $_GET['message'] ) ) {
+		$status_message->setStatus( $_GET['status'] );
+		$status_message->setMessage($_GET['message'] );
+	}
+
 	// Require the controller and exit
 	require( DIR_CONTROLLERS . '/' . $controller . '.php' );
 	exit;
@@ -53,7 +58,7 @@ if ( $controller = Router::route( REQUEST ) ) {
 
 // No route found, send 404
 header("HTTP/1.1 404 Not Found");
-$status_message->setStatus( array( 'error', 'important' ) );
+$status_message->setStatus( array( 'error', 'remain' ) );
 $status_message->setMessage( "This page doesn't exist" );
 require( DIR_VIEWS . '/pages/error.php' );
 exit;

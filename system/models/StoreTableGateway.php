@@ -113,6 +113,9 @@ class StoreTableGateway {
 		$stmnt->bindValue( ':id', $id, PDO::PARAM_INT );
 		$stmnt->execute();
 		$data = current( $stmnt->fetchAll( PDO::FETCH_ASSOC ) );
+		if ( !$data ) {
+			return false;
+		}
 		return new Store( $this->column_map, $data );
 	}
 
@@ -141,6 +144,9 @@ class StoreTableGateway {
 	}
 
 	function saveStore( Store $store ) {
+		if ( !$this->getStore( $store->getID() ) ) {
+			return false;
+		}
 		$id = $store->getID();
 		$store_array = $store->getData();
 		unset( $store_array['id'] );
@@ -160,13 +166,18 @@ class StoreTableGateway {
 			$stmnt->bindValue( ':'.$property, $value );
 		}
 		if ( $stmnt->execute() ) {
+			print_r($stmnt->errorInfo());
 			return true;
 		}
 		return false;
 	}
 
 	function validateTable() {
-		foreach( $this->db->query( sprintf( 'show columns from %s', $this->table ) )->fetchAll( PDO::FETCH_ASSOC ) as $c ) {
+		$query = $this->db->query( sprintf( 'show columns from %s', $this->table ) );
+		if ( !$query ) {
+			return false;
+		}
+		foreach( $query->fetchAll( PDO::FETCH_ASSOC ) as $c ) {
 			$columns[$c['Field']] = true;
 		}
 		return isset( $columns[$this->column_map['id']], $columns[$this->column_map['lat']], $columns[$this->column_map['lng']] );

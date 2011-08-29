@@ -7,6 +7,7 @@ if ( isset( $_POST['backup_file_name'] ) ) {
 		$status_message->setMessage( 'Backup created sucessfully' );
 	}
 	else {
+		header("HTTP/1.1 500 Internal Server Error");
 		$status_message->setStatus( 'error' );
 		$status_message->setMessage( 'Error during backup' );
 	}
@@ -20,6 +21,7 @@ if ( isset( $_POST['backup_file'] ) ) {
 			$status_message->setMessage( 'Backup restored successfully' );
 		}
 		else {
+			header("HTTP/1.1 500 Internal Server Error");
 			$status_message->setStatus( 'error' );
 			$status_message->setMessage( 'Error during restore' );
 		}
@@ -30,6 +32,7 @@ if ( isset( $_POST['backup_file'] ) ) {
 			$status_message->setMessage( 'Backup deleted successfully' );
 		}
 		else {
+			header("HTTP/1.1 500 Internal Server Error");
 			$status_message->setStatus( 'error' );
 			$status_message->setMessage( 'Error deleting backup' );
 		}

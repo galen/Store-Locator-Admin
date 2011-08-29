@@ -146,7 +146,9 @@ if ( $(".no_results").length == 0 && $(".show_search_modal").length == 0 ) {
 }
 
 if ( $(".autoremove_statuses").length ) {
-	$(".alert-message:not(.important)").delay($("body").data("autoremove-statuses-time")).fadeOut();
+	$(".alert-message:not(.remain)").delay($("body").data("autoremove-statuses-time")).fadeOut();
 }
+
+
 
 });

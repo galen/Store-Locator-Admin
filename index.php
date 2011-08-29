@@ -19,7 +19,7 @@ if ( $controller = Router::route( REQUEST ) ) {
 	require( DIR_CORE . '/Db.php' );
 	if ( !$db = Db::connect( $config['db_user'], $config['db_password'], $config['db_name'], $config['db_host'], $config['db_type'] ) ) {
 		header("HTTP/1.1 500 Internal Server Error");
-		$status_message->setStatus( 'error' );
+		$status_message->setStatuses( array( 'error',  'important' ) );
 		$status_message->setMessage( "Unable to connect to the database" );
 		require( DIR_VIEWS . '/pages/error.php' );
 		exit;
@@ -32,7 +32,7 @@ if ( $controller = Router::route( REQUEST ) ) {
 
 	if ( !$stg->validateTable() ) {
 		header("HTTP/1.1 500 Internal Server Error");
-		$status_message->setStatus( 'error' );
+		$status_message->setStatus( array('error', 'important' ) );
 		$status_message->setMessage( "Invalid table setup" );
 		require( DIR_VIEWS . '/pages/error.php' );
 		exit;
@@ -53,7 +53,7 @@ if ( $controller = Router::route( REQUEST ) ) {
 
 // No route found, send 404
 header("HTTP/1.1 404 Not Found");
-$status_message->setStatus( 'error' );
+$status_message->setStatus( array( 'error', 'important' ) );
 $status_message->setMessage( "This page doesn't exist" );
 require( DIR_VIEWS . '/pages/error.php' );
 exit;

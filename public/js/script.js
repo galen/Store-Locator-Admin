@@ -55,7 +55,7 @@ $(".delete_store").click(function( event, all ){
 });
 
 $(".geocode_form").click(function(){
-
+	$("#geocode_ajax_loader").show();
 	var obj = $(this);
 	var form_data = {};
 	$.get(
@@ -79,9 +79,11 @@ $(".geocode_form").click(function(){
 					map.map.setZoom( 14 );
 				}
 				alert( data.message );
+				$("#geocode_ajax_loader").hide();
 			}
 			else {
 				alert( data.message );
+				$("#geocode_ajax_loader").hide();
 			}
 		},
 		'json'

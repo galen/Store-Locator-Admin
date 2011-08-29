@@ -114,6 +114,12 @@ div.search_compare {
 	text-align:center;
 }
 
+
+#store_edit #geocode_ajax_loader {
+	display:none;
+	margin-left:10px;
+}
+
 /* Tools */
 
 #tools form, #tools fieldset {

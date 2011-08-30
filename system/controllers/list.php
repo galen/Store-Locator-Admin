@@ -9,8 +9,7 @@ else {
 	$vars['total_store_count'] = $stg->getCount( $vars['search_params'], $vars['geocode_status'] );
 }
 $vars['total_pages'] = ceil( $vars['total_store_count'] / $config['stores_per_page'] );
-
-if ( $vars['page_number'] < 1 || $vars['page_number'] > $vars['total_pages'] ) {
+if ( $vars['page_number'] < 1 || ( $vars['page_number'] > $vars['total_pages'] && $vars['total_pages'] != 0 ) ) {
 	header("HTTP/1.1 404 Not Found");
 	$status_message->setStatuses( array( 'error', 'block-message', 'remain' ) );
 	$status_message->setMessage( "<p><strong>Page not found</strong></p>" );

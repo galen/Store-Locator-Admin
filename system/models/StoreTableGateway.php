@@ -166,7 +166,6 @@ class StoreTableGateway {
 			$stmnt->bindValue( ':'.$property, $value );
 		}
 		if ( $stmnt->execute() ) {
-			print_r($stmnt->errorInfo());
 			return true;
 		}
 		return false;

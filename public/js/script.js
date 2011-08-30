@@ -151,6 +151,10 @@ if ( $(".autoremove_statuses").length ) {
 	$(".alert-message:not(.remain)").delay($("body").data("autoremove-statuses-time")).fadeOut();
 }
 
+// Create store page
+if ( $("body#create").length ) {
+	$("#create #geocode_form_button").show();
+}
 
 
 });

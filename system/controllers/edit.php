@@ -1,11 +1,31 @@
 <?php
 
+if ( isset( $_POST['geocode'] ) ) {
+	$address = preg_replace_callback( '~\{(.*?)\}~', function( $m ) use( $_POST ){ return $_POST[$m[1]]; }, $config['geocode_string'] );
+	$geocode = \PHPGoogleMaps\Service\Geocoder::geocode( $address );
+
+	if ( $geocode instanceof \PHPGoogleMaps\Service\GeocodeResult ) {
+		$_POST[$config['column_map']['lat']] = $geocode->getLat();
+		$_POST[$config['column_map']['lng']] = $geocode->getLng();
+		$_POST['save'] = true;
+		$status_message->setStatus( 'success' );
+		$status_message->setMessage( 'Store geocoded successfully' );
+	}
+	else {
+		$status_message->setStatus( 'error' );
+		$status_message->setMessage( 'Error geocoding the store' );
+	}
+}
+
+
 // Save the store
 if ( isset( $_POST['save'] ) ) {
 	$store_save = new Store( $config['column_map'], array_intersect_key( $_POST, array_flip( $vars['columns'] ) ) );
 	if ( $stg->saveStore( $store_save ) ) {
-		$status_message->setStatus( 'success' );
-		$status_message->setMessage( 'Store saved successfully' );
+		if ( !isset( $geocode ) ) {
+			$status_message->setStatus( 'success' );
+			$status_message->setMessage( 'Store saved successfully' );
+		}
 	}
 	else {
 		header("HTTP/1.1 500 Internal Server Error");
@@ -29,11 +49,9 @@ if ( !$store ) {
 }
 
 // Map code
-require( DIR_LIB . '/PHPGoogleMaps/PHPGoogleMaps/Core/Autoloader.php' );
-$map_loader = new SplClassLoader( 'PHPGoogleMaps', DIR_LIB . '/PHPGoogleMaps' );
-$map_loader->register();
 $map = new \PHPGoogleMaps\Map( array( 'width' => '550px', 'height' => '500px' ) );
 $map->enableStreetView();
+$map->setLoadingContent('<p id="map_msg"><a href="http://www.activatejavascript.org/">Enable javascript</a> to view the map</p>');
 
 if ( $store->isGeocoded() ) {
 	$marker = \PHPGoogleMaps\Overlay\Marker::createFromPosition( new \PHPGoogleMaps\Core\LatLng( $store->getLat(), $store->getLng() ), array( 'draggable' => true ) );

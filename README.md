@@ -9,9 +9,10 @@ Store locator admin for the web
  - Robust search capability
  - Google map integration
  - Backup/restore functions
+ - Utilizes progressive enhancement
 
 ## Coming Soon
 
- - WYSIWYG editor
+ - WYSIWYG editor for editing text columns
 
 Requires PHP 5.3+ with PDO

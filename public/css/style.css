@@ -4,13 +4,6 @@ body {
 hr {
 	border-bottom: 1px dotted #eee;
 }
-form div {
-	margin-bottom: 10px;
-}
-label {
-	margin-right:10px;
-	text-align:left;
-}
 .topbar h3 {
 	position:relative;
 	top: 2px;
@@ -20,6 +13,23 @@ label {
 	width:960px;
 	margin: 0 auto;
 }
+.center {
+	text-align:center;
+}
+
+/* Forms */
+form div {
+	margin-bottom: 10px;
+}
+label {
+	margin-right:10px;
+	text-align:left;
+}
+select {
+	width:220px;
+}
+
+/* All maps */
 #map {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -31,16 +41,15 @@ label {
 	margin-top: 230px;
 }
 
-select {
-	width:220px;
-}
-
 /* Status messages */
 .alert-message.remain .close {
 	display:none !important;
 }
 
-/* Store listing table */
+/* Store listing */
+.table_actions {
+	text-align:right;
+}
 thead {
 	-webkit-border-top-left-radius: 4px;
 	-webkit-border-top-right-radius: 4px;
@@ -53,12 +62,9 @@ thead td {
 	font-weight:bold;
 	background: #fafafa;
 }
-
-td.actions_cell {
+td.store_actions {
 	white-space:nowrap;
 }
-
-
 #store_listing_header {
 	position:relative;
 	overflow:hidden;
@@ -85,6 +91,7 @@ td.actions_cell {
 	background: #f7f7f7 !important;
 }
 
+/* Search page */
 .search_compare {
 	width: 50px !important;
 }
@@ -96,49 +103,6 @@ div.search_compare {
 #geocode_status {
 	width: 60px;
 }
-
-/* Store edit/create */
-#form_fields {
-	width:375px;
-	float:left;
-	overflow:auto;
-}
-
-#store_edit #map {
-	float:left;
-	margin-left:25px;
-}
-
-#delete_store {
-	float:right;
-}
-
-#store_edit_actions {
-	clear:both;
-	margin-top: 40px;
-}
-
-.center {
-	text-align:center;
-}
-
-
-#store_edit #geocode_ajax_loader {
-	display:none;
-	margin-left:10px;
-}
-
-#create #geocode_form_button {
-	display:none;
-}
-
-/* Tools */
-
-#tools form, #tools fieldset {
-	padding-top:0px !important;
-}
-
-/* Search Modal */
 .no_results {
 	text-align:center;
 	color: #aa0000;
@@ -148,15 +112,35 @@ div.search_compare {
 #search_modal form, #search_modal fieldset {
 	margin:0;
 }
-.table_actions {
-	text-align:right;
+
+/* Store edit/create */
+#form_fields {
+	width:375px;
+	float:left;
+	overflow:auto;
 }
-.table_actions p {
-	font-weight:bold;
+#store_edit #map {
+	float:left;
+	margin-left:25px;
+}
+#delete_store {
 	float:right;
-	line-height: 30px;
-	padding-right: 20px;
-	color: #ccc;
+}
+#store_edit_actions {
+	clear:both;
+	margin-top: 40px;
+}
+#store_edit #geocode_ajax_loader {
+	display:none;
+	margin-left:10px;
+}
+#create #geocode_form_button {
+	display:none;
+}
+
+/* Tools */
+#tools form, #tools fieldset {
+	padding-top:0px !important;
 }
 
 /* Footer */

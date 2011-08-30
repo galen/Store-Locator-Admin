@@ -35,7 +35,6 @@ select {
 	width:220px;
 }
 
-
 /* Status messages */
 .alert-message.remain .close {
 	display:none !important;

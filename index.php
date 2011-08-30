@@ -1,7 +1,9 @@
 <?php
+
 error_reporting( E_ALL );
 ini_set( 'display_errors', 'On' );
 
+//Check for a config file
 if( !@include( 'system/config/config.php' ) ){
 	header("HTTP/1.1 500 Internal Server Error");
 	echo "<p><strong>No config file found.</strong> Rename system/config/config_sample.php to config.php and edit it to reflect your needs.</p>";

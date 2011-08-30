@@ -120,7 +120,7 @@ div.search_compare {
 	overflow:auto;
 }
 #store_edit #map {
-	float:left;
+	float:right;
 	margin-left:25px;
 }
 #delete_store {

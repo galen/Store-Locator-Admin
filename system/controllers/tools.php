@@ -4,12 +4,12 @@
 if ( isset( $_POST['backup_file_name'] ) ) {
 	if ( $stg->backup( DIR_BACKUPS . '/' . basename( $_POST['backup_file_name'] ) ) ) {
 		$status_message->setStatus( 'success' );
-		$status_message->setMessage( 'Backup created sucessfully' );
+		$status_message->setMessage( '<p>Backup created sucessfully</p>' );
 	}
 	else {
 		header("HTTP/1.1 500 Internal Server Error");
 		$status_message->setStatus( 'error' );
-		$status_message->setMessage( 'Error during backup' );
+		$status_message->setMessage( '<p>Error during backup</p>' );
 	}
 }
 
@@ -18,7 +18,7 @@ if ( isset( $_POST['backup_file'] ) ) {
 	if ( isset( $_POST['restore_backup'] ) ) {
 		if ( $stg->restore( DIR_BACKUPS . '/' . basename( $_POST['backup_file'] ) ) ) {
 			$status_message->setStatus( 'success' );
-			$status_message->setMessage( 'Backup restored successfully' );
+			$status_message->setMessage( '<p>Backup restored successfully</p>' );
 		}
 		else {
 			header("HTTP/1.1 500 Internal Server Error");
@@ -29,12 +29,12 @@ if ( isset( $_POST['backup_file'] ) ) {
 	if ( isset( $_POST['delete_backup'] ) ) {
 		if ( @unlink( DIR_BACKUPS . '/' . basename( $_POST['backup_file'] ) ) ) {
 			$status_message->setStatus( 'success' );
-			$status_message->setMessage( 'Backup deleted successfully' );
+			$status_message->setMessage( '<p>Backup deleted successfully</p>' );
 		}
 		else {
 			header("HTTP/1.1 500 Internal Server Error");
 			$status_message->setStatus( 'error' );
-			$status_message->setMessage( 'Error deleting backup' );
+			$status_message->setMessage( '<p>Error deleting backup</p>' );
 		}
 	}
 }

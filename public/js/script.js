@@ -23,7 +23,6 @@ $(".delete_all").click(function(){
 		return false
 	}
 	$(".delete_store").each(function(){
-	alert('asdf');
 		$(this).trigger( 'click', [true] );
 	});
 })

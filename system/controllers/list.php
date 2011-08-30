@@ -1,6 +1,7 @@
 <?php
 
 $vars['page_number'] = isset( $vars['page_number'] ) ? $vars['page_number'] : 1;
+
 if ( $vars['controller'] == 'list' ) {
 	$vars['total_store_count'] = $stg->getCount();
 }
@@ -8,6 +9,14 @@ else {
 	$vars['total_store_count'] = $stg->getCount( $vars['search_params'], $vars['geocode_status'] );
 }
 $vars['total_pages'] = ceil( $vars['total_store_count'] / $config['stores_per_page'] );
+
+if ( $vars['page_number'] < 1 || $vars['page_number'] > $vars['total_pages'] ) {
+	header("HTTP/1.1 404 Not Found");
+	$status_message->setStatuses( array( 'error', 'block-message', 'remain' ) );
+	$status_message->setMessage( "<p><strong>Page not found</strong></p>" );
+	require( DIR_VIEWS . '/pages/error.php' );
+	exit;
+}
 
 $vars['page_array'] = array_slice( range( 1, $vars['total_pages'] ), $vars['page_number']-ceil($config['pagination_size']/2) > 0 ? $vars['page_number']-ceil($config['pagination_size']/2) : 0, $config['pagination_size'] );
 

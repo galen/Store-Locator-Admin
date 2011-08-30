@@ -24,8 +24,13 @@ if ( isset( $_POST['delete'] ) || isset( $_POST['cancel'] ) ) {
 			exit;
 		}
 		else {
-			$status_message->setStatus( 'error' );
-			$status_message->setMessage( 'Error deleting the store' );
+			$status_message->setStatuses( array( 'error', 'block-message', 'remain' ) );
+			if ( !$stg->getStore( $vars['store_id'] ) ) {
+				$status_message->setMessage( '<p><strong>Error deleting the store.</strong> That store does not exist.</p>' );
+			}
+			else {
+				$status_message->setMessage( '<p><strong>Error deleting the store</strong></p>' );
+			}
 		}
 	}
 }

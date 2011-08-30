@@ -9,11 +9,11 @@ if ( isset( $_POST['geocode'] ) ) {
 		$_POST[$config['column_map']['lng']] = $geocode->getLng();
 		$_POST['save'] = true;
 		$status_message->setStatus( 'success' );
-		$status_message->setMessage( 'Store geocoded successfully' );
+		$status_message->setMessage( '<p>Store geocoded successfully</p>' );
 	}
 	else {
 		$status_message->setStatus( 'error' );
-		$status_message->setMessage( 'Error geocoding the store' );
+		$status_message->setMessage( '<p>Error geocoding the store</p>' );
 	}
 }
 
@@ -24,15 +24,13 @@ if ( isset( $_POST['save'] ) ) {
 	if ( $stg->saveStore( $store_save ) ) {
 		if ( !isset( $geocode ) ) {
 			$status_message->setStatus( 'success' );
-			$status_message->setMessage( 'Store saved successfully' );
+			$status_message->setMessage( '<p>Store saved successfully</p>' );
 		}
 	}
 	else {
 		header("HTTP/1.1 500 Internal Server Error");
 		$status_message->setStatuses( array( 'error', 'remain' ) );
-		$status_message->setMessage( 'Error saving the store' );
-		require( DIR_VIEWS . '/pages/error.php' );
-		exit;
+		$status_message->setMessage( '<p>Error saving the store<p>' );
 	}
 }
 
@@ -42,8 +40,8 @@ $store = $stg->getStore( $vars['store_id'] );
 // Invalid store, send 404
 if ( !$store ) {
 	header("HTTP/1.1 404 Not Found");
-	$status_message->setStatuses( array( 'error', 'important' ) );
-	$status_message->setMessage( "Store does not exist" );
+	$status_message->setStatuses( array( 'error', 'block-message', 'remain' ) );
+	$status_message->setMessage( "<p><strong>This store does not exist</strong></p>" );
 	require( DIR_VIEWS . '/pages/error.php' );
 	exit;
 }

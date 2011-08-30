@@ -42,8 +42,8 @@ select {
 }
 
 /* Status messages */
-.alert-message.remain .close {
-	display:none !important;
+.alert-message .close {
+	display:none;
 }
 
 /* Store listing */
@@ -135,6 +135,10 @@ div.search_compare {
 	margin-left:10px;
 }
 #create #geocode_form_button {
+	display:none;
+}
+#geocode_status {
+	margin-left:10px;
 	display:none;
 }
 

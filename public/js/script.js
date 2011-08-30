@@ -77,8 +77,8 @@ $(".geocode_form").click(function(){
 					map.map.setCenter( new google.maps.LatLng( data.lat, data.lng ) );
 					map.map.setZoom( 14 );
 				}
-				alert( data.message );
 				$("#geocode_ajax_loader").hide();
+				$("#geocode_status").html( data.message ).show().delay(3000).fadeOut();
 			}
 			else {
 				alert( data.message );
@@ -102,9 +102,6 @@ $(".geocode_table").click(function( event, all ){
 			if ( data.status == 1 ) {
 				obj.parent().html("Yes");
 				obj.remove();
-				if ( !all ) {
-					alert( data.message );
-				}
 			}
 			else {
 				obj.html("No");
@@ -118,6 +115,8 @@ $(".geocode_table").click(function( event, all ){
 	return false;
 });
 
+$(".alert-message .close").show();
+
 $(".geocode_all").click(function(){
 	$(".geocode_table").trigger('click', [true]);
 	return false;
@@ -128,7 +127,7 @@ $(".show_search_form").click(function(){
 	return false;
 });
 
-$("#search_modal .close, ").click(function(){
+$("#search_modal .close").click(function(){
 	$("#search_modal").hide();
 	return false;
 });
@@ -154,6 +153,7 @@ if ( $(".autoremove_statuses").length ) {
 if ( $("body#create").length ) {
 	$("#create #geocode_form_button").show();
 }
+
 
 
 });

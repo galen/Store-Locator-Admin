@@ -10,10 +10,10 @@
 	url_delete = "<?php echo URL_DELETE ?>";
 	url_geocode = "<?php echo URL_GEOCODE ?>";
 	</script>
-	<script type="text/javascript" src="<?php echo URL_PUBLIC ?>/js/jquery.js"></script>
-	<script type="text/javascript" src="<?php echo URL_PUBLIC ?>/js/script.js"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo URL_PUBLIC ?>/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo URL_PUBLIC ?>/css/style.css">
+	<script type="text/javascript" src="<?php echo URL_PUBLIC ?>/js/jquery.js"></script>
+	<script type="text/javascript" src="<?php echo URL_PUBLIC ?>/js/script.js"></script>
 </head>
 <body id="<?php if( isset( $vars['controller'] ) ): ?><?php e( $vars['controller'] ) ?><?php endif; ?>" class="<?php echo get_body_classes( $config ) ?>"<?php echo get_body_data( $config ) ?>>
 

@@ -1,6 +1,5 @@
 <div class="table_actions well">
 	<a href="#" class="btn success geocode_all" title="Geocode all stores on the page">Geocode all stores</a>
-	<a href="#" class="btn danger delete_all" title="Delete all stores on the page">Delete all stores</a>
 </div>
 
 <table id="store_table" data-ajax-loader-image="<?php echo URL_PUBLIC  ?>/images/ajax_loader.gif">

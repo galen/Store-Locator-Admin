@@ -17,22 +17,10 @@ $.fn.serializeObject = function()
     return o;
 };
 
-$(".delete_all").click(function(){
-	var answer = confirm( "This will delete all store on this page. Are you sure?" );
+$(".delete_store").click(function( event, all ){
+	var answer = confirm( "Delete store #" + $(this).data("id") + "?" );
 	if ( !answer ) {
 		return false
-	}
-	$(".delete_store").each(function(){
-		$(this).trigger( 'click', [true] );
-	});
-})
-
-$(".delete_store").click(function( event, all ){
-	if ( !all ) {
-		var answer = confirm( "Delete store #" + $(this).data("id") + "?" );
-		if ( !answer ) {
-			return false
-		}
 	}
 	obj = $(this);
 	$.post(
@@ -43,9 +31,7 @@ $(".delete_store").click(function( event, all ){
 				obj.parent().parent().fadeOut();
 			}
 			else {
-				if ( !all ) {
-					alert( data.message );
-				}
+				alert( data.message );
 			}
 		},
 		'json'

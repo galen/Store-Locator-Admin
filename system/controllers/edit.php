@@ -2,9 +2,10 @@
 
 if ( isset( $_POST['geocode'] ) ) {
 	$address = preg_replace_callback( '~\{(.*?)\}~', function( $m ) use( $_POST ){ return $_POST[$m[1]]; }, $config['geocode_string'] );
-	$geocode = \PHPGoogleMaps\Service\Geocoder::geocode( $address );
-
-	if ( $geocode instanceof \PHPGoogleMaps\Service\GeocodeResult ) {
+	// Register the map autoloader
+	require( DIR_LIB . '/Geocoder/Geocoder.php' );
+	$geocode = Geocoder::geocode( $address );
+	if ( $geocode instanceof StdClass ) {
 		$_POST[$config['column_map']['lat']] = $geocode->getLat();
 		$_POST[$config['column_map']['lng']] = $geocode->getLng();
 		$_POST['save'] = true;
@@ -45,34 +46,6 @@ if ( !$store ) {
 	require( DIR_VIEWS . '/pages/error.php' );
 	exit;
 }
-
-// Map code
-$map = new \PHPGoogleMaps\Map( array( 'width' => '550px', 'height' => '500px' ) );
-$map->enableStreetView();
-$map->setLoadingContent('<p id="map_msg"><a href="http://www.activatejavascript.org/">Enable javascript</a> to view the map</p>');
-
-if ( $store->isGeocoded() ) {
-	$marker = \PHPGoogleMaps\Overlay\Marker::createFromPosition( new \PHPGoogleMaps\Core\LatLng( $store->getLat(), $store->getLng() ), array( 'draggable' => true ) );
-	$marker_map = $map->addObject( $marker );
-	$event = new \PHPGoogleMaps\Event\EventListener( $marker_map, 'dragend', sprintf( 'function(){ $("#lat").val(Math.round(map.markers[0].getPosition().lat()*1000000)/1000000);$("#lng").val(Math.round(map.markers[0].getPosition().lng()*1000000)/1000000); }', $marker_map ) );
-	$map->addObject( $event );
-	$map->disableAutoEncompass();
-	$map->setCenter( new \PHPGoogleMaps\Core\LatLng( $store->getLat(), $store->getLng() ) );
-	$map->setZoom( 14 );
-}
-else {
-	$location = sprintf( "%s, %s%s",  $store->getCity(), $store->getState() ? $store->getState().', ' : '', $store->getCountry() );
-	if ( ( $geocode = \PHPGoogleMaps\Service\Geocoder::geocode( $location ) ) instanceof \PHPGoogleMaps\Service\GeocodeResult ) {
-		$map->setCenter( $geocode );
-		$map->setZoom( 9 );
-	}
-	else {
-		$map->setCenter( new \PHPGoogleMaps\Core\LatLng( 23, 23 ) );
-		$map->setZoom( 2 );
-	}
-	$map->disableAutoEncompass();
-}
-
 require( DIR_VIEWS . '/pages/edit.php' );
 
 ?>

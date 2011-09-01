@@ -38,11 +38,6 @@ if ( $controller = Router::route( REQUEST ) ) {
 	require( DIR_MODELS . '/Store.php' );
 	$stg = new StoreTableGateway( $db, $config['db_table'], $config['column_map'] );
 
-	// Register the map autoloader
-	require( DIR_LIB . '/PHPGoogleMaps/PHPGoogleMaps/Core/Autoloader.php' );
-	$map_loader = new SplClassLoader( 'PHPGoogleMaps', DIR_LIB . '/PHPGoogleMaps' );
-	$map_loader->register();
-
 	if ( !$stg->validateTable() ) {
 		header("HTTP/1.1 500 Internal Server Error");
 		$status_message->setStatuses( array('error', 'remain' ) );

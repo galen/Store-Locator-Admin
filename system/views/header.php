@@ -2,10 +2,7 @@
 <html>
 <head>
 	<title>Store Admin<?php if( isset( $vars['page_title'] ) ): ?> - <?php echo ucwords( $vars['page_title'] ) ?><?php endif; ?></title>
-	<?php if( isset( $map ) ): ?>
-		<?php $map->printHeaderJS() ?>
-		<?php $map->printMapJS() ?>
-	<?php endif; ?>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&language=&region=&libraries="></script>
 	<script type="text/javascript">
 	url_delete = "<?php echo URL_DELETE ?>";
 	url_geocode = "<?php echo URL_GEOCODE ?>";

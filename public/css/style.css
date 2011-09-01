@@ -137,7 +137,7 @@ div.search_compare {
 #create #geocode_form_button {
 	display:none;
 }
-#geocode_status {
+#geocode_ajax_status {
 	margin-left:10px;
 	display:none;
 }

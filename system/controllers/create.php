@@ -10,18 +10,8 @@ if ( isset( $_POST['create'] ) ) {
 		header("HTTP/1.1 500 Internal Server Error");
 		$status_message->setStatuses( array( 'error', 'block-message', 'remain' ) );
 		$status_message->setMessage( '<p><strong>Error creating the store</strong></p>' );
-		$map = new \PHPGoogleMaps\Map( array( 'width' => '525px', 'height' => '525px' ) );
-		$map->setCenter( new \PHPGoogleMaps\Core\LatLng( 23, 23 ) );
-		$map->setZoom( 2 );
-		$map->disableAutoEncompass();
 		require( DIR_VIEWS . '/pages/edit.php' );
 	}
 }
-
-
-$map = new \PHPGoogleMaps\Map( array( 'width' => '525px', 'height' => '525px' ) );
-$map->setCenter( new \PHPGoogleMaps\Core\LatLng( 23, 23 ) );
-$map->setZoom( 2 );
-$map->disableAutoEncompass();
 
 require( DIR_VIEWS . '/pages/edit.php' );

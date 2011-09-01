@@ -1,6 +1,6 @@
 [submodule "system/lib/FormStatusMessage"]
 	path = system/lib/FormStatusMessage
-	url = git@github.com:galen/FormStatusMessage.git
+	url = git://github.com/galen/FormStatusMessage.git
 [submodule "system/lib/Geocoder"]
 	path = system/lib/Geocoder
-	url = git@github.com:galen/Geocoder.git
+	url = git://github.com/galen/Geocoder.git

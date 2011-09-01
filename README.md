@@ -10,6 +10,7 @@ Store locator admin for the web
  - Google map integration
  - Backup/restore functions
  - Utilizes progressive enhancement
+ - Built-in API
 
 ## Coming Soon
 

@@ -18,12 +18,12 @@ $.fn.serializeObject = function()
 };
 
 $(".delete_store").click(function( event, all ){
-	var answer = confirm( "Delete store #" + $(this).data("store-id") + "?" );
+	obj = $(this);
+	tr = obj.closest('tr');
+	var answer = confirm( "Delete store #" + tr.data("store-id") + "?" );
 	if ( !answer ) {
 		return false
 	}
-	obj = $(this);
-	tr = obj.closest('tr');
 	$.ajax({
 		type: 'POST',
 		url: url_api_delete + "/" + tr.data("store-id"),

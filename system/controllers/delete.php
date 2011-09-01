@@ -11,11 +11,11 @@ if ( isset( $_POST['delete'] ) || isset( $_POST['cancel'] ) ) {
 		$req->method = 'post';
 		$resp = $req->execute();
 		if ( $resp->status == 200 ) {
-			header( sprintf( 'Location: %s?status=success&message=Store+%s+deleted+successfully', URL_LIST, $vars['request']->store_id ) );
+			header( sprintf( 'Location: %s?status=success&message=%s', URL_LIST, urlencode( $resp->data->message ) ) );
 			exit;
 		}
 		else {
-			$status_message->setMessage( '<p><strong>Error deleting the store</strong></p>' );
+		$status_message->setMessage( sprintf( '<p>%s</p>', $resp->data->message ) );
 		}
 
 	}

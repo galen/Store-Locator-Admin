@@ -15,7 +15,7 @@ $config['db_table'] = '';
 $config['pagination_size'] = 10;
 
 // Number of stores to display on the list/search page
-$config['stores_per_page'] = 100;
+$config['stores_per_page'] = 25;
 
 // Edit this to reflect your table columns
 $config['column_map'] = array (
@@ -41,7 +41,7 @@ $config['geocode_string'] = '{address}, {city}, {state}';
  *
  * Set to 0 to disable
  */
-$config['autoremove_statuses'] = 3000;
+$config['autoremove_statuses'] = 0;
 
 /**
  * Do not edit below
@@ -59,7 +59,6 @@ define( 'DIR_BACKUPS',				DIR_SYSTEM . '/backups' );
 define( 'DIR_CONFIG', 				DIR_SYSTEM . '/config' );
 define( 'DIR_VIEWS', 				DIR_SYSTEM . '/views' );
 
-
 // URLs
 define( 'URL_ROOT',					dirname( $_SERVER['SCRIPT_NAME'] ) );
 define( 'URL_LIST',					URL_ROOT . '/list' );
@@ -68,8 +67,7 @@ define( 'URL_CREATE',				URL_ROOT . '/create' );
 define( 'URL_EDIT',					URL_ROOT . '/edit' );
 define( 'URL_SEARCH',				URL_ROOT . '/search' );
 define( 'URL_PUBLIC',				URL_ROOT . '/public' );
-define( 'URL_AJAX',					URL_PUBLIC . '/ajax' );
-define( 'URL_GEOCODE',				URL_AJAX . '/geocode.php' );
+define( 'URL_API',	 				URL_ROOT . '/api' );
 
 // Requests
 define( 'REQUEST',					trim( str_replace( dirname( $_SERVER['PHP_SELF'] ), '', preg_replace( '~/+~', '/' , parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ) ) ), '/' ) );

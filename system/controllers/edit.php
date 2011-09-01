@@ -14,7 +14,7 @@ if ( isset( $_POST['geocode'] ) ) {
 		$resp2 = $req2->execute();
 		if ( $resp2->status == 200 ) {
 			$status_message->setStatus( 'success' );
-			$status_message->setMessage( '<p>Store geocoded and saved successfully</p>' );
+			$status_message->setMessage( sprintf( '<p>%s</p>', $resp2->data->message ) );
 		}
 		else {
 			header("HTTP/1.1 500 Internal Server Error");
@@ -37,12 +37,12 @@ if ( isset( $_POST['save'] ) ) {
 	$resp = $req->execute();
 	if ( $resp->status == 200 ) {
 		$status_message->setStatus( 'success' );
-		$status_message->setMessage( '<p>Store saved successfully</p>' );
+		$status_message->setMessage( sprintf( '<p>%s</p>', $resp->data->message ) );
 	}
 	else {
 		header("HTTP/1.1 500 Internal Server Error");
 		$status_message->setStatuses( array( 'error', 'remain' ) );
-		$status_message->setMessage( '<p>Error saving the store<p>' );
+		$status_message->setMessage( sprintf( '<p>%s</p>', $resp->data->message ) );
 	}
 }
 

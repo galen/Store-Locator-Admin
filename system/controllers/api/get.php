@@ -9,5 +9,5 @@ if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) {
 	die( json_encode( $store->getData() ) );
 }
 
-header("HTTP/1.1 400 Bad Request");
-die( json_encode( array( 'message' => 'Invalid Request' ) ) );
+header("HTTP/1.1 400 Invalid Request Method");
+die( json_encode( array( 'message' => 'Invalid Request Method' ) ) );

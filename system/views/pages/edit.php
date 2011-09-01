@@ -24,7 +24,7 @@
 		<div class="well" id="store_edit_actions">
 			<input type="submit" class="btn primary" value="<?php if( $vars['controller'] == 'create' ): ?>Create<?php else: ?>Save<?php endif; ?>" name="<?php if( $vars['controller'] == 'create' ): ?>create<?php else: ?>save<?php endif; ?>">
 			<input type="submit" class="geocode_form btn success" id="geocode_form_button" name="geocode" value="Geocode"><span id="geocode_ajax_status">Geocode successful</span><img src="<?php echo URL_PUBLIC ?>/images/ajax_loader.gif" id="geocode_ajax_loader">
-			<?php if( isset( $store ) ): ?><a href="<?php echo URL_DELETE ?>/<?php echo $store->getID() ?>/" id="delete_store" class="btn danger">Delete this store</a><?php endif; ?>
+			<?php if( isset( $store ) ): ?><a href="<?php echo URL_DELETE ?>/<?php echo $store->getID() ?>/?c=<?php echo URL_ROOT . '/' . REQUEST ?>" id="delete_store" class="btn danger">Delete this store</a><?php endif; ?>
 		</div>
 	</fieldset>
 

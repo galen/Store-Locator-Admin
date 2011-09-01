@@ -1,17 +1,5 @@
 <?php
 
-// AJAX request
-if ( REQUEST_IS_AJAX ) {
-	if ( $stg->deleteStore( $vars['store_id'] ) ) {
-		$json = array( 'status' => 1, 'message' => 'Store deleted Successfully' );
-	}
-	else {
-		$json = array( 'status' => 0, 'message' => 'Error deleting the store' );
-	}
-	die( json_encode( $json ) );
-}
-
-// Delete the store
 if ( isset( $_POST['delete'] ) || isset( $_POST['cancel'] ) ) {
 	if ( isset( $_POST['cancel'] ) ) {
 		$c = isset( $_GET['c'] ) ? $_GET['c'] : URL_LIST;
@@ -19,20 +7,20 @@ if ( isset( $_POST['delete'] ) || isset( $_POST['cancel'] ) ) {
 		exit;
 	}
 	if ( isset( $_POST['delete'] ) ) {
-		if ( $stg->deleteStore( $vars['store_id'] ) ) {
-			header( sprintf( 'Location: %s?status=success&message=Store+%s+deleted+successfully', URL_LIST, $vars['store_id'] ) );
+		$req = Request::factory( URL_ROOT . '/api/delete/' . $vars['request']->store_id );
+		$req->method = 'post';
+		$resp = $req->execute();
+		if ( $resp->status == 200 ) {
+			header( sprintf( 'Location: %s?status=success&message=Store+%s+deleted+successfully', URL_LIST, $vars['request']->store_id ) );
 			exit;
 		}
 		else {
-			$status_message->setStatuses( array( 'error', 'block-message', 'remain' ) );
-			if ( !$stg->getStore( $vars['store_id'] ) ) {
-				$status_message->setMessage( '<p><strong>Error deleting the store.</strong> That store does not exist.</p>' );
-			}
-			else {
-				$status_message->setMessage( '<p><strong>Error deleting the store</strong></p>' );
-			}
+			$status_message->setMessage( '<p><strong>Error deleting the store</strong></p>' );
 		}
+
 	}
 }
 
 require( DIR_VIEWS . '/pages/delete.php' );
+
+

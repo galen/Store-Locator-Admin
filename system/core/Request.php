@@ -3,7 +3,7 @@
 class Request {
 
 	private $url;
-	public $method, $post, $get;
+	public $method, $post;
 	
 	static function factory( $url ) {
 		return new self( isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'] . $url );

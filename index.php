@@ -20,8 +20,10 @@ if ( !REQUEST_IS_AJAX ) {
 // Require necessary files
 require( DIR_CORE . '/Router.php' );
 require( DIR_CONFIG . '/routes.php' );
+require( DIR_CORE . '/Request.php' );
+require( DIR_CORE . '/Response.php' );
 
-if ( $controller = Router::route( REQUEST ) ) {
+if ( $vars['request'] = Router::route( REQUEST ) ) {
 
 	// Connect to the database
 	require( DIR_CORE . '/Db.php' );
@@ -40,15 +42,14 @@ if ( $controller = Router::route( REQUEST ) ) {
 
 	if ( !$stg->validateTable() ) {
 		header("HTTP/1.1 500 Internal Server Error");
-		$status_message->setStatuses( array('error', 'remain' ) );
+		$status_message->setStatuses( array('error', 'block-message', 'remain' ) );
 		$status_message->setMessage( "<p><strong>Invalid table setup</strong>. Please check your config and try again.</p>" );
 		require( DIR_VIEWS . '/pages/error.php' );
 		exit;
 	}
 
 	// Set variables
-	$vars = Router::getVars();
-	$vars['controller'] = $controller;
+	$vars['controller'] = $vars['request']->controller;
 	$vars['column_info'] = $stg->getColumns();
 	$vars['columns'] = array_keys( $vars['column_info'] );
 	$vars['columns_list'] = array_values( array_diff( $vars['columns'], array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) );
@@ -60,7 +61,7 @@ if ( $controller = Router::route( REQUEST ) ) {
 	}
 
 	// Require the controller and exit
-	require( DIR_CONTROLLERS . '/' . $controller . '.php' );
+	require( DIR_CONTROLLERS . '/' . $vars['controller'] . '.php' );
 	exit;
 }
 

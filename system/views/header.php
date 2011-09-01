@@ -4,8 +4,10 @@
 	<title>Store Admin<?php if( isset( $vars['page_title'] ) ): ?> - <?php echo ucwords( $vars['page_title'] ) ?><?php endif; ?></title>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&language=&region=&libraries="></script>
 	<script type="text/javascript">
-	url_delete = "<?php echo URL_DELETE ?>";
-	url_geocode = "<?php echo URL_GEOCODE ?>";
+	url_api_delete = "<?php echo URL_API ?>/delete";
+	url_api_geocode = "<?php echo URL_API ?>/geocode";
+	url_api_edit = "<?php echo URL_API ?>/edit";
+	column_map = <?php echo json_encode( $config['column_map'] ) ?>
 	</script>
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo URL_PUBLIC ?>/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo URL_PUBLIC ?>/css/style.css">

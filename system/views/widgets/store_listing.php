@@ -14,7 +14,7 @@
 	</thead>
 	<tbody>
 	<?php foreach( $vars['stores'] as $store ): ?>
-	<tr data-geocode="<?php echo $store->getQueryString() ?>">
+	<tr data-store-id="<?php echo $store->getID() ?>" data-geocode="<?php echo $store->getQueryString() ?>">
 		<?php foreach( $vars['columns_list'] as $tc ): ?>
 			<td><?php e( $store->raw( $tc ) ) ?></td>
 		<?php endforeach; ?>

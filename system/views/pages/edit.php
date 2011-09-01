@@ -2,11 +2,11 @@
 <?php require( DIR_VIEWS . '/widgets/map_edit.php' ) ?>
 <?php require( DIR_VIEWS . '/widgets/navigation.php' ) ?>
 
-<h2><?php if ( isset( $store ) ): ?>Editing Store #<?php echo $vars['store_id'] ?><?php else: ?>Create Store<?php endif; ?></h2>
+<h2><?php if ( isset( $store ) ): ?>Editing Store #<?php echo $vars['request']->store_id ?><?php else: ?>Create Store<?php endif; ?></h2>
 
 <?php require( DIR_VIEWS . '/widgets/page_status_message.php' ) ?>
 
-<form action="<?php if( $vars['controller'] == 'edit' ): ?><?php echo URL_EDIT ?>/<?php echo $vars['store_id'] ?>/<?php else: ?><?php echo URL_CREATE ?>/<?php endif; ?>" method="post" id="store_edit">
+<form action="<?php if( $vars['controller'] == 'edit' ): ?><?php echo URL_EDIT ?>/<?php echo $vars['request']->store_id ?>/<?php else: ?><?php echo URL_CREATE ?>/<?php endif; ?>" method="post" id="store_edit">
 
 	<fieldset>
 		<div id="form_fields">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Store Admin<?php if( isset( $vars['page_title'] ) ): ?> - <?php echo ucwords( $vars['page_title'] ) ?><?php endif; ?></title>
+	<title>Store Locator Admin<?php if( isset( $vars['page_title'] ) ): ?> - <?php echo ucwords( $vars['page_title'] ) ?><?php endif; ?></title>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&language=&region=&libraries="></script>
 	<script type="text/javascript">
 	url_api_delete = "<?php echo URL_API ?>/delete";

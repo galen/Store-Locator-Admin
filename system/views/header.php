@@ -14,6 +14,6 @@
 	<script type="text/javascript" src="<?php echo URL_PUBLIC ?>/js/jquery.js"></script>
 	<script type="text/javascript" src="<?php echo URL_PUBLIC ?>/js/script.js"></script>
 </head>
-<body id="<?php if( isset( $vars['controller'] ) ): ?><?php e( $vars['controller'] ) ?><?php endif; ?>" class="<?php echo get_body_classes( $config ) ?>"<?php echo get_body_data( $config ) ?>>
+<body id="<?php if( isset( $vars['controller'] ) ): ?><?php e( str_replace( '/', '_', $vars['controller'] ) ) ?><?php endif; ?>" class="<?php echo get_body_classes( $config ) ?>"<?php echo get_body_data( $config ) ?>>
 
 <div id="wrapper">

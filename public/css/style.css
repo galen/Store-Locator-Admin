@@ -151,6 +151,7 @@ div.search_compare {
 #footer {
 	border-top: 1px solid #eee;
 	overflow:hidden;
+	margin: 50px 0
 }
 #footer ul {
 	list-style:none;
@@ -164,6 +165,23 @@ div.search_compare {
 	display:block;
 	padding: 3px 6px;
 }
-#support {
+#footer .right {
 	float:right !important;
+}
+
+/* API index */
+
+#api_index h2 span {
+	color: #aaa;
+	margin-left: 15px;
+	font-size:.8em;
+}
+.parameter_list {
+	overflow:hidden;
+}
+.parameter_list dt {
+	width: 50px;
+}
+.parameter_list dd, .parameter_list dt {
+	float:left;
 }

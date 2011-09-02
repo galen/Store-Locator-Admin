@@ -10,7 +10,9 @@ Router::connect( '~^edit/(?P<store_id>\d+)$~', 'edit' );
 Router::connect( '~^delete/(?P<store_id>\d+)$~', 'delete' );
 Router::connect( '~^create$~', 'create' );
 Router::connect( '~^tools$~', 'tools' );
+Router::connect( '~^documentation$~', 'documentation' );
 
+Router::connect( '~^api$~', 'api/index' );
 Router::connect( '~^api/geocode$~', 'api/geocode' );
 Router::connect( '~^api/edit/(?P<store_id>\d+)$~', 'api/edit' );
 Router::connect( '~^api/delete/(?P<store_id>\d+)$~', 'api/delete' );

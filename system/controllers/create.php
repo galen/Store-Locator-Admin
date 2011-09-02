@@ -5,6 +5,7 @@ if ( isset( $_POST['create'] ) ) {
 	$req->post = array_intersect_key( $_POST, array_flip( $vars['columns'] ) );
 	$req->method = 'post';
 	$resp = $req->execute();
+	print_r($resp);
 	if ( $resp->status == 200 ) {
 		$status_message->setStatus( 'success' );
 		$status_message->setMessage( sprintf( '<p>%s</p>', $resp->data->message ) );

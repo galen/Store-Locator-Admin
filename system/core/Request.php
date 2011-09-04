@@ -2,15 +2,29 @@
 
 class Request {
 
-	private $url;
-	public $method, $post;
+	public $url;
+	public $controller;
+	public $method, $post, $get, $params;
 	
 	static function factory( $url ) {
-		return new self( isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'] . $url );
+		return new self( $url );
 	}
 
 	function __construct( $url ) {
-		$this->url = $url;
+		$this->url = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'] . $url;
+		$this->post = $_POST;
+		$this->get = $_GET;
+		$this->method = $_SERVER['REQUEST_METHOD'];
+		$this->params = new StdClass;
+		$this->is_ajax = (bool)isset( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest';
+	}
+
+	function setParam( $param, $value ) {
+		$this->params->$param = $value;
+	}
+
+	function getParam( $param ) {
+		return isset( $this->params->$param ) ? $this->params->$param : null;
 	}
 
 	function execute() {

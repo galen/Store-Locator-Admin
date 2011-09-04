@@ -2,7 +2,7 @@
 
 class Response {
 
-	public $data, $status, $status_text, $url;
+	public $data, $status, $url;
 
 	function __construct( $data ) {
 		$this->data = json_decode( $data );

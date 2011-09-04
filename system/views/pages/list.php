@@ -3,7 +3,7 @@
 
 <div id="store_listing_header">
 <h2>Store listing</h2>
-<?php if( $vars['total_store_count'] > 0 ): ?>
+<?php if( $vars->total_store_count > 0 ): ?>
 <?php require( DIR_VIEWS . '/widgets/result_numbers.php' ) ?>
 <?php require( DIR_VIEWS . '/widgets/pages_navigation.php' ) ?>
 </div>

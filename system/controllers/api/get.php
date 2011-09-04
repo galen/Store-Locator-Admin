@@ -1,7 +1,7 @@
 <?php
 
 if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) {
-	$store = $stg->getStore( $vars['request']->store_id );
+	$store = $stg->getStore( $vars->request->params->store_id );
 	if ( !$store ) {
 		header("HTTP/1.1 404 Not Found");
 		die( json_encode( array( 'message' => 'Store not found' ) ) );

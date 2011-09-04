@@ -1,11 +1,11 @@
 <?php
 
 if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
-	if ( isset( $_POST[$config['column_map']['id']] ) && $_POST[$config['column_map']['id']] != $vars['request']->store_id ) {
+	if ( isset( $_POST[$config['column_map']['id']] ) && $_POST[$config['column_map']['id']] != $vars->request->params->store_id ) {
 		header("HTTP/1.1 400 Invalid Request");
 		die( json_encode( array( 'message' => 'Invalid Request' ) ) );
 	}
-	if ( $stg->deleteStore( $vars['request']->store_id ) ) {
+	if ( $stg->deleteStore( $vars->request->params->store_id ) ) {
 		$json = array( 'message' => 'Store deleted successfully' );
 	}
 	else {

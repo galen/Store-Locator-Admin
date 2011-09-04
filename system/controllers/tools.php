@@ -40,15 +40,15 @@ if ( isset( $_POST['backup_file'] ) ) {
 }
 
 
-$vars['backup_file'] = array_map( 'basename', glob( DIR_BACKUPS . '/*' ) );
+$vars->backup_file = array_map( 'basename', glob( DIR_BACKUPS . '/*' ) );
 
 date_default_timezone_set( 'America/New_York' );
-$vars['backup_file_name_suggestion'] = date( 'Y-m-d' );
+$vars->backup_file_name_suggestion = date( 'Y-m-d' );
 
 $backup_file_name_suggestion_suffix = 2;
-while( file_exists( DIR_BACKUPS . '/' . $vars['backup_file_name_suggestion'] . '.sql' ) ) {
-	$vars['backup_file_name_suggestion'] = sprintf( '%s_%s', current( explode( '_', $vars['backup_file_name_suggestion'] ) ), $backup_file_name_suggestion_suffix );
+while( file_exists( DIR_BACKUPS . '/' . $vars->backup_file_name_suggestion . '.sql' ) ) {
+	$vars->backup_file_name_suggestion = sprintf( '%s_%s', current( explode( '_', $vars->backup_file_name_suggestion ) ), $backup_file_name_suggestion_suffix );
 }
-$vars['backup_file_name_suggestion'] .= '.sql';
-$vars['backup_dir_perms'] = substr( decoct( fileperms( DIR_BACKUPS ) ), 2 );
+$vars->backup_file_name_suggestion .= '.sql';
+$vars->backup_dir_perms = substr( decoct( fileperms( DIR_BACKUPS ) ), 2 );
 require( DIR_VIEWS . '/pages/tools.php' );

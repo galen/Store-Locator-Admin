@@ -40,7 +40,19 @@ $(".delete_store").click(function( event, all ){
 	return false;
 });
 
+$("#geocode_ajax_status_wrapper a.close").click(function(){
+	$("#geocode_ajax_status_wrapper").fadeOut();
+	return false;
+});
+
 $(".geocode_form").click(function(){
+	$("#geocode_ajax_status_wrapper").hide();
+	for ( geocode_required_field in geocode_required ) {
+		if ( $.trim( $( "#" + geocode_required[geocode_required_field] ).val() ) == '' ) {
+			alert( geocode_required[geocode_required_field] + " is a required field for geocoding" );
+			return false;
+		}
+	}
 	$("#geocode_ajax_loader").show();
 	var obj = $(this);
 	var store_id = $('#store_id').val();
@@ -74,7 +86,7 @@ $(".geocode_form").click(function(){
 								map.map.setZoom( 14 );
 							}
 							$("#geocode_ajax_loader").hide();
-							$("#geocode_ajax_status").html( save_data.message ).show().delay(3000).fadeOut();
+							$("#geocode_ajax_status_text").html(save_data.message).parent().css({display:"inline"});
 						}
 						else {
 							alert( save_data.message );

@@ -7,7 +7,8 @@
 	url_api_delete = "<?php echo URL_API ?>/delete";
 	url_api_geocode = "<?php echo URL_API ?>/geocode";
 	url_api_edit = "<?php echo URL_API ?>/edit";
-	column_map = <?php echo json_encode( $config['column_map'] ) ?>
+	column_map = <?php echo json_encode( $config['column_map'] ) ?>;
+	geocode_required = ["<?php echo trim( implode( '","', preg_split( '~\}.*?\{~', $config['geocode_string'] ) ), '{}' ) ?>"];
 	</script>
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo URL_PUBLIC ?>/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo URL_PUBLIC ?>/css/style.css">

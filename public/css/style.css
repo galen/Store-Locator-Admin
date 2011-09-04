@@ -140,9 +140,12 @@ div.search_compare {
 #create #geocode_form_button {
 	display:none;
 }
-#geocode_ajax_status {
+#geocode_ajax_status_wrapper {
 	margin-left:10px;
 	display:none;
+}
+#geocode_ajax_status_wrapper a.close {
+	margin-left: 5px;
 }
 
 /* Tools */

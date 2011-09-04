@@ -30,6 +30,13 @@ else {
 	$vars->stores = $stg->getStores( ($vars->page_number-1)*$config['stores_per_page'], $config['stores_per_page'], $vars->search_params, $vars->geocode_status );
 }
 
+$vars->all_stores_geocoded = true;
+foreach( $vars->stores as $store ) {
+	if ( !$store->isGeocoded() ) {
+		$vars->all_stores_geocoded = false;
+	}
+}
+
 $vars->page_store_count = count( $vars->stores );
 
 $vars->page_store_first_num = ($vars->page_number-1)*$config['stores_per_page']+1;

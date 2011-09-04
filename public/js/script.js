@@ -105,7 +105,6 @@ $(".geocode_form").click(function(){
 });
 
 $(".geocode_table").click(function( event, all ){
-
 	var obj = $(this);
 	tr = obj.closest('tr');
 	obj.html('<img src="' + $("#store_table").data('ajax-loader-image') + '">');
@@ -116,7 +115,6 @@ $(".geocode_table").click(function( event, all ){
 		url: url_api_geocode + data,
 		complete: function( jqxhr ) {
 			data = jQuery.parseJSON( jqxhr.responseText );
-			console.log(data);
 			if ( jqxhr.status == 200 ) {
 				$.ajax({
 					type: 'POST',
@@ -127,6 +125,9 @@ $(".geocode_table").click(function( event, all ){
 						if ( jqxhr.status == 200 ) {
 							obj.parent().html("Yes");
 							obj.remove();
+							if ( $('.geocode_table').length == 0 ) {
+								$('.geocode_all').addClass('disabled');
+							}
 						}
 						else {
 							obj.html("No");
@@ -148,7 +149,7 @@ $(".geocode_table").click(function( event, all ){
 	return false;
 });
 
-// status messagestuff
+// status message stuff
 $(".alert-message:not(.block-message) .close").show();
 $(".alert-message .close").click(function(){
 	$(this).parent().fadeOut();
@@ -160,6 +161,9 @@ if ( $(".autoremove_statuses").length ) {
 
 // Geocode stuff
 $(".geocode_all").click(function(){
+	if ( $(this).hasClass('disabled') ) {
+		return false;
+	}
 	$(".geocode_table").trigger('click', [true]);
 	return false;
 });
@@ -181,6 +185,10 @@ if ( $(".no_results").length == 0 && $(".show_search_modal").length == 0 ) {
 $(".pagination .disabled a").click(function(){
 	return false;
 });
+
+if ( $("#store_table").length ) {
+	$(".table_actions").show();
+}
 
 // Create store page
 if ( $("body#create").length ) {

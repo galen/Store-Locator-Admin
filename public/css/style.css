@@ -49,6 +49,7 @@ select {
 /* Store listing */
 .table_actions {
 	text-align:right;
+	display:none;
 }
 thead td {
 	font-weight:bold;

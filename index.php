@@ -65,7 +65,7 @@ if ( $vars->request = Router::route( REQUEST ) ) {
 	$vars->column_info = $stg->getColumns();
 	$vars->columns = array_keys( $vars->column_info );
 	$vars->columns_list = array_values( array_diff( $vars->columns, array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) );
-	$vars->columns_edit = array_values( array_diff( $vars->columns, array( $config['column_map']['id'] ) ) );
+	$vars->columns_edit = array_merge( array_values( array_diff( $vars->columns, array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) ), array( $config['column_map']['lat'], $config['column_map']['lng'] ) );
 
 	if ( isset( $_GET['status'], $_GET['message'] ) ) {
 		$status_message->setStatus( $_GET['status'] );

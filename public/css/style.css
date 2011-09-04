@@ -148,6 +148,13 @@ div.search_compare {
 #geocode_ajax_status_wrapper a.close {
 	margin-left: 5px;
 }
+#store_lat_lng {
+	padding-top:10px;
+}
+#create_geocode_note {
+	text-align:center;
+	margin-top:20px;
+}
 
 /* Tools */
 #tools form, #tools fieldset {

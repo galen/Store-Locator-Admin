@@ -99,13 +99,8 @@ td.store_actions {
 .search_compare {
 	width: 50px !important;
 }
-div.search_compare {
-	float:left;
-	text-align:center;
-	padding: 7px;
-}
 #geocode_status {
-	width: 60px;
+	width: 50px;
 }
 .no_results {
 	text-align:center;

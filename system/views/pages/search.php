@@ -12,7 +12,14 @@
 				<?php if( $vars->column_info[$vars->columns_list[$i]]['type'] == 'select' ): ?>
 					<div class="search_compare">=</div>
 				<?php else: ?>
-					<input class="search_compare" type="text" name="search_params[<?php echo $i ?>][1]" value="<?php if( isset( $vars->search_params[$i][1] ) ): ?><?php echo $vars->search_params[$i][1] ?><?php endif; ?>">
+					<select name="search_params[<?php echo $i ?>][1]" class="search_compare">
+						<option value=""></option>
+						<option value="="<?php if( $vars->search_params[$i][1] == "=" ): ?> selected="selected"<?php endif; ?>>=</option>
+						<option value="like"<?php if( $vars->search_params[$i][1] == "like" ): ?> selected="selected"<?php endif; ?>>like</option>
+						<option value="!="<?php if( $vars->search_params[$i][1] == "!==" ): ?> selected="selected"<?php endif; ?>>!=</option>
+						<option value="<"<?php if( $vars->search_params[$i][1] == "<" ): ?> selected="selected"<?php endif; ?>><</option>
+						<option value=">"<?php if( $vars->search_params[$i][1] == ">" ): ?> selected="selected"<?php endif; ?>>></option>
+					</select>
 				<?php endif; ?>			
 	
 				<?php if( $vars->column_info[$vars->columns_list[$i]]['type'] == 'select' ): ?>

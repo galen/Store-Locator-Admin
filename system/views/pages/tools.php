@@ -25,7 +25,7 @@
 <?php if ( count( $vars->backup_file ) ): ?>
 <form action="" method="post">
 <fieldset>
-	<p>Restore from backup. This will delete all existing data.</p>
+	<p>Restore from backup. This will delete all existing data.<?php if( $vars->backup_dir_perms != '777' ): ?> Chmod the backup directory to 777 for the ability to delete backups<?php endif; ?></p>
 	<label for="backup_filee">Backup File</label>
 	<select name="backup_file" id="backup_file">
 	<?php foreach( $vars->backup_file as $backup_file ): ?>
@@ -33,7 +33,9 @@
 	<?php endforeach; ?>
 	</select>
 	<input type="submit" name="restore_backup" value="Restore Backup" class="btn primary">
+	<?php if( $vars->backup_dir_perms == '777' ): ?>
 	<input type="submit" name="delete_backup" value="Delete backup" class="btn danger">
+	<?php endif; ?>
 </fieldset>
 </form>
 <?php else: ?>

@@ -2,9 +2,9 @@
 
 // Backup the table
 if ( isset( $_POST['backup_file_name'] ) ) {
-	if ( $stg->backup( DIR_BACKUPS . '/' . basename( $_POST['backup_file_name'] ) ) ) {
+	if ( $stg->backup( $b = DIR_BACKUPS . '/' . basename( $_POST['backup_file_name'] ) ) ) {
 		$status_message->setStatus( 'success' );
-		$status_message->setMessage( '<p>Backup created sucessfully</p>' );
+		$status_message->setMessage( sprintf( '<p>Backup created sucessfully (%s)</p>', $b ) );
 	}
 	else {
 		header("HTTP/1.1 500 Internal Server Error");
@@ -13,24 +13,12 @@ if ( isset( $_POST['backup_file_name'] ) ) {
 	}
 }
 
-if ( isset( $_POST['geocode_all'] ) ) {
-	if ( $geocode_all_result = $stg->geocodeAll() ) {
-		$status_message->setStatus( 'success' );
-		$status_message->setMessage( sprintf( '<p>%s stores successfully geocoded</p>', $geocode_all_result ) );
-	}
-	else {
-		header("HTTP/1.1 500 Internal Server Error");
-		$status_message->setStatus( 'error' );
-		$status_message->setMessage( '<p>No stores were geocoded</p>' );
-	}
-}
-
 // Restore from backup
 if ( isset( $_POST['backup_file'] ) ) {
 	if ( isset( $_POST['restore_backup'] ) ) {
-		if ( $stg->restore( DIR_BACKUPS . '/' . basename( $_POST['backup_file'] ) ) ) {
+		if ( $stg->restore( $b = DIR_BACKUPS . '/' . basename( $_POST['backup_file'] ) ) ) {
 			$status_message->setStatus( 'success' );
-			$status_message->setMessage( '<p>Backup restored successfully</p>' );
+			$status_message->setMessage( sprintf( '<p>Backup restored successfully (%s)</p>', $b ) );
 		}
 		else {
 			header("HTTP/1.1 500 Internal Server Error");
@@ -51,6 +39,18 @@ if ( isset( $_POST['backup_file'] ) ) {
 	}
 }
 
+if ( isset( $_POST['geocode_all'] ) ) {
+	if ( $geocode_all_result = $stg->geocodeAll() ) {
+		$status_message->setStatus( 'success' );
+		$status_message->setMessage( sprintf( '<p>%s stores successfully geocoded</p>', $geocode_all_result ) );
+	}
+	else {
+		header("HTTP/1.1 500 Internal Server Error");
+		$status_message->setStatus( 'error' );
+		$status_message->setMessage( '<p>No stores were geocoded</p>' );
+	}
+}
+
 $counts = $stg->getStoreCounts();
 $vars->count_all = $counts['all'];
 $vars->count_geocoded = $counts['geocoded'];
@@ -62,7 +62,7 @@ $vars->backup_file_name_suggestion = date( 'Y-m-d' );
 
 $backup_file_name_suggestion_suffix = 2;
 while( file_exists( DIR_BACKUPS . '/' . $vars->backup_file_name_suggestion . '.sql' ) ) {
-	$vars->backup_file_name_suggestion = sprintf( '%s_%s', current( explode( '_', $vars->backup_file_name_suggestion ) ), $backup_file_name_suggestion_suffix );
+	$vars->backup_file_name_suggestion = sprintf( '%s_%s', current( explode( '_', $vars->backup_file_name_suggestion ) ), $backup_file_name_suggestion_suffix++ );
 }
 $vars->backup_file_name_suggestion .= '.sql';
 $vars->backup_dir_perms = substr( decoct( fileperms( DIR_BACKUPS ) ), 2 );

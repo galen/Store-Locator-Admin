@@ -17,13 +17,20 @@ if ( $vars->page_number < 1 || ( $vars->page_number > $vars->total_pages && $var
 	exit;
 }
 
-$vars->page_array = range( $vars->page_number - 4, $vars->page_number + 4 );
+// Pagination size error checking
+if ( $config['pagination_size'] % 2 == 0 ) {
+	$config['pagination_size']--;
+}
+if ( $config['pagination_size'] < 1 || $config['pagination_size'] > 12 ) {
+	$config['pagination_size'] = 9;
+}
+$vars->page_array = range( $vars->page_number - floor( $config['pagination_size']/2 ), $vars->page_number + floor( $config['pagination_size']/2 ) );
 if ( $vars->page_array[0] < 1 ) {
 	$end_page = end( $vars->page_array ) + abs( $vars->page_array[0] ) + 1;
 	$vars->page_array = range( 1, $end_page > $vars->total_pages ? $vars->total_pages : $end_page );
 }
 if ( end( $vars->page_array ) > $vars->total_pages ) {
-	$start_page = $vars->page_number - abs( $vars->total_pages - $vars->page_number - 8 );
+	$start_page = $vars->page_number - abs( $vars->total_pages - $vars->page_number - ( $config['pagination_size'] - 1 ) );
 	$vars->page_array = array_reverse( range( $vars->total_pages, $start_page < 1 ? 1 : $start_page ) );
 }
 

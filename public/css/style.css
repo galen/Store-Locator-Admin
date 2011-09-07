@@ -169,6 +169,10 @@ td.store_actions {
 #geocode_stats dd, #geocode_stats dt {
 	float:left;
 }
+#tools #geocode_ajax_loader {
+	margin-left:10px;
+	display:none;
+}
 
 /* Footer */
 #footer {

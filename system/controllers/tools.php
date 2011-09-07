@@ -42,7 +42,7 @@ if ( isset( $_POST['backup_file'] ) ) {
 if ( isset( $_POST['geocode_all'] ) ) {
 	if ( $geocode_all_result = $stg->geocodeAll() ) {
 		$status_message->setStatus( 'success' );
-		$status_message->setMessage( sprintf( '<p>%s stores successfully geocoded</p>', $geocode_all_result ) );
+		$status_message->setMessage( sprintf( '<p>%s store%s successfully geocoded</p>', $geocode_all_result, $geocode_all_result > 1 ? 's' : '' ) );
 	}
 	else {
 		header("HTTP/1.1 500 Internal Server Error");

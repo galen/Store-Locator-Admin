@@ -71,6 +71,7 @@ class StoreTableGateway {
 
 	function geocodeAll() {
 		$updated = 0;
+		$stores = array();
 		$sql = sprintf( 'select * from %s where ( %2$s is null || %2$s = 0 || %3$s is null and %3$s = 0 )', $this->table, $this->column_map['lat'], $this->column_map['lng'] );
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->execute();
@@ -95,7 +96,6 @@ class StoreTableGateway {
 			}
 		}
 		return $updated;
-	
 	}
 
 	function getStoreCounts() {

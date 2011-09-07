@@ -195,6 +195,8 @@ if ( $("body#create").length ) {
 	$("#create #geocode_form_button").show();
 }
 
-
+$("#tools #geocode_all").click(function(){
+	$("#geocode_ajax_loader").show();
+});
 
 });

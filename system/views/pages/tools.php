@@ -46,11 +46,11 @@
 
 <h2>Geocode All Stores</h2>
 <dl id="geocode_stats">
-	<dt>Geocoded</dt><dd id="geocode_stats_geocoded"><?php echo $vars->count_geocoded ?></dd>
-	<dt>Ungeocoded</dt><dd id="geocode_stats_ungeocoded"><?php echo $vars->count_ungeocoded ?></dd>
+	<dt>Geocoded</dt><dd id="geocode_stats_geocoded"><?php if( $vars->count_geocoded ): ?><a href="<?php e( sprintf( '%s?geocode_status=%s', URL_SEARCH, StoreTableGateway::GEOCODE_STATUS_TRUE ) ) ?>"><?php endif; ?><?php echo $vars->count_geocoded ?><?php if( $vars->count_geocoded ): ?></a><?php endif; ?></dd>
+	<dt>Ungeocoded</dt><dd id="geocode_stats_ungeocoded"><?php if( $vars->count_ungeocoded ): ?><a href="<?php e( sprintf( '%s?geocode_status=%s', URL_SEARCH, StoreTableGateway::GEOCODE_STATUS_FALSE ) ) ?>"><?php endif; ?><?php echo $vars->count_ungeocoded ?><?php if( $vars->count_ungeocoded ): ?></a><?php endif; ?></dd>
 </dl>
 <p><?php if( $vars->count_ungeocoded == 0 ): ?>All stores are geocoded!<?php endif; ?></p>
 <form action="" method="post">
-	<input type="submit"<?php if( $vars->count_ungeocoded == 0 ): ?> disabled="true"<?php endif; ?> class="btn success<?php if( $vars->count_ungeocoded == 0 ): ?> disabled<?php endif; ?>" name="geocode_all" id="geocode_all" value="Geocode All">
+	<input type="submit"<?php if( $vars->count_ungeocoded == 0 ): ?> disabled="true"<?php endif; ?> class="btn success<?php if( $vars->count_ungeocoded == 0 ): ?> disabled<?php endif; ?>" name="geocode_all" id="geocode_all" value="Geocode All"><img src="/Store-Locator-Admin/public/images/ajax_loader.gif" id="geocode_ajax_loader">
 </form>
 <?php require( DIR_VIEWS . '/footer.php' ) ?>

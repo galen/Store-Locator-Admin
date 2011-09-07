@@ -81,6 +81,10 @@ td.store_actions {
 	right:0;
 	top: 0px;
 }
+.pagination a.page {
+	width: 20px;
+	text-align:center;
+}
 .pagination .active a {
 	background:#f3f3f3 !important;
 	color:#999;

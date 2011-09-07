@@ -60,7 +60,7 @@
 <h2>Search Stores</h2>
 <?php if( $vars->total_store_count > 0 ): ?>
 <?php require( DIR_VIEWS . '/widgets/result_numbers.php' ) ?>
-<?php if( $vars->total_pages > 1 ): ?><?php require( DIR_VIEWS . '/widgets/pages_navigation.php' ) ?><?php endif; ?>
+<?php if( $vars->total_pages > 1 ): ?><?php require( DIR_VIEWS . '/widgets/pagination.php' ) ?><?php endif; ?>
 <p><a href="#" class="show_search_form">Show search form</a></p>
 </div>
 <?php require( DIR_VIEWS . '/widgets/store_listing.php' ) ?>

@@ -12,7 +12,7 @@ $config['db_type'] = '';
 $config['db_table'] = '';
 
 // Max number of pages to show in the pagination
-$config['pagination_size'] = 10;
+$config['pagination_size'] = 9;
 
 // Number of stores to display on the list/search page
 $config['stores_per_page'] = 25;

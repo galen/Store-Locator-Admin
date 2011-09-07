@@ -5,7 +5,7 @@ require( DIR_VIEWS . '/widgets/navigation.php' );
 
 <h1>Documentation</h1>
 
-<a href="<?php echo URL_ROOT?>/documentation/">API Documentation</a>
+<a href="<?php echo URL_ROOT?>/api/">API Documentation</a>
 
 <?php
 require( DIR_VIEWS . '/footer.php' );

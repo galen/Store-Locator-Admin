@@ -18,7 +18,9 @@
 <?php else: ?>
 <p>You must chmod the backup directory to 777.</p>
 <?php endif; ?>
+
 <hr>
+
 <h2>Existing Backups</h2>
 <?php if ( count( $vars->backup_file ) ): ?>
 <form action="" method="post">
@@ -38,4 +40,15 @@
 <p>No backups exist</p>
 <?php endif; ?>
 
+<hr>
+
+<h2>Geocode All Stores</h2>
+<dl id="geocode_stats">
+	<dt>Geocoded</dt><dd id="geocode_stats_geocoded"><?php echo $vars->count_geocoded ?></dd>
+	<dt>Ungeocoded</dt><dd id="geocode_stats_ungeocoded"><?php echo $vars->count_ungeocoded ?></dd>
+</dl>
+<p><?php if( $vars->count_ungeocoded == 0 ): ?>All stores are geocoded!<?php endif; ?></p>
+<form action="" method="post">
+	<input type="submit"<?php if( $vars->count_ungeocoded == 0 ): ?> disabled="true"<?php endif; ?> class="btn success<?php if( $vars->count_ungeocoded == 0 ): ?> disabled<?php endif; ?>" name="geocode_all" id="geocode_all" value="Geocode All">
+</form>
 <?php require( DIR_VIEWS . '/footer.php' ) ?>

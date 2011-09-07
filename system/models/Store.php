@@ -31,6 +31,7 @@ class Store {
 	}
 
 	function __call( $method, array $args ) {
+
 		if ( strpos( $method, 'get' ) === 0 ) {
 			$var = strtolower( substr( $method, 3 ) );
 			return isset( $this->data[$this->column_map[$var]] ) ? $this->data[$this->column_map[$var]] : null;

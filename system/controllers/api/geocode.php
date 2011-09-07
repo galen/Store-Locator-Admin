@@ -1,8 +1,8 @@
 <?php
 
 if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) {
-	$address = preg_replace_callback( '~\{(.*?)\}~', function( $m ) use( $_GET ){ return $_GET[$m[1]]; }, $config['geocode_string'] );
-	
+	$address = preg_replace_callback( '~\{(.*?)\}~', function( $m ) use( $_GET ){ return isset($_GET[$m[1]]) ? $_GET[$m[1]] : null; }, $config['geocode_string'] );
+
 	if ( strpos( $address, '{' ) !== false ) {
 		header("HTTP/1.1 400 Error Parsing Address");
 		$json = array( 'message' => 'Error geocoding the store' );

@@ -155,6 +155,16 @@ td.store_actions {
 #tools form, #tools fieldset {
 	padding-top:0px !important;
 }
+#geocode_stats {
+	overflow:hidden;
+}
+#geocode_stats dt {
+	width: 100px;
+	clear:left;
+}
+#geocode_stats dd, #geocode_stats dt {
+	float:left;
+}
 
 /* Footer */
 #footer {

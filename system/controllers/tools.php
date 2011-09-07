@@ -13,6 +13,18 @@ if ( isset( $_POST['backup_file_name'] ) ) {
 	}
 }
 
+if ( isset( $_POST['geocode_all'] ) ) {
+	if ( $geocode_all_result = $stg->geocodeAll() ) {
+		$status_message->setStatus( 'success' );
+		$status_message->setMessage( sprintf( '<p>%s stores successfully geocoded</p>', $geocode_all_result ) );
+	}
+	else {
+		header("HTTP/1.1 500 Internal Server Error");
+		$status_message->setStatus( 'error' );
+		$status_message->setMessage( '<p>No stores were geocoded</p>' );
+	}
+}
+
 // Restore from backup
 if ( isset( $_POST['backup_file'] ) ) {
 	if ( isset( $_POST['restore_backup'] ) ) {
@@ -39,7 +51,10 @@ if ( isset( $_POST['backup_file'] ) ) {
 	}
 }
 
-
+$counts = $stg->getStoreCounts();
+$vars->count_all = $counts['all'];
+$vars->count_geocoded = $counts['geocoded'];
+$vars->count_ungeocoded = $counts['ungeocoded'];
 $vars->backup_file = array_map( 'basename', glob( DIR_BACKUPS . '/*' ) );
 
 date_default_timezone_set( 'America/New_York' );

@@ -69,6 +69,52 @@ class StoreTableGateway {
 		return $stores;
 	}
 
+	function geocodeAll() {
+		$updated = 0;
+		$sql = sprintf( 'select * from %s where ( %2$s is null || %2$s = 0 || %3$s is null and %3$s = 0 )', $this->table, $this->column_map['lat'], $this->column_map['lng'] );
+		$stmnt = $this->db->prepare( $sql );
+		$stmnt->execute();
+		foreach( $stmnt->fetchAll( PDO::FETCH_ASSOC ) as $data ) {
+			$stores[] = new Store( $this->column_map, $data );
+		}
+		foreach( $stores as $store ) {
+			$req = Request::factory( URL_ROOT . '/api/geocode?' . http_build_query( $store->getData() ) );
+			$resp = $req->execute();
+			if ( $resp->status == 200 ) {
+				$req2 = Request::factory( URL_ROOT . '/api/edit/' . $store->getID() );
+				$req2->post = array(
+					$this->column_map['id'] => $store->getID(),
+					$this->column_map['lat'] => $resp->data->lat,
+					$this->column_map['lng'] => $resp->data->lng
+				);
+				$req2->method = 'post';
+				$resp2 = $req2->execute();
+				if ( $resp2->status == 200 ) {
+					$updated++;
+				}
+			}
+		}
+		return $updated;
+	
+	}
+
+	function getStoreCounts() {
+		$sql = sprintf( "select count(id) as count from %s", $this->table );
+		$stmnt = $this->db->prepare( $sql );
+		$stmnt->execute();
+		$all_count = $stmnt->fetchColumn();
+		$sql = sprintf( 'select count(id) as count from %s where ( %2$s is not null and %2$s != 0 && %3$s is not null and %3$s != 0 )', $this->table, $this->column_map['lat'], $this->column_map['lng'] );
+		$stmnt = $this->db->prepare( $sql );
+		$stmnt->execute();
+		$geocoded_count = $stmnt->fetchColumn();
+		$ungeocoded_count = $all_count - $geocoded_count;
+		return array (
+			'all'			=> $all_count,
+			'geocoded'		=> $geocoded_count,
+			'ungeocoded'	=> $ungeocoded_count,			
+		);
+	}
+
 	private function buildSearchString( array $search_params, $geocode_status ) {
 		$columns = implode( ' and ', array_map( function($a){ return sprintf( '%s %s :%s', $a[0], $a[1], $a[0] ); }, $search_params ) );
 		$sql = sprintf( 'where 1 = 1%s', $columns ? ' and ' : '' ) . $columns; 

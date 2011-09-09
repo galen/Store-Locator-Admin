@@ -67,6 +67,7 @@ define( 'URL_DELETE',				URL_ROOT . '/delete' );
 define( 'URL_CREATE',				URL_ROOT . '/create' );
 define( 'URL_EDIT',					URL_ROOT . '/edit' );
 define( 'URL_SEARCH',				URL_ROOT . '/search' );
+define( 'URL_EXPORT',				URL_ROOT . '/export' );
 define( 'URL_PUBLIC',				URL_ROOT . '/public' );
 define( 'URL_API',	 				URL_ROOT . '/api' );
 

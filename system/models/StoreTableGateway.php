@@ -51,11 +51,16 @@ class StoreTableGateway {
 		return $stmnt->fetchColumn();
 	}
 
-	public function getStores( $start, $length, array $search_params=null, $geocode_status=null ) {
-		$sql = sprintf( 'select * from %s %s limit :start, :length', $this->table, isset( $search_params ) || isset( $geocode_status ) ? $this->buildSearchString( (array)$search_params, $geocode_status ) : '' );
+	public function getStores( $start=null, $length=null, array $search_params=null, $geocode_status=null ) {
+		$sql = sprintf( 'select * from %s %s', $this->table, isset( $search_params ) || isset( $geocode_status ) ? $this->buildSearchString( (array)$search_params, $geocode_status ) : '' );
+		if ( $start !== null ) {
+			$sql .= ' limit :start, :length';
+		}
 		$stmnt = $this->db->prepare( $sql );
-		$stmnt->bindValue( ':start', $start, PDO::PARAM_INT );
-		$stmnt->bindValue( ':length', $length, PDO::PARAM_INT );
+		if ( $start !== null ) {
+			$stmnt->bindValue( ':start', $start, PDO::PARAM_INT );
+			$stmnt->bindValue( ':length', $length, PDO::PARAM_INT );
+		}
 		if ( is_array( $search_params ) ) {
 			foreach( $search_params as $sp ) {
 				$stmnt->bindValue( ':'.$sp[0], $sp[2] );

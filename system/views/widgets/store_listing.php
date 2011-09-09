@@ -1,5 +1,6 @@
 <div class="table_actions well">
-	<a href="#" class="btn success geocode_all<?php if( $vars->all_stores_geocoded ): ?> disabled<?php endif; ?>" title="Geocode all stores on the page">Geocode all stores</a>
+	<a href="<?php echo URL_EXPORT ?>?<?php echo $_SERVER['QUERY_STRING'] ?>" class="btn export">Export</a>
+	<a href="#"></a></a><a href="#" class="btn success geocode_all<?php if( $vars->all_stores_geocoded ): ?> disabled<?php endif; ?>" title="Geocode all stores on the page">Geocode all stores</a>
 </div>
 
 <table id="store_table" data-ajax-loader-image="<?php echo URL_PUBLIC  ?>/images/ajax_loader.gif">

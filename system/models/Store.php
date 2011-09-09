@@ -60,6 +60,10 @@ class Store {
 		return array_diff( array_keys( $this->data ), array( $this->column_map['id'], 'column_map' ) );
 	}
 
+	function getCSV() {
+		return implode( ',', $this->getData() );
+	}
+
 	function getQueryString() {
 		$str = '?';
 		foreach( $this->data as $k => $v ) {

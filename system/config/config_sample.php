@@ -12,10 +12,11 @@ $config['db_type'] = '';
 $config['db_table'] = '';
 
 // Max number of pages to show in the pagination
-$config['pagination_size'] = 9;
+// If this is not odd 1 will be subtracted from it
+$config['pagination_viewport'] = 4;
 
 // Number of stores to display on the list/search page
-$config['stores_per_page'] = 25;
+$config['stores_per_page'] = 5;
 
 // Edit this to reflect your table columns
 $config['column_map'] = array (

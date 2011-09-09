@@ -17,6 +17,16 @@ $.fn.serializeObject = function()
     return o;
 };
 
+$(".export").click(function( e ){
+	answer = prompt( "Enter the filename", "export.csv" );
+	if ( answer ) {
+		e.preventDefault();
+		window.location = $(this).data("export-url") + '&filename=' + answer
+		return false;
+	}
+	return false;
+});
+
 $(".delete_store").click(function( event, all ){
 	obj = $(this);
 	tr = obj.closest('tr');

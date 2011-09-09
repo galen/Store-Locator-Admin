@@ -63,7 +63,6 @@ class StoreTableGateway {
 		}
 		if ( is_array( $search_params ) ) {
 			foreach( $search_params as $sp ) {
-			print_r($sp);
 				$stmnt->bindValue( ':'.$sp[0], $sp[2] );
 			}
 		}

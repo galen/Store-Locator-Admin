@@ -21,13 +21,14 @@ if ( isset( $_GET['search_params'] ) ) {
 $vars->stores = $stg->getStores( null, null, $vars->search_params, $vars->geocode_status );
 $csv = implode( "\n", array_map( function( $s ) { return $s->getCSV(); }, $vars->stores ) );
 $columns = implode( ',', $vars->columns );
+$filename = isset( $_GET['filename'] ) ? $_GET['filename'] : 'expsort.csv';
 
 header("Pragma: public");
 header("Expires: 0");
 header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 header("Cache-Control: private",false);
 header("Content-Type: text/csv");
-header("Content-Disposition: attachment;filename=export.csv" );
+header("Content-Disposition: attachment;filename=$filename" );
 header("Content-Length: " . strlen( $csv ) );
 echo $columns . "\n";
 echo $csv;

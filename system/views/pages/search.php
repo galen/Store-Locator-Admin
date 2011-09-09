@@ -62,10 +62,14 @@
 <div id="store_listing_header">
 <h2>Search Stores</h2>
 
+<?php if( count( $vars->stores ) ): ?>
+
 <?php require( DIR_VIEWS . '/widgets/result_numbers.php' ) ?>
 <?php if( $vars->total_pages > 1 ): ?><?php require( DIR_VIEWS . '/widgets/pagination.php' ) ?><?php endif; ?>
 <p><a href="#" class="show_search_form">Show search form</a></p>
 </div>
 <?php require( DIR_VIEWS . '/widgets/store_listing.php' ) ?>
-
+<?php else: ?>
+</div>
+<?php endif; ?>
 <?php require( DIR_VIEWS . '/footer.php' ) ?>

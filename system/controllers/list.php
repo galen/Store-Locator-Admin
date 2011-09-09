@@ -7,7 +7,11 @@ if ( $vars->controller == 'list' ) {
 }
 else {
 	$vars->total_store_count = $stg->getCount( $vars->search_params, $vars->geocode_status );
+	$vars->search_results_exist = (bool) $vars->total_store_count;
+	$vars->active_search = (bool)count( $_GET );
 }
+
+
 $vars->total_pages = ceil( $vars->total_store_count / $config['stores_per_page'] );
 if ( $vars->page_number < 1 || ( $vars->page_number > $vars->total_pages && $vars->total_pages != 0 ) ) {
 	header("HTTP/1.1 404 Not Found");

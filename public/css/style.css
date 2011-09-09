@@ -106,11 +106,12 @@ td.store_actions {
 #geocode_status {
 	width: 50px;
 }
+#search_modal_note {
+	float:left;
+}
 .no_results {
-	text-align:center;
 	color: #aa0000;
 	font-weight:bold;
-	float:left;
 }
 #search_modal form, #search_modal fieldset {
 	margin:0;

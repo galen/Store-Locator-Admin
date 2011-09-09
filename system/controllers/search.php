@@ -1,22 +1,22 @@
 <?php
 $vars->geocode_status = isset( $_GET['geocode_status'] ) && ( $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_FALSE || $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_TRUE ) ? (int)$_GET['geocode_status'] : null;
+unset( $_GET['geocode_status'] );
 $vars->search_params = null;
 
-if ( isset( $_GET['search_params'] ) ) {
-	foreach( $_GET['search_params'] as $index => $search_param ) {
-		if ( $vars->column_info[$search_param[0]]['type'] == 'select' && $search_param[2] != sprintf( 'select_%s', $search_param[0] ) ) {
-			$vars->search_params[$index] = array(
-				$search_param[0],
+if ( count( $_GET ) ) {
+	foreach( $_GET as $var => $vals ) {
+		if ( $vars->column_info[$var]['type'] == 'select' && $vals[1] != sprintf( 'select_%s', $var ) ) {
+			$vars->search_params[$var] = array(
+				$var,
 				'=',
-				$search_param[2]
+				$vals[1]
 			);
 		}
-		elseif ( !empty( $search_param[0] ) && !empty( $search_param[1] ) ) {
-			$vars->search_params[$index] = $search_param;
+		elseif ( !empty( $vals[1] ) ) {
+			$vars->search_params[$var] = $vals;
+			array_unshift( $vars->search_params[$var], $var );
 		}
 	}
 }
-
-$vars->search_status = $vars->geocode_status || $vars->search_params;
 
 require( DIR_CONTROLLERS . '/list.php' );

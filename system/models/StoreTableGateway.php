@@ -10,6 +10,12 @@ class StoreTableGateway {
 	const GEOCODE_STATUS_TRUE = 2;
 	const GEOCODE_STATUS_FALSE = 1;
 
+	public function __construct( PDO $db, $table, array $column_map ) {
+		$this->db = $db;
+		$this->table = $table;
+		$this->column_map = $column_map;
+	}
+
 	public function backup( $file ) {
 		$sql = sprintf( sprintf( 'select * into outfile :file from %s', $this->table ) );
 		$stmnt = $this->db->prepare( $sql );
@@ -30,13 +36,7 @@ class StoreTableGateway {
 		return false;
 	}
 
-	public function __construct( PDO $db, $table, array $column_map ) {
-		$this->db = $db;
-		$this->table = $table;
-		$this->column_map = $column_map;
-	}
-
-	public function getCount( array $search_params=null, $geocode_status=null ) {
+	public function getStoreCount( array $search_params=null, $geocode_status=null ) {
 		$sql = sprintf( 'select count(id) from %s %s', $this->table, isset( $search_params ) || isset( $geocode_status ) ? $this->buildSearchString( (array)$search_params, $geocode_status ) : '' );
 		unset( $search_params['geocode_status'] );
 		$stmnt = $this->db->prepare( $sql );

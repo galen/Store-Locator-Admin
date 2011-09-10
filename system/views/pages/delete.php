@@ -1,6 +1,6 @@
 <?php require( DIR_VIEWS . '/header.php' ) ?>
 <?php require( DIR_VIEWS . '/widgets/navigation.php' ) ?>
-<h2>Delete Store #<?php echo $vars->request->params->store_id ?></h2>
+<h2>Delete Store #<?php echo $registry->request->params->store_id ?></h2>
 <?php require( DIR_VIEWS . '/widgets/page_status_message.php' ) ?>
 <form action="" method="post">
 	<fieldset>

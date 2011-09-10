@@ -1,5 +1,5 @@
 <p>Showing stores
-<?php e( $vars->page_store_first_num ) ?> to <?php e( $vars->page_store_last_num ) ?>
+<?php e( $registry->page_store_first_num ) ?> to <?php e( $registry->page_store_last_num ) ?>
  of
-	<?php e( $vars->total_store_count ) ?>
+	<?php e( $registry->total_store_count ) ?>
 </p>

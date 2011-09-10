@@ -20,8 +20,8 @@ if ( !REQUEST_IS_AJAX ) {
 	$status_message = new FormStatusMessage;
 }
 
-// Variable container
-$vars = new StdClass;
+// Registry
+$registry = new StdClass;
 
 // Require necessary files
 require( DIR_CORE . '/Router.php' );
@@ -29,7 +29,7 @@ require( DIR_CONFIG . '/routes.php' );
 require( DIR_CORE . '/Request.php' );
 require( DIR_CORE . '/Response.php' );
 
-if ( $vars->request = Router::route( REQUEST ) ) {
+if ( $registry->request = Router::route( REQUEST ) ) {
 
 	// Connect to the database
 	require( DIR_CORE . '/Db.php' );
@@ -61,18 +61,18 @@ if ( $vars->request = Router::route( REQUEST ) ) {
 	}
 
 	// Set variables
-	$vars->controller = Router::$controller;
-	$vars->column_info = $stg->getColumns();
-	$vars->columns = array_keys( $vars->column_info );
-	$vars->columns_list = array_values( array_diff( $vars->columns, array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) );
-	$vars->columns_edit = array_merge( array_values( array_diff( $vars->columns, array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) ), array( $config['column_map']['lat'], $config['column_map']['lng'] ) );
+	$registry->controller = Router::$controller;
+	$registry->column_info = $stg->getColumns();
+	$registry->columns = array_keys( $registry->column_info );
+	$registry->columns_list = array_values( array_diff( $registry->columns, array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) );
+	$registry->columns_edit = array_merge( array_values( array_diff( $registry->columns, array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) ), array( $config['column_map']['lat'], $config['column_map']['lng'] ) );
 
 	if ( isset( $_GET['status'], $_GET['message'] ) ) {
 		$status_message->setStatus( $_GET['status'] );
 		$status_message->setMessage($_GET['message'] );
 	}
 
-	require( sprintf( "%s/%s.php", DIR_CONTROLLERS, $vars->controller ) );
+	require( sprintf( "%s/%s.php", DIR_CONTROLLERS, $registry->controller ) );
 	exit;
 }
 

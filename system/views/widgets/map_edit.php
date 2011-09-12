@@ -7,7 +7,7 @@ this.initialize = function() {
 
 	var self = this;
 	this.map_options = {
-		zoom: <?php if( isset( $store ) && $store->isGeocoded() ): ?>14<?php else: ?>2<?php endif; ?>,
+		zoom: <?php if( isset( $store ) && $store->isGeocoded() ): ?>14<?php else: ?><?php e( $config['default_map_properties']['zoom'] ) ?><?php endif; ?>,
 		navigationControl: true,
 		mapTypeControl: true,
 		scaleControl: false,
@@ -31,7 +31,11 @@ this.initialize = function() {
 		draggable:true
 	});
 	<?php endif; ?>
-	this.map.setCenter( new google.maps.LatLng(<?php if( isset( $store ) && $store->isGeocoded() ): ?><?php e( $store->getLat() ) ?>,<?php e( $store->getLng() ) ?><?php else:?>23,23<?php endif; ?>) );
+	<?php if( isset( $store ) && $store->isGeocoded() ): ?>
+	this.map.setCenter( new google.maps.LatLng( <?php e( $store->getLat() ) ?>,<?php e( $store->getLng() ) ?> ) );
+	<?php else:?>
+	this.map.setCenter( new google.maps.LatLng( <?php e( $config['default_map_properties']['lat'] ) ?>,<?php e( $config['default_map_properties']['lng'] ) ?> ) );
+	<?php endif; ?>
 	<?php if( isset( $store ) && $store->isGeocoded() ): ?>
 	this.event_listeners = [];
 	this.event_listeners[0] = google.maps.event.addListener(map.markers[0], 'dragend', function(){ $("#lat").val(Math.round(map.markers[0].getPosition().lat()*1000000)/1000000);$("#lng").val(Math.round(map.markers[0].getPosition().lng()*1000000)/1000000); });
@@ -49,9 +53,6 @@ this.initialize = function() {
 function initialize_map() {
 	map = new phpgooglemap_map();
 	map.initialize();
-
-
-
 }
 
 google.maps.event.addDomListener(window, "load", initialize_map );

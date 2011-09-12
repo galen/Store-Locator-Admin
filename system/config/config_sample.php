@@ -3,7 +3,11 @@
 error_reporting( E_ALL );
 ini_set( 'display_errors', 'On' );
 
-// Database configuration
+/**
+ * Database configuration
+ *
+ * Only mysql is supported right now
+ */
 $config['db_user'] = '';
 $config['db_password'] = '';
 $config['db_host'] = '';
@@ -11,14 +15,19 @@ $config['db_name'] = '';
 $config['db_type'] = '';
 $config['db_table'] = '';
 
-// Max number of pages to show in the pagination
-// If this is not odd 1 will be subtracted from it
+/**
+ * Number of pages to show on either side of the current page
+ */
 $config['pagination_viewport'] = 4;
 
-// Number of stores to display on the list/search page
-$config['stores_per_page'] = 5;
+/**
+ * Number of stores to display on the list/search page
+ */
+$config['stores_per_page'] = 25;
 
-// Edit this to reflect your table columns
+/**
+ * Edit this to reflect your table columns
+ */
 $config['column_map'] = array (
 	'lat'		=> 'lat',
 	'lng'		=> 'lng',
@@ -43,6 +52,16 @@ $config['geocode_string'] = '{address}, {city}, {state}';
  * Set to 0 to disable
  */
 $config['autoremove_statuses'] = 0;
+
+/**
+ * Default lat, lng, and zoom of the map on the edit and create page
+ */
+$config['default_map_properties'] = array (
+	'lat'	=> 38.48,
+	'lng'	=> -96.77,
+	'zoom'	=> 3
+);
+
 
 /**
  * Do not edit below

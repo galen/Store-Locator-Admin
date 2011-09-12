@@ -2,7 +2,7 @@
 <?php require( DIR_VIEWS . '/widgets/map_edit.php' ) ?>
 <?php require( DIR_VIEWS . '/widgets/navigation.php' ) ?>
 
-<h2><?php if ( isset( $store ) ): ?>Editing Store #<?php echo $registry->request->getParam( 'store_id' ) ?><?php else: ?>Create Store<?php endif; ?></h2>
+<h2><?php if( $registry->controller == 'edit' ): ?>Editing Store #<?php echo $registry->request->getParam( 'store_id' ) ?><?php else: ?>Create Store<?php endif; ?></h2>
 
 <?php require( DIR_VIEWS . '/widgets/page_status_message.php' ) ?>
 
@@ -10,7 +10,7 @@
 
 	<fieldset>
 		<div id="form_fields">
-			<?php if ( isset( $store ) ): ?>
+			<?php if( $registry->controller == 'edit' ): ?>
 			<input type="hidden" name="<?php echo $config['column_map']['id'] ?>" value="<?php echo $store->getID() ?>" id="store_id">
 			<?php endif; ?>
 			<?php foreach( $registry->columns_edit as $property ): ?>
@@ -31,7 +31,7 @@
 		<div class="well" id="store_edit_actions">
 			<input type="submit" class="btn primary" value="<?php if( $registry->controller == 'create' ): ?>Create<?php else: ?>Save<?php endif; ?>" name="<?php if( $registry->controller == 'create' ): ?>create<?php else: ?>save<?php endif; ?>">
 			<?php if( $registry->controller == 'edit' ): ?><input type="submit" class="geocode_form btn success" id="geocode_form_button" name="geocode" value="Geocode"><div id="geocode_ajax_status_wrapper"><span id="geocode_ajax_status_text"></span><span><a href="#" class="close">&times;</a></span></div><img src="<?php echo URL_PUBLIC ?>/images/ajax_loader.gif" id="geocode_ajax_loader"><?php endif; ?>
-			<?php if( isset( $store ) ): ?><a href="<?php echo URL_DELETE ?>/<?php echo $store->getID() ?>/?c=<?php echo URL_ROOT . '/' . REQUEST ?>" id="delete_store" class="btn danger">Delete this store</a><?php endif; ?>
+			<?php if( $registry->controller == 'edit' ): ?><a href="<?php echo URL_DELETE ?>/<?php echo $store->getID() ?>/?c=<?php echo URL_ROOT . '/' . REQUEST ?>" id="delete_store" class="btn danger">Delete this store</a><?php endif; ?>
 		</div>
 	</fieldset>
 

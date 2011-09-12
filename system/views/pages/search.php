@@ -70,6 +70,9 @@
 </div>
 <?php require( DIR_VIEWS . '/widgets/store_listing.php' ) ?>
 <?php else: ?>
+<?php if( $registry->active_search && !$registry->search_results_exist ): ?>
+<p class="no_results"><strong>No stores match your search criteria</strong></p>
+<?php endif; ?>
 </div>
 <?php endif; ?>
 <?php require( DIR_VIEWS . '/footer.php' ) ?>

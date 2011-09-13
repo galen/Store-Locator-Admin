@@ -2,6 +2,8 @@
 
 Store locator admin for the web
 
+Requires PHP 5.3+ with PDO
+
 ## Features
 
  - Easy integration with existing tables
@@ -16,4 +18,6 @@ Store locator admin for the web
 
  - WYSIWYG editor for editing text columns
 
-Requires PHP 5.3+ with PDO
+##Todo
+
+ - Fix atrocious routing

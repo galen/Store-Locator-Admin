@@ -11,7 +11,7 @@ class Request {
 	}
 
 	function __construct( $url ) {
-		$this->url = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'] . $url;
+		$this->url = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'] . '/' . $url;
 		$this->post = $_POST;
 		$this->get = $_GET;
 		$this->method = $_SERVER['REQUEST_METHOD'];

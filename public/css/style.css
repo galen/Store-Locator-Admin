@@ -198,7 +198,7 @@ td.store_actions {
 }
 
 /* API index */
-#api_index h2 span {
+#api h2 span {
 	color: #aaa;
 	margin-left: 15px;
 	font-size:.8em;

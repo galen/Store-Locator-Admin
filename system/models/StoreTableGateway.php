@@ -16,6 +16,10 @@ class StoreTableGateway {
 		$this->column_map = $column_map;
 	}
 
+	public function setTable( $table ) {
+		$this->table = $table;
+	}
+
 	public function backup( $file ) {
 		$sql = sprintf( sprintf( 'select * into outfile :file from %s', $this->table ) );
 		$stmnt = $this->db->prepare( $sql );

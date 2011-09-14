@@ -8,9 +8,7 @@ class Store {
 	function __construct( array $column_map, array $data = null ) {
 		$this->column_map = $column_map;
 		if ( $data ) {
-			foreach( $data as $var => $val ) {
-				$this->data[$var] = $val;
-			}
+			$this->data = $data;
 		}
 		/*
 		 * These next lines set the lat/lng to '' if the lat/lng is null or 0.000000
@@ -31,7 +29,6 @@ class Store {
 	}
 
 	function __call( $method, array $args ) {
-
 		if ( strpos( $method, 'get' ) === 0 ) {
 			$var = strtolower( substr( $method, 3 ) );
 			return isset( $this->data[$this->column_map[$var]] ) ? $this->data[$this->column_map[$var]] : null;

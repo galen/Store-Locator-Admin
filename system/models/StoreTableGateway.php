@@ -46,8 +46,8 @@ class StoreTableGateway {
 		$stmnt = $this->db->prepare( $sql );
 		if ( is_array( $search_params ) ) {
 			foreach( $search_params as $sp ) {
-				if ( strtolower( $sp[2] ) != 'null' && strtolower( $sp[2] ) != 'not null' ) {
-					$stmnt->bindValue( ':'.$sp[0], $sp[2] );
+				if ( strtolower( $sp['value'] ) != 'null' && strtolower( $sp['value'] ) != 'not null' ) {
+					$stmnt->bindValue( ':'.$sp['variable'], $sp['value'] );
 				}
 			}
 		}
@@ -67,7 +67,7 @@ class StoreTableGateway {
 		}
 		if ( is_array( $search_params ) ) {
 			foreach( $search_params as $sp ) {
-				$stmnt->bindValue( ':'.$sp[0], $sp[2] );
+				$stmnt->bindValue( ':'.$sp['variable'], $sp['value'] );
 			}
 		}
 		$stmnt->execute();
@@ -125,7 +125,7 @@ class StoreTableGateway {
 	}
 
 	private function buildSearchString( array $search_params, $geocode_status ) {
-		$columns = implode( ' and ', array_map( function($a) { return sprintf( '%s %s :%s', $a[0], $a[1], $a[0] ); }, $search_params ) );
+		$columns = implode( ' and ', array_map( function($a) { return sprintf( '%s %s :%s', $a['variable'], $a['compare'], $a['variable'] ); }, $search_params ) );
 		$sql = sprintf( 'where 1 = 1%s', $columns ? ' and ' : '' ) . $columns; 
 		if ( $geocode_status === self::GEOCODE_STATUS_FALSE ) {
 			$sql .= sprintf( ' and ( ( %1$s is null or %1$s = 0 ) || ( %2$s is null or %2$s = 0 ) )', $this->column_map['lat'], $this->column_map['lng'] );

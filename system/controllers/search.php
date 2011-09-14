@@ -5,16 +5,16 @@ $registry->search_params = null;
 
 if ( count( $_GET ) ) {
 	foreach( $_GET as $var => $vals ) {
-		if ( $registry->column_info[$var]['type'] == 'select' && $vals[1] != sprintf( 'select_%s', $var ) ) {
+		if ( $registry->column_info[$var]['type'] == 'select' && $vals["value"] != sprintf( 'select_%s', $var ) ) {
 			$registry->search_params[$var] = array(
 				$var,
 				'=',
-				$vals[1]
+				$vals["value"]
 			);
 		}
-		elseif ( !empty( $vals[1] ) ) {
+		elseif ( !empty( $vals['compare'] ) ) {
 			$registry->search_params[$var] = $vals;
-			array_unshift( $registry->search_params[$var], $var );
+			$registry->search_params[$var]['variable'] = $var;
 		}
 	}
 }

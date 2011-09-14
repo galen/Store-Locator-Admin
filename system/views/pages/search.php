@@ -5,34 +5,34 @@
 <form action="<?php echo URL_SEARCH ?>" method="get" id="search_form">
 	<fieldset>
 		<div class="modal-body">
-	<?php for( $i=0;$i<count($registry->columns_list);$i++ ): ?>
+	<?php for( $i=0;$i<count($registry->columns);$i++ ): ?>
 			<div>
-				<label><?php e( prettify_var( $registry->columns_list[$i] ) ) ?></label>
-				<?php if( $registry->column_info[$registry->columns_list[$i]]['type'] == 'select' ): ?>
+				<label><?php e( prettify_var( $registry->columns[$i] ) ) ?></label>
+				<?php if( $registry->column_info[$registry->columns[$i]]['type'] == 'select' ): ?>
 					<div class="search_compare">=</div>
 				<?php else: ?>
-					<select name="<?php echo $registry->columns_list[$i] ?>[]" class="search_compare">
+					<select name="<?php echo $registry->columns[$i] ?>[compare]" class="search_compare">
 						<option value=""></option>
-						<option value="="<?php if( isset( $registry->search_params[$registry->columns_list[$i]] ) && $registry->search_params[$registry->columns_list[$i]][1] == "=" ): ?> selected="selected"<?php endif; ?>>=</option>
-						<option value="like"<?php if( isset( $registry->search_params[$registry->columns_list[$i]] ) && $registry->search_params[$registry->columns_list[$i]][1] == "like" ): ?> selected="selected"<?php endif; ?>>like</option>
-						<option value="!="<?php if( isset( $registry->search_params[$registry->columns_list[$i]] ) && $registry->search_params[$registry->columns_list[$i]][1] == "!==" ): ?> selected="selected"<?php endif; ?>>!=</option>
-						<option value="<"<?php if( isset( $registry->search_params[$registry->columns_list[$i]] ) && $registry->search_params[$registry->columns_list[$i]][1] == "<" ): ?> selected="selected"<?php endif; ?>><</option>
-						<option value=">"<?php if( isset( $registry->search_params[$registry->columns_list[$i]] ) && $registry->search_params[$registry->columns_list[$i]][1] == ">" ): ?> selected="selected"<?php endif; ?>>></option>
+						<option value="="<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == "=" ): ?> selected="selected"<?php endif; ?>>=</option>
+						<option value="like"<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == "like" ): ?> selected="selected"<?php endif; ?>>like</option>
+						<option value="!="<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == "!==" ): ?> selected="selected"<?php endif; ?>>!=</option>
+						<option value="<"<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == "<" ): ?> selected="selected"<?php endif; ?>><</option>
+						<option value=">"<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == ">" ): ?> selected="selected"<?php endif; ?>>></option>
 					</select>
 				<?php endif; ?>			
 	
-				<?php if( $registry->column_info[$registry->columns_list[$i]]['type'] == 'select' ): ?>
-				<select name="<?php echo $registry->columns_list[$i] ?>[]">
-					<option value="select_<?php e( $registry->columns_list[$i] ) ?>">Select <?php e( $registry->columns_list[$i] ) ?></option>
-					<option value=""<?php if( isset( $registry->search_params[$registry->columns_list[$i]][2] ) && $registry->search_params[$registry->columns_list[$i]][2] == '' ): ?> selected="selected"<?php endif; ?>></option>
-					<?php foreach( $registry->column_info[$registry->columns_list[$i]]['values'] as $option ): ?>
-					<option value="<?php echo $option ?>"<?php if( isset( $registry->search_params[$registry->columns_list[$i]][2] ) && $registry->search_params[$registry->columns_list[$i]][2] == $option ): ?> selected="selected"<?php endif; ?>><?php echo $option ?></option>
+				<?php if( $registry->column_info[$registry->columns[$i]]['type'] == 'select' ): ?>
+				<select name="<?php echo $registry->columns[$i] ?>[value]">
+					<option value="select_<?php e( $registry->columns[$i] ) ?>">Select <?php e( $registry->columns[$i] ) ?></option>
+					<option value=""<?php if( isset( $registry->search_params[$registry->columns[$i]]['value'] ) && $registry->search_params[$registry->columns[$i]]['value'] == '' ): ?> selected="selected"<?php endif; ?>></option>
+					<?php foreach( $registry->column_info[$registry->columns[$i]]['values'] as $option ): ?>
+					<option value="<?php echo $option ?>"<?php if( isset( $registry->search_params[$registry->columns[$i]]['value'] ) && $registry->search_params[$registry->columns[$i]]['value'] == $option ): ?> selected="selected"<?php endif; ?>><?php echo $option ?></option>
 					<?php endforeach; ?>
 				</select>
-				<?php elseif( $registry->column_info[$registry->columns_list[$i]]['type'] == 'textarea' ): ?>
-					<textarea name="<?php echo $registry->columns_list[$i] ?>[]"><?php if( isset( $registry->search_params[$registry->columns_list[$i]][2] ) ): ?><?php echo $registry->search_params[$i][2] ?><?php endif; ?></textarea>
+				<?php elseif( $registry->column_info[$registry->columns[$i]]['type'] == 'textarea' ): ?>
+					<textarea name="<?php echo $registry->columns[$i] ?>[value]"><?php if( isset( $registry->search_params[$registry->columns[$i]]['value'] ) ): ?><?php echo $registry->search_params[$i]['value'] ?><?php endif; ?></textarea>
 				<?php else: ?>
-					<input type="text" name="<?php echo $registry->columns_list[$i] ?>[]" value="<?php if( isset( $registry->search_params[$registry->columns_list[$i]][2] ) ): ?><?php echo $registry->search_params[$registry->columns_list[$i]][2] ?><?php endif; ?>">
+					<input type="text" name="<?php echo $registry->columns[$i] ?>[value]" value="<?php if( isset( $registry->search_params[$registry->columns[$i]]['value'] ) ): ?><?php echo $registry->search_params[$registry->columns[$i]]['value'] ?><?php endif; ?>">
 				<?php endif; ?>
 			</div>
 	<?php endfor; ?>

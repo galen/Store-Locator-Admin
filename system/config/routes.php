@@ -13,7 +13,7 @@ Router::connect( '~^tools$~', 'tools' );
 Router::connect( '~^export$~', 'export' );
 Router::connect( '~^documentation$~', 'documentation' );
 
-Router::connect( '~^api(?:/(?P<sub_controller>.*?)/(?P<store_id>\w+))?~', 'api' );
+Router::connect( '~^api(?:/(?P<sub_controller>\w+)/?(?P<store_id>\d*)?)?~', 'api' );
 
 /*
 Router::connect( '~^api$~', 'api/index' );

@@ -1,7 +1,4 @@
-<div class="table_actions well">
-	<a href="<?php echo URL_EXPORT ?>?<?php echo $_SERVER['QUERY_STRING'] ?>" data-export-url="<?php echo URL_EXPORT ?>?<?php echo $_SERVER['QUERY_STRING'] ?>" class="btn export" title="Export to CSV">Export</a>
-	<a href="#"></a></a><a href="#" class="btn success geocode_all<?php if( $registry->all_stores_geocoded ): ?> disabled<?php endif; ?>" title="Geocode all stores on the page">Geocode all stores</a>
-</div>
+<?php include( DIR_VIEWS . '/widgets/store_listing_table_actions.php' ) ?>
 
 <table id="store_table" data-ajax-loader-image="<?php echo URL_PUBLIC  ?>/images/ajax_loader.gif">
 	<thead>
@@ -19,7 +16,7 @@
 		<?php foreach( $registry->columns_list as $tc ): ?>
 			<td><?php e( $store->raw( $tc ) ) ?></td>
 		<?php endforeach; ?>
-		<td class="center"><?php if( $store->isGeocoded() ): ?>Yes<?php else: ?><a href="<?php echo URL_EDIT ?>/<?php echo $store->getID() ?>/" class="geocode_table btn small success" title="Geocode this store">No</a><?php endif; ?></td>
+		<td class="center"><?php if( $store->isGeocoded() ): ?>Yes<?php else: ?><a href="<?php echo URL_EDIT ?>/<?php echo $store->getID() ?>/" class="geocode_table btn small success" title="Click to geocode this store">No</a><?php endif; ?></td>
 		<td class="store_actions center">
 			<a class="btn small primary" href="<?php echo URL_EDIT ?>/<?php echo $store->getID() ?>/" title="Edit this store">edit</a>
 			<a class="btn small danger delete_store" href="<?php echo URL_DELETE ?>/<?php echo $store->getID() ?>/" class="delete_store" title="Delete this store">X</a>
@@ -30,7 +27,5 @@
 </table>
 
 <?php if( $registry->page_store_count > 20 ): ?>
-<div class="table_actions well">
-	<a href="#" class="btn success geocode_all" title="Geocode all stores on the page">Geocode all stores</a>
-</div>
+<?php include( DIR_VIEWs . '/widgets/store_listing_table_actions.php' ) ?>
 <?php endif; ?>

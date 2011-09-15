@@ -1,11 +1,11 @@
 <?php require( DIR_VIEWS . '/header.php' ) ?>
 <?php require( DIR_VIEWS . '/widgets/navigation.php' ) ?>
 
-<h1>Tools</h1>
+<h2>Tools</h2>
 <?php require( DIR_VIEWS . '/widgets/page_status_message.php' ) ?>
 
 
-<h2>Backup</h2>
+<h3>Backup</h3>
 <?php if( $registry->backup_dir_perms == '777' ): ?>
 <form action="" method="post">
 <fieldset>
@@ -21,7 +21,7 @@
 
 <hr>
 
-<h2>Existing Backups</h2>
+<h3>Existing Backups</h3>
 <?php if ( count( $registry->backup_file ) ): ?>
 <form action="" method="post">
 <fieldset>
@@ -44,7 +44,7 @@
 
 <hr>
 
-<h2>Geocode All Stores</h2>
+<h3>Geocode All Stores</h3>
 <dl id="geocode_stats">
 	<dt>Geocoded</dt><dd id="geocode_stats_geocoded"><?php if( $registry->count_geocoded ): ?><a href="<?php e( sprintf( '%s?geocode_status=%s', URL_SEARCH, StoreTableGateway::GEOCODE_STATUS_TRUE ) ) ?>"><?php endif; ?><?php echo $registry->count_geocoded ?><?php if( $registry->count_geocoded ): ?></a><?php endif; ?></dd>
 	<dt>Ungeocoded</dt><dd id="geocode_stats_ungeocoded"><?php if( $registry->count_ungeocoded ): ?><a href="<?php e( sprintf( '%s?geocode_status=%s', URL_SEARCH, StoreTableGateway::GEOCODE_STATUS_FALSE ) ) ?>"><?php endif; ?><?php echo $registry->count_ungeocoded ?><?php if( $registry->count_ungeocoded ): ?></a><?php endif; ?></dd>

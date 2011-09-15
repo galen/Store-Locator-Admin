@@ -1,4 +1,6 @@
 <?php
 
-// Enter the root URL or your app here
-define( 'URL_ROOT', 'http://localhost:8888/Store-Locator-Admin' );
+$_SERVER['HTTP_HOST'] = '';
+
+
+define( 'URL_ROOT_TEST',		'http://localhost:8888/Store-Locator-Admin' );

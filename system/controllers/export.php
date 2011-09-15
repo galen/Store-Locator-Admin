@@ -21,7 +21,7 @@ if ( isset( $_GET['search_params'] ) ) {
 $registry->stores = $stg->getStores( null, null, $registry->search_params, $registry->geocode_status );
 $csv = implode( "\n", array_map( function( $s ) { return $s->getCSV(); }, $registry->stores ) );
 $columns = implode( ',', $registry->columns );
-$filename = isset( $_GET['filename'] ) ? $_GET['filename'] : 'expsort.csv';
+$filename = isset( $_GET['filename'] ) ? $_GET['filename'] : 'export.csv';
 
 header("Pragma: public");
 header("Expires: 0");
@@ -32,5 +32,5 @@ header("Content-Disposition: attachment;filename=$filename" );
 header("Content-Length: " . strlen( $csv ) );
 echo $columns . "\n";
 echo $csv;
-exit();
+exit;
 

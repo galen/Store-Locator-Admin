@@ -7,7 +7,7 @@ if ( isset( $_POST['delete'] ) || isset( $_POST['cancel'] ) ) {
 		exit;
 	}
 	if ( isset( $_POST['delete'] ) ) {
-		$req = Request::factory( URL_ROOT . '/api/delete/' . $registry->request->params->store_id );
+		$req = Request::factory( URL_ROOT_ABSOLUTE . '/api/delete/' . $registry->request->params->store_id );
 		$req->method = 'post';
 		$resp = $req->execute();
 		if ( $resp->status == 200 ) {

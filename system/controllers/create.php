@@ -1,7 +1,7 @@
 <?php
 
 if ( isset( $_POST['create'] ) ) {
-	$req = Request::factory( URL_ROOT . '/api/create/' );
+	$req = Request::factory( URL_ROOT_ABSOLUTE . '/api/create/' );
 	$req->post = array_intersect_key( $_POST, array_flip( $registry->columns ) );
 	$req->method = 'post';
 	$resp = $req->execute();

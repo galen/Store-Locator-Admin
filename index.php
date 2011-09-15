@@ -3,10 +3,15 @@
 error_reporting( E_ALL );
 ini_set( 'display_errors', 'On' );
 
+// Requests
+define( 'REQUEST',					trim( str_replace( dirname( $_SERVER['PHP_SELF'] ), '', preg_replace( '~/+~', '/' , parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ) ) ), '/' ) );
+define( 'REQUEST_METHOD',			$_SERVER['REQUEST_METHOD'] );
+define( 'REQUEST_IS_AJAX',			(bool)isset( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' );
+
 //Check for a config file
 if( !@include( 'system/config/config.php' ) ){
 	header("HTTP/1.1 500 Internal Server Error");
-	if ( isset( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
+	if ( REQUEST_IS_AJAX ) {
 		die( json_encode( array( 'message' => 'No config file found. Rename system/config/config_sample.php to config.php and edit it to reflect your needs.' ) ) );
 	}
 	echo "<p><strong>No config file found.</strong> Rename system/config/config_sample.php to config.php and edit it to reflect your needs.</p>";

@@ -1,10 +1,10 @@
 <?php
 
 if ( isset( $_POST['geocode'] ) ) {
-	$req = Request::factory( URL_ROOT . '/api/geocode?' . http_build_query( $_POST ) );
+	$req = Request::factory( URL_ROOT_ABSOLUTE . '/api/geocode?' . http_build_query( $_POST ) );
 	$resp = $req->execute();
 	if ( $resp->status == 200 ) {
-		$req2 = Request::factory( URL_ROOT . '/api/edit/' . $_POST[$config['column_map']['id']] );
+		$req2 = Request::factory( URL_ROOT_ABSOLUTE . '/api/edit/' . $_POST[$config['column_map']['id']] );
 		$req2->post = array(
 			$config['column_map']['id'] => $registry->request->params->store_id,
 			$config['column_map']['lat'] => $resp->data->lat,
@@ -31,7 +31,7 @@ if ( isset( $_POST['geocode'] ) ) {
 
 // Save the store
 if ( isset( $_POST['save'] ) ) {
-	$req = Request::factory( URL_ROOT . '/api/edit/' . $_POST[$config['column_map']['id']] );
+	$req = Request::factory( URL_ROOT_ABSOLUTE . '/api/edit/' . $_POST[$config['column_map']['id']] );
 	$req->post = array_intersect_key( $_POST, array_flip( $registry->columns ) );
 	$req->method = 'post';
 	$resp = $req->execute();

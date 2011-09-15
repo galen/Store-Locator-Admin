@@ -11,12 +11,8 @@ class Request {
 	}
 
 	function __construct( $url ) {
-		$this->url = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'] . '/' . $url;
-		$this->post = $_POST;
-		$this->get = $_GET;
-		$this->method = $_SERVER['REQUEST_METHOD'];
+		$this->url = $url;
 		$this->params = new StdClass;
-		$this->is_ajax = (bool)isset( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest';
 	}
 
 	function setParam( $param, $value ) {

@@ -1,7 +1,10 @@
 <?php
 
-error_reporting( E_ALL );
-ini_set( 'display_errors', 'On' );
+// Turn on error reporting if the site is in development
+if ( SITE_DEV ) {
+	error_reporting( E_ALL );
+	ini_set( 'display_errors', 'On' );
+}
 
 // Requests
 define( 'REQUEST',					trim( str_replace( dirname( $_SERVER['PHP_SELF'] ), '', preg_replace( '~/+~', '/' , parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ) ) ), '/' ) );
@@ -25,7 +28,7 @@ if ( !REQUEST_IS_AJAX ) {
 	$status_message = new FormStatusMessage;
 }
 
-// Registry
+// Simple registry
 $registry = new StdClass;
 
 // Require necessary files

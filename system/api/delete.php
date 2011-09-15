@@ -1,7 +1,7 @@
 <?php
 
 if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
-	if ( isset( $_POST[$config['column_map']['id']] ) && $_POST[$config['column_map']['id']] != $registry->request->params->store_id ) {
+	if ( !isset( $registry->request->params->store_id ) || isset( $_POST[$config['column_map']['id']] ) && $_POST[$config['column_map']['id']] != $registry->request->params->store_id ) {
 		header("HTTP/1.1 400 Invalid Request");
 		die( json_encode( array( 'message' => 'Invalid Request' ) ) );
 	}

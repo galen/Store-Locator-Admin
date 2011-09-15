@@ -11,20 +11,20 @@
 	<fieldset>
 		<div id="form_fields">
 			<?php if( $registry->controller == 'edit' ): ?>
-			<input type="hidden" name="<?php echo $config['column_map']['id'] ?>" value="<?php echo $store->getID() ?>" id="store_id">
+				<input type="hidden" name="<?php echo $config['column_map']['id'] ?>" value="<?php echo $store->getID() ?>" id="store_id">
 			<?php endif; ?>
 			<?php foreach( $registry->columns_edit as $property ): ?>
-			<?php if( $property == $config['column_map']['lat'] ): ?>
-			<div id="store_lat_lng">
-			<?php endif; ?>
-			<div>
-				<label><?php echo prettify_var( $property ) ?></label>
-				<input type="text" name="<?php echo $property ?>" id="<?php echo $property ?>" value="<?php if ( isset( $store ) ): ?><?php e( $store->$property ) ?><?php endif; ?>">
-			</div>
-			<?php if( $property == $config['column_map']['lng'] ): ?>
-			<?php if( $registry->controller == 'create' ): ?><p id="create_geocode_note">You will be able to geocode the store after creation</p><?php endif; ?>
-			</div>
-			<?php endif; ?>
+				<?php if( $property == $config['column_map']['lat'] ): ?>
+					<div id="store_lat_lng">
+				<?php endif; ?>
+					<div>
+						<label><?php echo prettify_var( $property ) ?></label>
+						<input type="text" name="<?php echo $property ?>" id="<?php echo $property ?>" value="<?php if ( isset( $store ) ): ?><?php e( $store->$property ) ?><?php endif; ?>">
+					</div>
+				<?php if( $property == $config['column_map']['lng'] ): ?>
+				<?php if( $registry->controller == 'create' ): ?><p id="create_geocode_note">You will be able to geocode the store after creation</p><?php endif; ?>
+				</div>
+				<?php endif; ?>
 			<?php endforeach; ?>
 		</div>
 		<div id="map" style="width:550px;height:500px;"><p id="map_msg"><a href="http://www.activatejavascript.org/">Enable javascript</a> to view the map</p></div>	

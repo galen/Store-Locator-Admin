@@ -19,7 +19,7 @@
 			<?php endif; ?>
 			<div>
 				<label><?php echo prettify_var( $property ) ?></label>
-				<input type="text" name="<?php echo $property ?>" id="<?php echo $property ?>" value="<?php if ( isset( $store ) ): ?><?php echo $store->raw( $property ) ?><?php endif; ?>">
+				<input type="text" name="<?php echo $property ?>" id="<?php echo $property ?>" value="<?php if ( isset( $store ) ): ?><?php e( $store->$property ) ?><?php endif; ?>">
 			</div>
 			<?php if( $property == $config['column_map']['lng'] ): ?>
 			<?php if( $registry->controller == 'create' ): ?><p id="create_geocode_note">You will be able to geocode the store after creation</p><?php endif; ?>

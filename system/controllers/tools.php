@@ -45,13 +45,12 @@ if ( isset( $_POST['geocode_all'] ) ) {
 		$status_message->setMessage( sprintf( '<p>%s store%s successfully geocoded</p>', $geocode_all_result, $geocode_all_result > 1 ? 's' : '' ) );
 	}
 	else {
-		header("HTTP/1.1 500 Internal Server Error");
 		$status_message->setStatus( 'error' );
-		$status_message->setMessage( '<p>No stores were geocoded</p>' );
+		$status_message->setMessage( '<p>No stores were able to be geocoded</p>' );
 	}
 }
 
-$counts = $stg->getStoreCounts();
+$counts = $stg->getStoreStats();
 $registry->count_all = $counts['all'];
 $registry->count_geocoded = $counts['geocoded'];
 $registry->count_ungeocoded = $counts['ungeocoded'];

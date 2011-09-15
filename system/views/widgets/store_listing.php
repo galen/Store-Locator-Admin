@@ -14,7 +14,7 @@
 	<?php foreach( $registry->stores as $store ): ?>
 	<tr data-store-id="<?php echo $store->getID() ?>" data-geocode="<?php echo $store->getQueryString() ?>">
 		<?php foreach( $registry->columns_list as $tc ): ?>
-			<td><?php e( $store->raw( $tc ) ) ?></td>
+			<td><?php e( $store->$tc ) ?></td>
 		<?php endforeach; ?>
 		<td class="center"><?php if( $store->isGeocoded() ): ?>Yes<?php else: ?><a href="<?php echo URL_EDIT ?>/<?php echo $store->getID() ?>/" class="geocode_table btn small success" title="Click to geocode this store">No</a><?php endif; ?></td>
 		<td class="store_actions center">

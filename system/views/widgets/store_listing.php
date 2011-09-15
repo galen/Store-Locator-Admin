@@ -27,5 +27,5 @@
 </table>
 
 <?php if( $registry->page_store_count > 20 ): ?>
-<?php include( DIR_VIEWs . '/widgets/store_listing_table_actions.php' ) ?>
+<?php include( DIR_VIEWS . '/widgets/store_listing_table_actions.php' ) ?>
 <?php endif; ?>

@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+// Turns a form into an object
 $.fn.serializeObject = function()
 {
     var o = {};

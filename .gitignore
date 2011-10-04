@@ -1,3 +1,4 @@
 system/config/config.php
 system/backups/*
 !system/backups/.htaccess
+.DS_Store

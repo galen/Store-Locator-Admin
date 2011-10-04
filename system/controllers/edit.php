@@ -28,8 +28,6 @@ if ( isset( $_POST['geocode'] ) ) {
 	}
 }
 
-
-// Save the store
 if ( isset( $_POST['save'] ) ) {
 	$req = Request::factory( URL_ROOT_ABSOLUTE . '/api/edit/' . $_POST[$config['column_map']['id']] );
 	$req->post = array_intersect_key( $_POST, array_flip( $registry->columns ) );
@@ -46,10 +44,8 @@ if ( isset( $_POST['save'] ) ) {
 	}
 }
 
-// Get the store
 $store = $stg->getStore( $registry->request->getParam( 'store_id' ) );
 
-// Invalid store, send 404
 if ( !$store ) {
 	header("HTTP/1.1 404 Not Found");
 	$status_message->setStatuses( array( 'error', 'block-message', 'remain' ) );

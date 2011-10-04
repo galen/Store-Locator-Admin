@@ -17,6 +17,15 @@ hr {
 	text-align:center;
 }
 
+h2 {
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 10px;
+}
+
+body#search h2, body#list h2 {
+	border: 0;
+}
+
 /* Forms */
 form div {
 	margin-bottom: 10px;

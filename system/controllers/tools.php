@@ -1,6 +1,5 @@
 <?php
 
-// Backup the table
 if ( isset( $_POST['backup_file_name'] ) ) {
 	if ( $stg->backup( $b = DIR_BACKUPS . '/' . basename( $_POST['backup_file_name'] ) ) ) {
 		$status_message->setStatus( 'success' );
@@ -13,7 +12,6 @@ if ( isset( $_POST['backup_file_name'] ) ) {
 	}
 }
 
-// Restore from backup
 if ( isset( $_POST['backup_file'] ) ) {
 	if ( isset( $_POST['restore_backup'] ) ) {
 		if ( $stg->restore( $b = DIR_BACKUPS . '/' . basename( $_POST['backup_file'] ) ) ) {
@@ -65,4 +63,5 @@ while( file_exists( DIR_BACKUPS . '/' . $registry->backup_file_name_suggestion .
 }
 $registry->backup_file_name_suggestion .= '.sql';
 $registry->backup_dir_perms = substr( decoct( fileperms( DIR_BACKUPS ) ), 2 );
+
 require( DIR_VIEWS . '/pages/tools.php' );

@@ -189,6 +189,11 @@ td.store_actions {
 	display:none;
 }
 
+/* Map page */
+.infowindow {
+	color: #000;
+}
+
 /* Footer */
 #footer {
 	border-top: 1px solid #eee;

@@ -11,6 +11,7 @@ Router::connect( '~^delete/(?P<store_id>\d+)$~', 'delete' );
 Router::connect( '~^create$~', 'create' );
 Router::connect( '~^tools$~', 'tools' );
 Router::connect( '~^export$~', 'export' );
+Router::connect( '~^map$~', 'map' );
 Router::connect( '~^documentation$~', 'documentation' );
 
 // Route for API requests

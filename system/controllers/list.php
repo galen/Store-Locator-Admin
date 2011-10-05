@@ -42,6 +42,8 @@ else {
 	$registry->stores = $stg->getStores( ($registry->page_number-1)*$config['stores_per_page'], $config['stores_per_page'], $registry->search_params, $registry->geocode_status );
 }
 
+$registry->store_ids = array_map( function($s){return $s->getId();}, $registry->stores );
+
 $registry->all_stores_geocoded = true;
 foreach( $registry->stores as $store ) {
 	if ( !$store->isGeocoded() ) {

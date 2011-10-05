@@ -19,5 +19,4 @@ if ( count( $_GET ) ) {
 		}
 	}
 }
-
 require( DIR_CONTROLLERS . '/list.php' );

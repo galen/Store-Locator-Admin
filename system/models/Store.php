@@ -72,7 +72,7 @@ class Store {
 	function __call( $method, array $args ) {
 		$var = strtolower( substr( $method, 3 ) );
 		if ( strpos( $method, 'get' ) === 0 ) {
-			return $this->$var;
+			return $this->{$this->column_map[$var]};
 		}
 		if ( strpos( $method, 'set' ) === 0 ) {
 			$this->data[$this->column_map[$var]] = $args[0];
@@ -131,6 +131,10 @@ class Store {
 	 */
 	function getCSV() {
 		return implode( ',', $this->getData() );
+	}
+
+	function hasState() {
+		return isset( $this->data[$this->column_map['state']] );
 	}
 
 	/**

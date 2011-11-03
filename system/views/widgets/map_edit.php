@@ -28,7 +28,9 @@ this.initialize = function() {
 	this.markers[0] = new google.maps.Marker({
 		position: new google.maps.LatLng(<?php e( $store->getLat() ) ?>,<?php e( $store->getLng() ) ?>),
 		map: this.map,
-		draggable:true
+		draggable:true,
+		content: '<div class="infowindow"><strong><?php e( $store->getName() ) ?></strong><br><?php e( $store->getAddress() ) ?><br><?php e( $store->getCity() ) ?><?php if( $store->hasState() ): ?>, <?php e( $store->getState() ) ?><?php endif; ?></div>'
+
 	});
 	<?php endif; ?>
 	<?php if( isset( $store ) && $store->isGeocoded() ): ?>
@@ -46,7 +48,7 @@ this.initialize = function() {
 		pov:{"heading":90,"zoom":1,"pitch":0}
 	});
 	this.map.setStreetView(this.streetview);
-
+	google.maps.event.addListener(this.markers[0], 'click', function() { self.info_window.setContent(self.markers[0].content);self.info_window.open(self.map,self.markers[0]); });
 };
 
 }

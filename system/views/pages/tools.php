@@ -16,7 +16,7 @@
 </fieldset>
 </form>
 <?php else: ?>
-<p>You must chmod the backup directory to 777.</p>
+<p>Chmod the backup directory to 777 for the ability to create backups.</p>
 <?php endif; ?>
 
 <hr>

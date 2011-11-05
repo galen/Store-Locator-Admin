@@ -29,10 +29,12 @@ if ( $config['pagination_viewport'] < 0 || $config['pagination_viewport'] > 7 ) 
 $start_page = max( $registry->page_number - $config['pagination_viewport'], 1 ); // 22
 $end_page = min( $start_page + ( $config['pagination_viewport']*2 ), $registry->total_pages ); // 28
 $start_page = max( $end_page - ( $config['pagination_viewport']*2 ), 1 );
+
 $registry->page_array = range($start_page,$end_page);
 
-$registry->prev_page = $registry->page_number != 1 ? $registry->page_number - 1 : null;
+$registry->search_query = $registry->controller == 'search' && isset( $registry->search_params ) ? '?'.$_SERVER['QUERY_STRING'] : '';
 
+$registry->prev_page = $registry->page_number != 1 ? $registry->page_number - 1 : null;
 $registry->next_page = $registry->page_number + 1 <= $registry->total_pages ? $registry->page_number + 1 : null;
 
 if ( $registry->controller == 'list' ) {

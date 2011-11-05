@@ -80,6 +80,8 @@ if ( $registry->request = Router::route( REQUEST ) ) {
 		$status_message->setMessage($_GET['message'] );
 	}
 
+	require( DIR_HELPERS . '/helpers.php' );
+
 	require( sprintf( "%s/%s.php", DIR_CONTROLLERS, $registry->controller ) );
 	exit;
 }

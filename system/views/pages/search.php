@@ -11,7 +11,7 @@
 				<?php if( $registry->column_info[$registry->columns[$i]]['type'] == 'select' ): ?>
 					<div class="search_compare">=</div>
 				<?php else: ?>
-					<select name="<?php echo $registry->columns[$i] ?>[compare]" class="search_compare">
+					<select name="search_params[<?php echo $registry->columns[$i] ?>][compare]" class="search_compare">
 						<option value=""></option>
 						<option value="="<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == "=" ): ?> selected="selected"<?php endif; ?>>=</option>
 						<option value="like"<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == "like" ): ?> selected="selected"<?php endif; ?>>like</option>
@@ -22,7 +22,7 @@
 				<?php endif; ?>			
 	
 				<?php if( $registry->column_info[$registry->columns[$i]]['type'] == 'select' ): ?>
-				<select name="<?php echo $registry->columns[$i] ?>[value]">
+				<select name="search_params[<?php echo $registry->columns[$i] ?>][value]">
 					<option value="select_<?php e( $registry->columns[$i] ) ?>">Select <?php e( $registry->columns[$i] ) ?></option>
 					<option value=""<?php if( isset( $registry->search_params[$registry->columns[$i]]['value'] ) && $registry->search_params[$registry->columns[$i]]['value'] == '' ): ?> selected="selected"<?php endif; ?>></option>
 					<?php foreach( $registry->column_info[$registry->columns[$i]]['values'] as $option ): ?>
@@ -30,9 +30,9 @@
 					<?php endforeach; ?>
 				</select>
 				<?php elseif( $registry->column_info[$registry->columns[$i]]['type'] == 'textarea' ): ?>
-					<textarea name="<?php echo $registry->columns[$i] ?>[value]"><?php if( isset( $registry->search_params[$registry->columns[$i]]['value'] ) ): ?><?php echo $registry->search_params[$i]['value'] ?><?php endif; ?></textarea>
+					<textarea name="search_params[<?php echo $registry->columns[$i] ?>][value]"><?php if( isset( $registry->search_params[$registry->columns[$i]]['value'] ) ): ?><?php echo $registry->search_params[$i]['value'] ?><?php endif; ?></textarea>
 				<?php else: ?>
-					<input type="text" name="<?php echo $registry->columns[$i] ?>[value]" value="<?php if( isset( $registry->search_params[$registry->columns[$i]]['value'] ) ): ?><?php echo $registry->search_params[$registry->columns[$i]]['value'] ?><?php endif; ?>">
+					<input type="text" name="search_params[<?php echo $registry->columns[$i] ?>][value]" value="<?php if( isset( $registry->search_params[$registry->columns[$i]]['value'] ) ): ?><?php echo $registry->search_params[$registry->columns[$i]]['value'] ?><?php endif; ?>">
 				<?php endif; ?>
 			</div>
 	<?php endfor; ?>

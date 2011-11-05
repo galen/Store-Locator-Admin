@@ -9,6 +9,12 @@ hr {
 	top: 2px;
 	left:-10px;
 }
+.topbar h3 a {
+	background-repeat: no-repeat;
+	padding-left: 40px;
+	background-position: 0 3px;
+}
+
 #wrapper {
 	width:960px;
 	margin: 0 auto;

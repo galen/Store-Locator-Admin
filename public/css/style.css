@@ -4,15 +4,16 @@ body {
 hr {
 	border-bottom: 1px dotted #eee;
 }
-.topbar h3 {
-	position:relative;
-	top: 2px;
-	left:-10px;
-}
+
 .topbar h3 a {
 	background-repeat: no-repeat;
-	padding-left: 40px;
-	background-position: 0 3px;
+	padding-left: 50px;
+	background-position: 10px 5px;
+	display:block;
+}
+
+.topbar a:hover,.topbar ul li.active a{
+	background-color:#333;background-color:rgba(255, 255, 255, 0.1);
 }
 
 #wrapper {

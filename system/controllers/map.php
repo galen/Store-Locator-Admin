@@ -1,13 +1,12 @@
 <?php
 
-$stores = $stg->getStoresWithIds( explode( ',', $_GET['ids'] ) );
+$registry->search_params = null;
 
-foreach( $stores as $index => $store ) {
-	if ( !$store->isGeocoded() ) {
-		
-		unset( $stores[$index] );
-	}
+if ( isset( $_GET['search_params'] ) && count( $_GET['search_params'] ) ) {
+	$registry->search_params = get_search_params( $_GET['search_params'], $registry->column_info );
 }
+
+$registry->stores = $stg->getStores( null, null, $registry->search_params, StoreTableGateway::GEOCODE_STATUS_TRUE );
 
 require( DIR_VIEWS . '/pages/map.php' );
 

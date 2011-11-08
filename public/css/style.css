@@ -29,6 +29,11 @@ h2 {
 	margin-bottom: 10px;
 }
 
+h1 span, h2 span, h3 span, h4 span, h5 span {
+	font-size:.6em;
+	float:right;
+}
+
 body#search h2, body#list h2 {
 	border: 0;
 }

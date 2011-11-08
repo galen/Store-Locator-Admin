@@ -26,7 +26,7 @@ this.initialize = function() {
 	this.markers = [];
 	this.event_listeners = [];
 	this.bounds = new google.maps.LatLngBounds();
-	<?php foreach( $stores as $index => $store ): ?>
+	<?php foreach( $registry->stores as $index => $store ): ?>
 	this.markers[<?php echo $index ?>] = new google.maps.Marker({
 		position: new google.maps.LatLng(<?php e( $store->getLat() ) ?>,<?php e( $store->getLng() ) ?>),
 		map: this.map,

@@ -6,7 +6,7 @@
 				<ul>
 					<li><a href="<?php echo URL_ROOT ?>/list/">List</a></li>
 					<li><a href="<?php echo URL_ROOT ?>/search/">Search</a></li>
-					<li><a href="<?php echo URL_ROOT ?>/create/">Create</a></li>
+					<li><a href="<?php echo URL_ROOT ?>/create/?c=<?php echo URL_ROOT . '/' . REQUEST ?>">Create</a></li>
 					<li><a href="<?php echo URL_ROOT ?>/tools/">Tools</a></li>
 				</ul>
 			</div>

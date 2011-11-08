@@ -29,7 +29,7 @@ this.initialize = function() {
 		position: new google.maps.LatLng(<?php e( $store->getLat() ) ?>,<?php e( $store->getLng() ) ?>),
 		map: this.map,
 		draggable:true,
-		content: '<div class="infowindow"><strong><?php e( $store->getName() ) ?></strong><br><?php e( $store->getAddress() ) ?><br><?php e( $store->getCity() ) ?><?php if( $store->hasState() ): ?>, <?php e( $store->getState() ) ?><?php endif; ?></div>'
+		content: '<div class="infowindow"><address><strong><?php e( $store->getName() ) ?></strong><br><?php e( $store->getAddress() ) ?><br><?php e( $store->getCity() ) ?><?php if( $store->hasState() ): ?>, <?php e( $store->getState() ) ?><?php endif; ?></address></div>'
 
 	});
 	<?php endif; ?>

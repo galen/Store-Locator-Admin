@@ -30,7 +30,7 @@ this.initialize = function() {
 	this.markers[<?php echo $index ?>] = new google.maps.Marker({
 		position: new google.maps.LatLng(<?php e( $store->getLat() ) ?>,<?php e( $store->getLng() ) ?>),
 		map: this.map,
-		content: '<div class="infowindow"><strong><?php e( $store->getName() ) ?></strong><br><?php e( $store->getAddress() ) ?><br><?php e( $store->getCity() ) ?><?php if( $store->hasState() ): ?>, <?php e( $store->getState() ) ?><br><a href="<?php e( URL_EDIT ) ?>/<?php e( $store->getId() ) ?>">Edit this store</a><?php endif; ?></div>'
+		content: '<div class="infowindow"><address><strong><?php e( $store->getName() ) ?></strong><br><?php e( $store->getAddress() ) ?><br><?php e( $store->getCity() ) ?><?php if( $store->hasState() ): ?>, <?php e( $store->getState() ) ?><br><a href="<?php e( URL_EDIT ) ?>/<?php e( $store->getId() ) ?>/">Edit this store</a><?php endif; ?></address></div>'
 	});
 	this.bounds.extend(this.markers[<?php echo $index ?>].position);
 	this.map.fitBounds(this.bounds);

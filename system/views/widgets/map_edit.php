@@ -7,7 +7,7 @@ this.initialize = function() {
 
 	var self = this;
 	this.map_options = {
-		zoom: <?php if( isset( $store ) && $store->isGeocoded() ): ?>14<?php else: ?><?php e( $config['default_map_properties']['zoom'] ) ?><?php endif; ?>,
+		zoom: <?php if( isset( $store ) && $store->isGeocoded() ): ?>14<?php else: ?><?php e( $config['map_default_properties']['zoom'] ) ?><?php endif; ?>,
 		navigationControl: true,
 		mapTypeControl: true,
 		scaleControl: false,
@@ -36,7 +36,7 @@ this.initialize = function() {
 	<?php if( isset( $store ) && $store->isGeocoded() ): ?>
 	this.map.setCenter( new google.maps.LatLng( <?php e( $store->getLat() ) ?>,<?php e( $store->getLng() ) ?> ) );
 	<?php else:?>
-	this.map.setCenter( new google.maps.LatLng( <?php e( $config['default_map_properties']['lat'] ) ?>,<?php e( $config['default_map_properties']['lng'] ) ?> ) );
+	this.map.setCenter( new google.maps.LatLng( <?php e( $config['map_default_properties']['lat'] ) ?>,<?php e( $config['map_default_properties']['lng'] ) ?> ) );
 	<?php endif; ?>
 	<?php if( isset( $store ) && $store->isGeocoded() ): ?>
 	this.event_listeners = [];

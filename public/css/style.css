@@ -101,6 +101,10 @@ td.store_actions {
 	margin-bottom:15px;
 }
 
+#store_table tbody tr:hover {
+	background: #fbfbfb;
+}
+
 /* Pagination */
 .pagination {
 	position:absolute;

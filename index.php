@@ -71,6 +71,11 @@ if ( $registry->request = Router::route( REQUEST ) ) {
 	// Set variables
 	$registry->controller = Router::$controller;
 	$registry->column_info = $stg->getColumns();
+
+	if ( $config['store_name'] ) {
+		unset( $registry->column_info['name'] );
+	} 
+
 	$registry->columns = array_keys( $registry->column_info );
 	$registry->columns_list = array_values( array_diff( $registry->columns, array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) );
 	$registry->columns_edit = array_merge( array_values( array_diff( $registry->columns, array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) ), array( $config['column_map']['lat'], $config['column_map']['lng'] ) );

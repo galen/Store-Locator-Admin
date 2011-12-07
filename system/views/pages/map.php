@@ -36,6 +36,9 @@ this.initialize = function() {
 	this.map.fitBounds(this.bounds);
 	google.maps.event.addListener(this.markers[<?php echo $index ?>], 'click', function() { self.info_window.setContent(self.markers[<?php echo $index ?>].content);self.info_window.open(self.map,self.markers[<?php echo $index ?>]); });
 	<?php endforeach; ?>
+	<?php if( $config['map_cluster_limit'] === null || count( $registry->stores ) > $config['map_cluster_limit'] ): ?>
+	var markerCluster = new MarkerClusterer(self.map, self.markers, {"maxZoom":4,"gridSize":null});
+	<?php endif; ?>
 	
 };
 

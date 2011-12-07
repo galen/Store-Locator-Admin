@@ -51,6 +51,8 @@
 </dl>
 <p><?php if( $registry->count_ungeocoded == 0 ): ?>All stores are geocoded!<?php endif; ?></p>
 <form action="" method="post">
-	<input type="submit"<?php if( $registry->count_ungeocoded == 0 ): ?> disabled="true"<?php endif; ?> class="btn success<?php if( $registry->count_ungeocoded == 0 ): ?> disabled<?php endif; ?>" name="geocode_all" id="geocode_all" value="Geocode All"><img src="/Store-Locator-Admin/public/images/ajax_loader.gif" id="geocode_ajax_loader">
+	<input type="submit"<?php if( $registry->count_ungeocoded == 0 ): ?> disabled="true"<?php endif; ?> class="btn success<?php if( $registry->count_ungeocoded == 0 ): ?> disabled<?php endif; ?>" name="geocode_all" id="geocode_all" value="Geocode All">
+	<input type="submit"<?php if( $registry->count_geocoded == 0 ): ?> disabled="true"<?php endif; ?> class="btn error<?php if( $registry->count_geocoded == 0 ): ?> disabled<?php endif; ?>" name="ungeocode_all" id="ungeocode_all" value="Delete All Geocode Info">
+	<img src="<?php e( URL_PUBLIC ) ?>/images/ajax_loader.gif" id="geocode_ajax_loader">
 </form>
 <?php require( DIR_VIEWS . '/footer.php' ) ?>

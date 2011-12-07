@@ -38,6 +38,7 @@ if ( isset( $_POST['backup_file'] ) ) {
 }
 
 if ( isset( $_POST['geocode_all'] ) ) {
+	set_time_limit( $registry->count_ungeocoded );
 	if ( $geocode_all_result = $stg->geocodeAll() ) {
 		$status_message->setStatus( 'success' );
 		$status_message->setMessage( sprintf( '<p>%s store%s successfully geocoded</p>', $geocode_all_result, $geocode_all_result > 1 ? 's' : '' ) );
@@ -45,6 +46,17 @@ if ( isset( $_POST['geocode_all'] ) ) {
 	else {
 		$status_message->setStatus( 'error' );
 		$status_message->setMessage( '<p>No stores were able to be geocoded</p>' );
+	}
+}
+
+if ( isset( $_POST['ungeocode_all'] ) ) {
+	if ( $geocode_all_result = $stg->ungeocodeAll() ) {
+		$status_message->setStatus( 'success' );
+		$status_message->setMessage( '<p>Store location data removed</p>' );
+	}
+	else {
+		$status_message->setStatus( 'error' );
+		$status_message->setMessage( '<p>Error removing location data</p>' );
 	}
 }
 

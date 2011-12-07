@@ -183,6 +183,20 @@ class StoreTableGateway {
 		return $updated;
 	}
 
+
+	/**
+	 * Ungeocode all stores
+	 * 
+	 * @return void
+	 */
+	function ungeocodeAll() {
+		$updated = 0;
+		$stores = array();
+		$sql = sprintf( 'update %s set %s=null, %s=null', $this->table, $this->column_map['lat'], $this->column_map['lng'] );
+		$stmnt = $this->db->prepare( $sql );
+		return (bool) $stmnt->execute();
+	}
+
 	/**
 	 * Get store statistics
 	 *

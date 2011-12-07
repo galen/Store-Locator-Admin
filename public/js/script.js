@@ -137,7 +137,7 @@ $(".geocode_table").click(function( event, all ){
 							obj.parent().html("Yes");
 							obj.remove();
 							if ( $('.geocode_table').length == 0 ) {
-								$('.geocode_all').addClass('disabled');
+								$('.geocode_all').remove();
 							}
 						}
 						else {

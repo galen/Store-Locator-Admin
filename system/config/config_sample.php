@@ -7,9 +7,9 @@
  */
 $config['db_user'] = '';
 $config['db_password'] = '';
-$config['db_host'] = '';
+$config['db_host'] = 'localhost';
 $config['db_name'] = '';
-$config['db_type'] = '';
+$config['db_type'] = 'mysql';
 $config['db_table'] = '';
 
 /**
@@ -36,6 +36,8 @@ $config['column_map'] = array (
 	'name'		=> 'name'
 );
 
+$config['store_name'] = 'Elizabeth Arden';
+
 /**
  * This gets translated into the address that will be geocoded
  *
@@ -46,25 +48,31 @@ $config['geocode_string'] = '{address}, {city}, {state}';
 /**
  * Time in milliseconds for the status messages to remain before being faded out
  *
- * Set to 0 to disable
+ * Set to 0 to disable fading out
  */
 $config['autoremove_statuses'] = 0;
 
 /**
  * Default lat, lng, and zoom of the map on the edit and create page
  */
-$config['default_map_properties'] = array (
+$config['map_default_properties'] = array (
 	'lat'	=> 38.48,
 	'lng'	=> -96.77,
 	'zoom'	=> 3
 );
 
 /**
+ * If there are more than this many markers marker clusterer will be used
+ * Set to NULL to always use clustering
+ */
+$config['map_cluster_limit'] = 50;
+
+/**
  * Site status
  *
- * If set to false, error reporting will be turned on
+ * If set to true, error reporting will be turned on
  */
-define( 'SITE_DEV',					false );
+define( 'SITE_DEV',					TRUE );
 
 /**
  * Do not edit below
@@ -89,6 +97,7 @@ define( 'URL_ROOT_ABSOLUTE',		sprintf( 'http://%s%s', $_SERVER['HTTP_HOST'], dir
 define( 'URL_LIST',					URL_ROOT . '/list' );
 define( 'URL_DELETE',				URL_ROOT . '/delete' );
 define( 'URL_CREATE',				URL_ROOT . '/create' );
+define( 'URL_MAP',					URL_ROOT . '/map' );
 define( 'URL_EDIT',					URL_ROOT . '/edit' );
 define( 'URL_SEARCH',				URL_ROOT . '/search' );
 define( 'URL_EXPORT',				URL_ROOT . '/export' );

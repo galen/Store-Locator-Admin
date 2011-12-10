@@ -11,6 +11,12 @@ define( 'REQUEST',					trim( str_replace( dirname( $_SERVER['PHP_SELF'] ), '', p
 define( 'REQUEST_METHOD',			$_SERVER['REQUEST_METHOD'] );
 define( 'REQUEST_IS_AJAX',			(bool)isset( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' );
 
+if ( REQUEST == 'index.php' ) {
+    Header( 'HTTP/1.1 301 Moved Permanently' ); 
+    header( 'Location: /' );
+    exit;
+}
+
 //Check for a config file
 if( !@include( 'system/config/config.php' ) ){
 	header("HTTP/1.1 500 Internal Server Error");

@@ -37,9 +37,21 @@ $config['column_map'] = array (
 );
 
 /**
+ * Alignment of the columns in the list
+ *
+ * Options: left, center, right
+ *
+ * Left is default
+ */
+$config['column_alignment'] = array(
+	'country'	=> 'center',
+	'state'		=> 'center'
+);
+
+/**
  * Application title
  */
-$config['app_title'] = 'Locations Admin';
+$config['app_title'] = 'Pizza Locations Admin';
 
 /**
  * This gets translated into the address that will be geocoded

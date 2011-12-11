@@ -1,12 +1,12 @@
 <?php
 
 if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) {
-	$store = $stg->getStore( $registry->request->params->store_id );
-	if ( !$store ) {
+	$location = $stg->getLocation( $registry->request->params->location_id );
+	if ( !$location ) {
 		header("HTTP/1.1 404 Not Found");
-		die( json_encode( array( 'message' => 'Store not found' ) ) );
+		die( json_encode( array( 'message' => 'Location not found' ) ) );
 	}
-	die( json_encode( $store->getData() ) );
+	die( json_encode( $location->getData() ) );
 }
 
 header("HTTP/1.1 400 Invalid Request Method");

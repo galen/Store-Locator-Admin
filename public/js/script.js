@@ -28,16 +28,16 @@ $(".export").click(function( e ){
 	return false;
 });
 
-$(".delete_store").click(function( event, all ){
+$(".delete_location").click(function( event, all ){
 	obj = $(this);
 	tr = obj.closest('tr');
-	var answer = confirm( "Delete store #" + tr.data("store-id") + "?" );
+	var answer = confirm( "Delete location #" + tr.data("location-id") + "?" );
 	if ( !answer ) {
 		return false
 	}
 	$.ajax({
 		type: 'POST',
-		url: url_api_delete + "/" + tr.data("store-id"),
+		url: url_api_delete + "/" + tr.data("location-id"),
 		complete: function( jqxhr ) {
 			data = jQuery.parseJSON( jqxhr.responseText );
 			if ( jqxhr.status == 200 ) {
@@ -66,18 +66,18 @@ $(".geocode_form").click(function(){
 	}
 	$("#geocode_ajax_loader").show();
 	var obj = $(this);
-	var store_id = $('#store_id').val();
+	var location_id = $('#location_id').val();
 	$.ajax({
 		type: 'GET',
 		url: url_api_geocode,
-		data: $("#store_edit input:text").serializeObject(),
+		data: $("#location_edit input:text").serializeObject(),
 		complete: function( jqxhr ) {
 			geocode_data = jQuery.parseJSON( jqxhr.responseText );
 			if ( jqxhr.status == 200 ) {
 				$.ajax({
 					type: 'POST',
-					data: column_map.id + "=" + store_id + "&" + column_map.lat + "=" + geocode_data.lat + "&" + column_map.lng + "=" +geocode_data.lng,
-					url: url_api_edit + '/' + store_id,
+					data: column_map.id + "=" + location_id + "&" + column_map.lat + "=" + geocode_data.lat + "&" + column_map.lng + "=" +geocode_data.lng,
+					url: url_api_edit + '/' + location_id,
 					complete: function( jqxhr ) {
 						save_data = jQuery.parseJSON( jqxhr.responseText );
 						if ( jqxhr.status == 200 ) {
@@ -118,9 +118,9 @@ $(".geocode_form").click(function(){
 $(".geocode_table").click(function( event, all ){
 	var obj = $(this);
 	tr = obj.closest('tr');
-	obj.html('<img src="' + $("#store_table").data('ajax-loader-image') + '">');
+	obj.html('<img src="' + $("#location_table").data('ajax-loader-image') + '">');
 	var data = tr.data('geocode');
-	var store_id = tr.data('store-id');
+	var location_id = tr.data('location-id');
 	$.ajax({
 		type: 'GET',
 		url: url_api_geocode + data,
@@ -129,8 +129,8 @@ $(".geocode_table").click(function( event, all ){
 			if ( jqxhr.status == 200 ) {
 				$.ajax({
 					type: 'POST',
-					data: column_map.id + "=" + store_id + "&" + column_map.lat + "=" + data.lat + "&" + column_map.lng + "=" + data.lng,
-					url: url_api_edit + '/' + store_id,
+					data: column_map.id + "=" + location_id + "&" + column_map.lat + "=" + data.lat + "&" + column_map.lng + "=" + data.lng,
+					url: url_api_edit + '/' + location_id,
 					complete: function( jqxhr ) {
 						data = jQuery.parseJSON( jqxhr.responseText );
 						if ( jqxhr.status == 200 ) {
@@ -197,11 +197,11 @@ $(".pagination .disabled a").click(function(){
 	return false;
 });
 
-if ( $("#store_table").length ) {
+if ( $("#location_table").length ) {
 	$(".table_actions").show();
 }
 
-// Create store page
+// Create locationpage
 if ( $("body#create").length ) {
 	$("#create #geocode_form_button").show();
 }

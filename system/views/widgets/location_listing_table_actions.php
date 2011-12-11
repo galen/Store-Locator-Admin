@@ -1,6 +1,6 @@
 <div class="table_actions well">
-	<p title="This applies ">Store Actions</p>
+	<p title="This applies ">Location Actions</p>
 	<a href="<?php e( URL_MAP ) ?>/<?php if( $registry->controller == 'search' ): ?>?<?php e( $registry->search_query ) ?>&geocode_status=<?php e( $registry->geocode_status ) ?><?php endif; ?>" class="btn" title="<?php if( $registry->controller == 'search' ): ?>View a map of the search results<?php else: ?>View a map of all locations<?php endif; ?>">View Map</a>
 	<a href="<?php e( URL_EXPORT ) ?>/<?php if( $registry->controller == 'search' ): ?>?<?php e( $registry->search_query ) ?>&geocode_status=<?php e( $registry->geocode_status ) ?><?php endif; ?>" data-export-url="<?php e( URL_EXPORT ) ?>/?<?php e( $registry->search_query ) ?>&geocode_status=<?php e( $registry->geocode_status ) ?>" class="btn export" title="<?php if( $registry->controller == 'search' ): ?>Export search results to CSV<?php else: ?>Export all locations to CSV<?php endif; ?>">Export</a>
-	<?php if( $registry->all_stores_geocoded != true ): ?><a href="#"></a></a><a href="#" class="btn success geocode_all" title="<?php if( $registry->all_stores_geocoded ): ?>All stores are geocoded<?php else: ?>Geocode all stores on the page<?php endif; ?>">Geocode all stores</a><?php endif; ?>
+	<?php if( $registry->all_locations_geocoded != true ): ?><a href="#"></a></a><a href="#" class="btn success geocode_all" title="<?php if( $registry->all_locations_geocoded ): ?>All locations are geocoded<?php else: ?>Geocode all locations on the page<?php endif; ?>">Geocode all locations</a><?php endif; ?>
 </div>

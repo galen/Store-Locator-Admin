@@ -26,17 +26,17 @@ this.initialize = function() {
 	this.markers = [];
 	this.event_listeners = [];
 	this.bounds = new google.maps.LatLngBounds();
-	<?php foreach( $registry->stores as $index => $store ): ?>
+	<?php foreach( $registry->locations as $index => $location ): ?>
 	this.markers[<?php echo $index ?>] = new google.maps.Marker({
-		position: new google.maps.LatLng(<?php e( $store->getLat() ) ?>,<?php e( $store->getLng() ) ?>),
+		position: new google.maps.LatLng(<?php e( $location->getLat() ) ?>,<?php e( $location->getLng() ) ?>),
 		map: this.map,
-		content: '<div class="infowindow"><address><strong><?php e( $store->getName() ) ?></strong><br><?php e( $store->getAddress() ) ?><br><?php e( $store->getCity() ) ?><?php if( $store->hasState() ): ?>, <?php e( $store->getState() ) ?><br><a href="<?php e( URL_EDIT ) ?>/<?php e( $store->getId() ) ?>/">Edit this store</a><?php endif; ?></address></div>'
+		content: '<div class="infowindow"><address><strong><?php e( $location->getName() ) ?></strong><br><?php e( $location->getAddress() ) ?><br><?php e( $location->getCity() ) ?><?php if( $location->hasState() ): ?>, <?php e( $location->getState() ) ?><br><a href="<?php e( URL_EDIT ) ?>/<?php e( $location->getId() ) ?>/">Edit this location</a><?php endif; ?></address></div>'
 	});
 	this.bounds.extend(this.markers[<?php echo $index ?>].position);
 	this.map.fitBounds(this.bounds);
 	google.maps.event.addListener(this.markers[<?php echo $index ?>], 'click', function() { self.info_window.setContent(self.markers[<?php echo $index ?>].content);self.info_window.open(self.map,self.markers[<?php echo $index ?>]); });
 	<?php endforeach; ?>
-	<?php if( $config['map_cluster_limit'] === null || count( $registry->stores ) > $config['map_cluster_limit'] ): ?>
+	<?php if( $config['map_cluster_limit'] === null || count( $registry->locations ) > $config['map_cluster_limit'] ): ?>
 	var markerCluster = new MarkerClusterer(self.map, self.markers, {"maxZoom":4,"gridSize":null});
 	<?php endif; ?>
 	

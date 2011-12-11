@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @package Store Locator Admin
+ * @package Locations Admin
  * @author Galen Grover <galenjr@gmail.com>
  */
 
-class StoreTableGateway {
+class LocationTableGateway {
 
 	/**
 	 * DB Instance
@@ -15,7 +15,7 @@ class StoreTableGateway {
 	protected $db;
 
 	/**
-	 * Table that holds the store locations
+	 * Table that holds the locations
 	 *
 	 * @var string
 	 */
@@ -43,7 +43,7 @@ class StoreTableGateway {
 	 * @param PDO $db
 	 * @param string $table
 	 * @param array $column_map
-	 * @return StoreTableGateway
+	 * @return LocationTableGateway
 	 */
 	public function __construct( PDO $db, $table, array $column_map ) {
 		$this->db = $db;
@@ -78,7 +78,7 @@ class StoreTableGateway {
 	}
 
 	/**
-	 * Restore from backup
+	 * restore from backup
 	 * 
 	 * @param string $file
 	 * @return boolean
@@ -100,7 +100,7 @@ class StoreTableGateway {
 	 * @param int $geocode_status (default: null)
 	 * @return int
 	 */
-	public function getStoreCount( array $search_params=null, $geocode_status=null ) {
+	public function getLocationCount( array $search_params=null, $geocode_status=null ) {
 		$sql = sprintf( 'select count(id) from %s %s', $this->table, isset( $search_params ) || isset( $geocode_status ) ? $this->buildSearchString( (array)$search_params, $geocode_status ) : '' );
 		unset( $search_params['geocode_status'] );
 		$stmnt = $this->db->prepare( $sql );
@@ -116,9 +116,9 @@ class StoreTableGateway {
 	}
 
 	/**
-	 * Get stores
+	 * Get locations
 	 *
-	 * Returns a set of stores from teh table matching the given arguments
+	 * Returns a set of locations from the table matching the given arguments
 	 * 
 	 * @param int $start Limit start (default: null)
 	 * @param int $length Limit length (default: null)
@@ -126,7 +126,7 @@ class StoreTableGateway {
 	 * @param int $geocode_status geocode status (default: null)
 	 * @return void
 	 */
-	public function getStores( $start=null, $length=null, array $search_params=null, $geocode_status=null ) {
+	public function getLocations( $start=null, $length=null, array $search_params=null, $geocode_status=null ) {
 		$sql = sprintf( 'select * from %s %s', $this->table, isset( $search_params ) || isset( $geocode_status ) ? $this->buildSearchString( (array)$search_params, $geocode_status ) : '' );
 		if ( $start !== null ) {
 			$sql .= ' limit :start, :length';
@@ -142,34 +142,34 @@ class StoreTableGateway {
 			}
 		}
 		$stmnt->execute();
-		$stores = array();
+		$locations = array();
 		foreach( $stmnt->fetchAll( PDO::FETCH_ASSOC ) as $data ) {
-			$stores[] = new Store( $this->column_map, $data );
+			$locations[] = new Location( $this->column_map, $data );
 		}
-		return $stores;
+		return $locations;
 	}
 
 	/**
-	 * Geocode all stores
+	 * Geocode all locations
 	 * 
-	 * @return int Returns the number of stores that were geocoded
+	 * @return int Returns the number of locations that were geocoded
 	 */
 	function geocodeAll() {
 		$updated = 0;
-		$stores = array();
+		$locations = array();
 		$sql = sprintf( 'select * from %s where ( %2$s is null || %2$s = 0 || %3$s is null and %3$s = 0 )', $this->table, $this->column_map['lat'], $this->column_map['lng'] );
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->execute();
 		foreach( $stmnt->fetchAll( PDO::FETCH_ASSOC ) as $data ) {
-			$stores[] = new Store( $this->column_map, $data );
+			$locations[] = new Location( $this->column_map, $data );
 		}
-		foreach( $stores as $store ) {
-			$req = Request::factory( URL_ROOT_ABSOLUTE . '/api/geocode?' . http_build_query( $store->getData() ) );
+		foreach( $locations as $location ) {
+			$req = Request::factory( URL_ROOT_ABSOLUTE . '/api/geocode?' . http_build_query( $location->getData() ) );
 			$resp = $req->execute();
 			if ( $resp->status == 200 ) {
-				$req2 = Request::factory( URL_ROOT_ABSOLUTE . '/api/edit/' . $store->getID() );
+				$req2 = Request::factory( URL_ROOT_ABSOLUTE . '/api/edit/' . $location->getID() );
 				$req2->post = array(
-					$this->column_map['id'] => $store->getID(),
+					$this->column_map['id'] => $location->getID(),
 					$this->column_map['lat'] => $resp->data->lat,
 					$this->column_map['lng'] => $resp->data->lng
 				);
@@ -185,27 +185,27 @@ class StoreTableGateway {
 
 
 	/**
-	 * Ungeocode all stores
+	 * Ungeocode all locations
 	 * 
 	 * @return void
 	 */
 	function ungeocodeAll() {
 		$updated = 0;
-		$stores = array();
+		$locations = array();
 		$sql = sprintf( 'update %s set %s=null, %s=null', $this->table, $this->column_map['lat'], $this->column_map['lng'] );
 		$stmnt = $this->db->prepare( $sql );
 		return (bool) $stmnt->execute();
 	}
 
 	/**
-	 * Get store statistics
+	 * Get locationstatistics
 	 *
-	 * Returns the number of stores in the table as well as the number of
-	 * geocoded/ungeocoded stores 
+	 * Returns the number of locations in the table as well as the number of
+	 * geocoded/ungeocoded locations 
 	 *
 	 * @return array
 	 */
-	function getStoreStats() {
+	function getLocationStats() {
 		$sql = sprintf( "select count(id) as count from %s", $this->table );
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->execute();
@@ -222,8 +222,7 @@ class StoreTableGateway {
 		);
 	}
 
-	function getStoresWithIds( array $ids ) {
-	
+	function getLocationsWithIds( array $ids ) {
 		foreach( $ids as $idn => $id ) {
 			$in[] = sprintf( ':id%s', $idn );
 		}
@@ -235,9 +234,9 @@ class StoreTableGateway {
 		}
 		$stmnt->execute();
 		foreach( $stmnt->fetchAll( PDO::FETCH_ASSOC ) as $data ) {
-			$stores[] = new Store( $this->column_map, $data );
+			$locations[] = new Location( $this->column_map, $data );
 		}
-		return $stores;
+		return $locations;
 	}
 
 	/**
@@ -291,12 +290,12 @@ class StoreTableGateway {
 	}
 
 	/**
-	 * Get a store
+	 * Get a location
 	 *
 	 * @param int $id
-	 * @return mixed The store on success, false on error
+	 * @return mixed The locationon success, false on error
 	 */
-	function getStore( $id ) {
+	function getLocation( $id ) {
 		$sql = sprintf( 'select * from %s where id=:id', $this->table );
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->bindValue( ':id', $id, PDO::PARAM_INT );
@@ -305,16 +304,16 @@ class StoreTableGateway {
 		if ( !$data ) {
 			return false;
 		}
-		return new Store( $this->column_map, $data );
+		return new Location( $this->column_map, $data );
 	}
 
 	/**
-	 * Delete a store
+	 * Delete a location
 	 * 
 	 * @param int $id
 	 * @return boolean True on success, false on error
 	 */
-	function deleteStore( $id ) {
+	function deleteLocation( $id ) {
 		$sql = sprintf( 'delete from %s where %s = :id', $this->table, $this->column_map['id'] );
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->bindValue( ':id', $id );
@@ -325,13 +324,13 @@ class StoreTableGateway {
 	}
 
 	/**
-	 * Create a store
+	 * Create a location
 	 * 
-	 * @param Store $store
+	 * @param location$location
 	 * @return boolean True on success, false on error
 	 */
-	function createStore( Store $store ) {
-		$vars = $store->getData();
+	function createLocation( location$location ) {
+		$vars = $location->getData();
 		unset( $vars['id'] );
 		$sql = sprintf( 'insert into %s (%s) values(%s)', $this->table, implode( ',', array_keys( $vars ) ), implode( ',', array_map( function( $v ) { return ':'.$v; }, array_keys( $vars ) ) ) );
 		$stmnt = $this->db->prepare( $sql );
@@ -345,31 +344,31 @@ class StoreTableGateway {
 	}
 
 	/**
-	 * Save a store
+	 * Save a location
 	 * 
-	 * @param Store $store Store to save
+	 * @param location$location locationto save
 	 * @return boolean True on success, false on error
 	 */
-	function saveStore( Store $store ) {
-		if ( !$this->getStore( $store->getID() ) ) {
+	function saveLocation( location$location ) {
+		if ( !$this->getLocation( $location->getID() ) ) {
 			return false;
 		}
-		$id = $store->getID();
-		$store_array = $store->getData();
-		unset( $store_array['id'] );
-		//foreach( $store_array as $property => $value ) {
+		$id = $location->getID();
+		$location_array = $location->getData();
+		unset( $location_array['id'] );
+		//foreach( $location_array as $property => $value ) {
 			//if ( strpos( $property, '_' ) === 0 ) {
-				//unset( $store_array[$property] );
+				//unset( $location_array[$property] );
 			//}
 		//}
 		$cm = $this->column_map;
 		$sql = sprintf( 'update %s set %s where id = :id',
 			$this->table,
-			implode( ', ', array_map( function( $c ) { return sprintf( '%1$s = :%1$s', $c ); }, array_keys( $store_array ) ) )
+			implode( ', ', array_map( function( $c ) { return sprintf( '%1$s = :%1$s', $c ); }, array_keys( $location_array ) ) )
 		);
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->bindValue( ':id', $id );
-		foreach( $store_array as $property => $value ) {
+		foreach( $location_array as $property => $value ) {
 			$stmnt->bindValue( ':'.$property, $value );
 		}
 		if ( $stmnt->execute() ) {

@@ -67,7 +67,7 @@ select {
 	display:none;
 }
 
-/* Store listing */
+/* locationlisting */
 .table_actions {
 	text-align:right;
 	display:none;
@@ -92,16 +92,16 @@ thead td:last-child {
 	-webkit-border-top-right-radius: 4px;
 	-moz-border-radius-topright: 4px;
 }
-td.store_actions {
+td.location_actions {
 	white-space:nowrap;
 }
-#store_listing_header {
+#location_listing_header {
 	position:relative;
 	overflow:hidden;
 	margin-bottom:15px;
 }
 
-#store_table tbody tr:hover {
+#location_table tbody tr:hover {
 	background: #fbfbfb;
 }
 
@@ -147,24 +147,24 @@ td.store_actions {
 	margin:0;
 }
 
-/* Store edit/create */
+/* locationedit/create */
 #form_fields {
 	width:375px;
 	float:left;
 	overflow:auto;
 }
-#store_edit #map {
+#location_edit #map {
 	float:right;
 	margin-left:25px;
 }
-#delete_store {
+#delete_location {
 	float:right;
 }
-#store_edit_actions {
+#location_edit_actions {
 	clear:both;
 	margin-top: 40px;
 }
-#store_edit #geocode_ajax_loader {
+#location_edit #geocode_ajax_loader {
 	display:none;
 	margin-left:10px;
 }
@@ -178,7 +178,7 @@ td.store_actions {
 #geocode_ajax_status_wrapper a.close {
 	margin-left: 5px;
 }
-#store_lat_lng {
+#location_lat_lng {
 	padding-top:10px;
 }
 #create_geocode_note {

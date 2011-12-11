@@ -58,10 +58,10 @@ if ( $registry->request = Router::route( REQUEST ) ) {
 		exit;
 	}
 
-	// We will use a store table gateway on every page so we will create one here
-	require( DIR_MODELS . '/StoreTableGateway.php' );
-	require( DIR_MODELS . '/Store.php' );
-	$stg = new StoreTableGateway( $db, $config['db_table'], $config['column_map'] );
+	// We will use a locationtable gateway on every page so we will create one here
+	require( DIR_MODELS . '/LocationTableGateway.php' );
+	require( DIR_MODELS . '/Location.php' );
+	$stg = new LocationTableGateway( $db, $config['db_table'], $config['column_map'] );
 
 	if ( !$stg->validateTable() ) {
 		header("HTTP/1.1 500 Internal Server Error");
@@ -77,10 +77,6 @@ if ( $registry->request = Router::route( REQUEST ) ) {
 	// Set variables
 	$registry->controller = Router::$controller;
 	$registry->column_info = $stg->getColumns();
-
-	if ( $config['store_name'] ) {
-		unset( $registry->column_info['name'] );
-	} 
 
 	$registry->columns = array_keys( $registry->column_info );
 	$registry->columns_list = array_values( array_diff( $registry->columns, array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) );

@@ -1,13 +1,13 @@
-# Store Locator Admin
+# Locations Admin
 
-Store locator admin for the web
+Locations admin for the web
 
 Requires PHP 5.3+ with PDO
 
 ## Features
 
  - Easy integration with existing tables
- - Geocoding and batch geocoding of stores
+ - Geocoding and batch geocoding of locations
  - Robust search capability
  - Google map integration
  - Backup/restore functions

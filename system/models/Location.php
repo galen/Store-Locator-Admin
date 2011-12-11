@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @package Store Locator Admin
+ * @package Locations Admin
  * @author Galen Grover <galenjr@gmail.com>
  */
  
-class Store {
+class Location {
 
 	/**
 	 * Column map
@@ -17,7 +17,7 @@ class Store {
 	private $column_map = array();
 
 	/**
-	 * Store data
+	 * locationdata
 	 *
 	 * @var array
 	 */
@@ -27,8 +27,8 @@ class Store {
 	 * Constructor
 	 *
 	 * @param array $column_map column map
-	 * @param array $data Store data
-	 * @return Store
+	 * @param array $data locationdata
+	 * @return Location
 	 */
 	function __construct( array $column_map, array $data = null ) {
 		$this->column_map = $column_map;
@@ -39,7 +39,7 @@ class Store {
 		 * These next lines set the lat/lng to '' if the lat/lng is null or 0.000000
 		 * This helps to account for the default values of more table structures
 		 *
-		 * Also assumes that there will be no stores at 0,0
+		 * Also assumes that there will be no locations at 0,0
 		 */
 		if ( !(int)$this->getLat() ) {
 			$this->setLat( '' );
@@ -50,9 +50,9 @@ class Store {
 	}
 
 	/**
-	 * Get store geocode status
+	 * Get locationgeocode status
 	 *
-	 * Returns true if the store is geocoded, false otherwise
+	 * Returns true if the locationis geocoded, false otherwise
 	 *
 	 * @return boolean
 	 */
@@ -80,16 +80,16 @@ class Store {
 	}
 
 	/**
-	 * Get the store data array
+	 * Get the locationdata array
 	 *
-	 * @return array Returns the array of store data
+	 * @return array Returns the array of locationdata
 	 */
 	function getData() {
 		return $this->data;
 	}
 
 	/**
-	 * Set store data
+	 * Set locationdata
 	 *
 	 * @param string $var Variable to set
 	 * @param mixed $val Value to set the variable to
@@ -103,7 +103,7 @@ class Store {
 	}
 
 	/**
-	 * Get store data
+	 * Get locationdata
 	 *
 	 * @param string $var Variable to set
 	 * @return mixed Returns the data
@@ -114,18 +114,18 @@ class Store {
 	}
 
 	/**
-	 * Get editable store properties
+	 * Get editable locationproperties
 	 *
 	 * Id is not editable, we need a way to get all data except for the id
 	 *
-	 * @return array Returns an array of store data minus the id
+	 * @return array Returns an array of locationdata minus the id
 	 */
 	function getEditableProperties() {
 		return array_diff( array_keys( $this->data ), array( $this->column_map['id'], 'column_map' ) );
 	}
 
 	/**
-	 * Get the store in CSV format
+	 * Get the locationin CSV format
 	 *
 	 * @return string
 	 */
@@ -138,9 +138,9 @@ class Store {
 	}
 
 	/**
-	 * Get the store in query string format
+	 * Get the locationin query string format
 	 *
-	 * @return string Returns the store in query string format
+	 * @return string Returns the locationin query string format
 	 */
 	function getQueryString() {
 		$str = '?';

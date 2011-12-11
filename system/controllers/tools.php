@@ -41,18 +41,18 @@ if ( isset( $_POST['geocode_all'] ) ) {
 	set_time_limit( $registry->count_ungeocoded );
 	if ( $geocode_all_result = $stg->geocodeAll() ) {
 		$status_message->setStatus( 'success' );
-		$status_message->setMessage( sprintf( '<p>%s store%s successfully geocoded</p>', $geocode_all_result, $geocode_all_result > 1 ? 's' : '' ) );
+		$status_message->setMessage( sprintf( '<p>%s location%s successfully geocoded</p>', $geocode_all_result, $geocode_all_result > 1 ? 's' : '' ) );
 	}
 	else {
 		$status_message->setStatus( 'error' );
-		$status_message->setMessage( '<p>No stores were able to be geocoded</p>' );
+		$status_message->setMessage( '<p>No locations were able to be geocoded</p>' );
 	}
 }
 
 if ( isset( $_POST['ungeocode_all'] ) ) {
 	if ( $geocode_all_result = $stg->ungeocodeAll() ) {
 		$status_message->setStatus( 'success' );
-		$status_message->setMessage( '<p>Store location data removed</p>' );
+		$status_message->setMessage( '<p>Location location data removed</p>' );
 	}
 	else {
 		$status_message->setStatus( 'error' );
@@ -60,7 +60,7 @@ if ( isset( $_POST['ungeocode_all'] ) ) {
 	}
 }
 
-$counts = $stg->getStoreStats();
+$counts = $stg->getLocationStats();
 $registry->count_all = $counts['all'];
 $registry->count_geocoded = $counts['geocoded'];
 $registry->count_ungeocoded = $counts['ungeocoded'];

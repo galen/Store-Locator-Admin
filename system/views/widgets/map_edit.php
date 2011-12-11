@@ -7,7 +7,7 @@ this.initialize = function() {
 
 	var self = this;
 	this.map_options = {
-		zoom: <?php if( isset( $store ) && $store->isGeocoded() ): ?>14<?php else: ?><?php e( $config['map_default_properties']['zoom'] ) ?><?php endif; ?>,
+		zoom: <?php if( isset( $location ) && $location->isGeocoded() ): ?>14<?php else: ?><?php e( $config['map_default_properties']['zoom'] ) ?><?php endif; ?>,
 		navigationControl: true,
 		mapTypeControl: true,
 		scaleControl: false,
@@ -23,22 +23,22 @@ this.initialize = function() {
 	this.map = new google.maps.Map(document.getElementById("map"), this.map_options);
 	this.info_window = new google.maps.InfoWindow();
 
-	<?php if( isset( $store ) && $store->isGeocoded() ): ?>
+	<?php if( isset( $location ) && $location->isGeocoded() ): ?>
 	this.markers = [];
 	this.markers[0] = new google.maps.Marker({
-		position: new google.maps.LatLng(<?php e( $store->getLat() ) ?>,<?php e( $store->getLng() ) ?>),
+		position: new google.maps.LatLng(<?php e( $location->getLat() ) ?>,<?php e( $location->getLng() ) ?>),
 		map: this.map,
 		draggable:true,
-		content: '<div class="infowindow"><address><strong><?php e( $store->getName() ) ?></strong><br><?php e( $store->getAddress() ) ?><br><?php e( $store->getCity() ) ?><?php if( $store->hasState() ): ?>, <?php e( $store->getState() ) ?><?php endif; ?></address></div>'
+		content: '<div class="infowindow"><address><strong><?php e( $location->getName() ) ?></strong><br><?php e( $location->getAddress() ) ?><br><?php e( $location->getCity() ) ?><?php if( $location->hasState() ): ?>, <?php e( $location->getState() ) ?><?php endif; ?></address></div>'
 
 	});
 	<?php endif; ?>
-	<?php if( isset( $store ) && $store->isGeocoded() ): ?>
-	this.map.setCenter( new google.maps.LatLng( <?php e( $store->getLat() ) ?>,<?php e( $store->getLng() ) ?> ) );
+	<?php if( isset( $location ) && $location->isGeocoded() ): ?>
+	this.map.setCenter( new google.maps.LatLng( <?php e( $location->getLat() ) ?>,<?php e( $location->getLng() ) ?> ) );
 	<?php else:?>
 	this.map.setCenter( new google.maps.LatLng( <?php e( $config['map_default_properties']['lat'] ) ?>,<?php e( $config['map_default_properties']['lng'] ) ?> ) );
 	<?php endif; ?>
-	<?php if( isset( $store ) && $store->isGeocoded() ): ?>
+	<?php if( isset( $location ) && $location->isGeocoded() ): ?>
 	this.event_listeners = [];
 	this.event_listeners[0] = google.maps.event.addListener(map.markers[0], 'dragend', function(){ $("#lat").val(Math.round(map.markers[0].getPosition().lat()*1000000)/1000000);$("#lng").val(Math.round(map.markers[0].getPosition().lng()*1000000)/1000000); });
 	<?php endif; ?>

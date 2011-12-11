@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Store Locator Admin<?php if( isset( $registry->page_title ) ): ?> - <?php e( ucwords( $registry->page_title ) ) ?><?php endif; ?></title>
+	<title><?php e( $config['app_owner'] ) ?> Locations Admin<?php if( isset( $registry->page_title ) ): ?> - <?php e( ucwords( $registry->page_title ) ) ?><?php endif; ?></title>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&language=&region=&libraries="></script>
 	<script type="text/javascript">
 	url_api_delete = "<?php e( URL_API ) ?>/delete";

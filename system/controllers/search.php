@@ -1,6 +1,6 @@
 <?php
 
-$registry->geocode_status = isset( $_GET['geocode_status'] ) && ( $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_FALSE || $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_TRUE ) ? (int)$_GET['geocode_status'] : null;
+$registry->geocode_status = isset( $_GET['geocode_status'] ) && ( $_GET['geocode_status'] == LocationTableGateway::GEOCODE_STATUS_FALSE || $_GET['geocode_status'] == LocationTableGateway::GEOCODE_STATUS_TRUE ) ? (int)$_GET['geocode_status'] : null;
 
 $registry->search_params = null;
 

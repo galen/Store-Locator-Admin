@@ -1,6 +1,6 @@
 <?php require( DIR_VIEWS . '/header.php' ) ?>
 <?php require( DIR_VIEWS . '/widgets/navigation.php' ) ?>
-<div id="search_modal" class="modal<?php if( !isset( $registry->search_params ) && !isset( $registry->geocode_status ) || !count( $registry->stores ) ): ?> show_search_modal<?php endif; ?>">
+<div id="search_modal" class="modal<?php if( !isset( $registry->search_params ) && !isset( $registry->geocode_status ) || !count( $registry->locations ) ): ?> show_search_modal<?php endif; ?>">
 <div class="modal-header"><h2>Search Parameters</h2><?php if( $registry->search_results_exist ): ?><a href="" class="close">&times;</a><?php endif; ?></div>
 <form action="<?php echo URL_SEARCH ?>" method="get" id="search_form">
 	<fieldset>
@@ -39,16 +39,16 @@
 			<div>
 				<label for="geocode_status">Geocoded</label>
 				<select name="geocode_status" id="geocode_status">
-					<option value="<?php echo StoreTableGateway::GEOCODE_STATUS_ALL ?>"<?php if( $registry->geocode_status == StoreTableGateway::GEOCODE_STATUS_ALL ): ?> selected="selected"<?php endif; ?>>All</option>
-					<option value="<?php echo StoreTableGateway::GEOCODE_STATUS_TRUE ?>"<?php if( $registry->geocode_status == StoreTableGateway::GEOCODE_STATUS_TRUE ): ?> selected="selected"<?php endif; ?>>Yes</option>
-					<option value="<?php echo StoreTableGateway::GEOCODE_STATUS_FALSE ?>"<?php if( $registry->geocode_status == StoreTableGateway::GEOCODE_STATUS_FALSE ): ?> selected="selected"<?php endif; ?>>No</option>
+					<option value="<?php echo LocationTableGateway::GEOCODE_STATUS_ALL ?>"<?php if( $registry->geocode_status == LocationTableGateway::GEOCODE_STATUS_ALL ): ?> selected="selected"<?php endif; ?>>All</option>
+					<option value="<?php echo LocationTableGateway::GEOCODE_STATUS_TRUE ?>"<?php if( $registry->geocode_status == LocationTableGateway::GEOCODE_STATUS_TRUE ): ?> selected="selected"<?php endif; ?>>Yes</option>
+					<option value="<?php echo LocationTableGateway::GEOCODE_STATUS_FALSE ?>"<?php if( $registry->geocode_status == LocationTableGateway::GEOCODE_STATUS_FALSE ): ?> selected="selected"<?php endif; ?>>No</option>
 				</select>
 			</div>
 		</div>
 		<div class="modal-footer">
 		
 			<?php if( $registry->active_search && !$registry->search_results_exist ): ?>
-				<p id="search_modal_note" class="no_results">No stores match your search criteria</p>
+				<p id="search_modal_note" class="no_results">No locations match your search criteria</p>
 			<?php else: ?>
 				<p id="search_modal_note">Enter your search terms and click Search</p>
 			<?php endif; ?>
@@ -59,19 +59,19 @@
 	</fieldset>
 </form>
 </div>
-<div id="store_listing_header">
-<h2>Search Stores</h2>
+<div id="location_listing_header">
+<h2>Search Locations</h2>
 
-<?php if( count( $registry->stores ) ): ?>
+<?php if( count( $registry->locations ) ): ?>
 
 <?php require( DIR_VIEWS . '/widgets/result_numbers.php' ) ?>
 <?php if( $registry->total_pages > 1 ): ?><?php require( DIR_VIEWS . '/widgets/pagination.php' ) ?><?php endif; ?>
 <p><a href="#" class="show_search_form">Show search form</a></p>
 </div>
-<?php require( DIR_VIEWS . '/widgets/store_listing.php' ) ?>
+<?php require( DIR_VIEWS . '/widgets/location_listing.php' ) ?>
 <?php else: ?>
 <?php if( $registry->active_search && !$registry->search_results_exist ): ?>
-<p class="no_results"><strong>No stores match your search criteria</strong></p>
+<p class="no_results"><strong>No locations match your search criteria</strong></p>
 <?php endif; ?>
 </div>
 <?php endif; ?>

@@ -18,9 +18,9 @@ $config['db_table'] = '';
 $config['pagination_viewport'] = 4;
 
 /**
- * Number of stores to display on the list/search page
+ * Number of locations to display on the list/search page
  */
-$config['stores_per_page'] = 25;
+$config['locations_per_page'] = 25;
 
 /**
  * Edit this to reflect your table columns
@@ -36,7 +36,7 @@ $config['column_map'] = array (
 	'name'		=> 'name'
 );
 
-$config['store_name'] = 'Elizabeth Arden';
+$config['location_name'] = 'Elizabeth Arden';
 
 /**
  * This gets translated into the address that will be geocoded

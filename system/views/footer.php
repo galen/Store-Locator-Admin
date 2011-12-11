@@ -6,7 +6,7 @@
 		<li><a href="<?php echo URL_ROOT ?>/tools/">Tools</a></li>
 		<li class="right"><a href="mailto:galenjr@gmail.com">Support</a></li>
 		<li class="right"><a href="<?php echo URL_ROOT ?>/documentation/">Documentation</a></li>
-		<li class="right"><a href="https://github.com/galen/Store-Locator-Admin">Github</a></li>
+		<li class="right"><a href="https://github.com/galen/Location-Locator-Admin">Github</a></li>
 	</ul>
 </div>
 </div>

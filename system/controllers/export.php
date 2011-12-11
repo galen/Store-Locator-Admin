@@ -1,14 +1,14 @@
 <?php
 
-$registry->geocode_status = isset( $_GET['geocode_status'] ) && ( $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_FALSE || $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_TRUE ) ? (int)$_GET['geocode_status'] : null;
+$registry->geocode_status = isset( $_GET['geocode_status'] ) && ( $_GET['geocode_status'] == LocationTableGateway::GEOCODE_STATUS_FALSE || $_GET['geocode_status'] == LocationTableGateway::GEOCODE_STATUS_TRUE ) ? (int)$_GET['geocode_status'] : null;
 $registry->search_params = null;
 
 if ( isset( $_GET['search_params'] ) && count( $_GET['search_params'] ) ) {
 	$registry->search_params = get_search_params( $_GET['search_params'], $registry->column_info );
 }
 
-$registry->stores = $stg->getStores( null, null, $registry->search_params, $registry->geocode_status );
-$csv = implode( "\n", array_map( function( $s ) { return $s->getCSV(); }, $registry->stores ) );
+$registry->locations = $stg->getLocations( null, null, $registry->search_params, $registry->geocode_status );
+$csv = implode( "\n", array_map( function( $s ) { return $s->getCSV(); }, $registry->locations ) );
 $columns = implode( ',', $registry->columns );
 $filename = isset( $_GET['filename'] ) ? $_GET['filename'] : 'export.csv';
 

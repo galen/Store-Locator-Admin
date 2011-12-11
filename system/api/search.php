@@ -1,6 +1,6 @@
 <?php
 
-$registry->geocode_status = isset( $_GET['geocode_status'] ) && ( $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_FALSE || $_GET['geocode_status'] == StoreTableGateway::GEOCODE_STATUS_TRUE ) ? (int)$_GET['geocode_status'] : null;
+$registry->geocode_status = isset( $_GET['geocode_status'] ) && ( $_GET['geocode_status'] == LocationTableGateway::GEOCODE_STATUS_FALSE || $_GET['geocode_status'] == LocationTableGateway::GEOCODE_STATUS_TRUE ) ? (int)$_GET['geocode_status'] : null;
 unset( $_GET['geocode_status'] );
 $registry->search_params = null;
 
@@ -20,11 +20,11 @@ if ( count( $_GET ) ) {
 	}
 }
 
-$registry->stores = $stg->getStores( null, null, $registry->search_params, $registry->geocode_status );
+$registry->locations = $stg->getLocations( null, null, $registry->search_params, $registry->geocode_status );
 
 $result = new StdClass;
-$result->num_results = count( $registry->stores );
+$result->num_results = count( $registry->locations );
 $result->search_params = $registry->search_params;
-$result->results = array_map( function( $s ){ return $s->getData(); }, $registry->stores );
+$result->results = array_map( function( $s ){ return $s->getData(); }, $registry->locations );
 
 die( json_encode( $result ) );

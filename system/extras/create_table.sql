@@ -1,4 +1,4 @@
-CREATE TABLE `store_locations` (
+CREATE TABLE `location_locations` (
   `id` mediumint(8) unsigned NOT NULL auto_increment,
   `name` varchar(60) collate utf8_bin NOT NULL,
   `address1` varchar(100) collate utf8_bin NOT NULL default '',

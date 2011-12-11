@@ -6,7 +6,7 @@ if ( isset( $_POST['create'] ) ) {
 	$req->method = 'post';
 	$resp = $req->execute();
 	if ( $resp->status == 200 ) {
-		header( sprintf( 'Location: %s/%s/?status=%s&message=%s', URL_EDIT, $resp->data->store_id, 'success', $resp->data->message ) );
+		header( sprintf( 'Location: %s/%s/?status=%s&message=%s', URL_EDIT, $resp->data->location_id, 'success', $resp->data->message ) );
 		exit;
 		$status_message->setStatus( 'success' );
 		$status_message->setMessage( sprintf( '<p>%s</p>', $resp->data->message ) );

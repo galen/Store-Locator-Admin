@@ -6,7 +6,7 @@ if ( isset( $_POST['geocode'] ) ) {
 	if ( $resp->status == 200 ) {
 		$req2 = Request::factory( URL_ROOT_ABSOLUTE . '/api/edit/' . $_POST[$config['column_map']['id']] );
 		$req2->post = array(
-			$config['column_map']['id'] => $registry->request->params->store_id,
+			$config['column_map']['id'] => $registry->request->params->location_id,
 			$config['column_map']['lat'] => $resp->data->lat,
 			$config['column_map']['lng'] => $resp->data->lng
 		);
@@ -44,12 +44,12 @@ if ( isset( $_POST['save'] ) ) {
 	}
 }
 
-$store = $stg->getStore( $registry->request->getParam( 'store_id' ) );
+$location = $stg->getLocation( $registry->request->getParam( 'location_id' ) );
 
-if ( !$store ) {
+if ( !$location ) {
 	header("HTTP/1.1 404 Not Found");
 	$status_message->setStatuses( array( 'error', 'block-message', 'remain' ) );
-	$status_message->setMessage( "<p><strong>This store does not exist</strong></p>" );
+	$status_message->setMessage( "<p><strong>This locationdoes not exist</strong></p>" );
 	require( DIR_VIEWS . '/pages/error.php' );
 	exit;
 }

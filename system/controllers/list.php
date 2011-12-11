@@ -3,16 +3,16 @@
 $registry->page_number = isset( $registry->request->params->page_number ) ? $registry->request->params->page_number : 1;
 
 if ( $registry->controller == 'list' ) {
-	$registry->total_store_count = $stg->getStoreCount();
+	$registry->total_location_count = $stg->getLocationCount();
 }
 else {
-	$registry->total_store_count = $stg->getStoreCount( $registry->search_params, $registry->geocode_status );
-	$registry->search_results_exist = (bool) $registry->total_store_count;
+	$registry->total_location_count = $stg->getLocationCount( $registry->search_params, $registry->geocode_status );
+	$registry->search_results_exist = (bool) $registry->total_location_count;
 	$registry->active_search = (bool)count( $_GET );
 }
 
 
-$registry->total_pages = ceil( $registry->total_store_count / $config['stores_per_page'] );
+$registry->total_pages = ceil( $registry->total_location_count / $config['locations_per_page'] );
 if ( $registry->page_number < 1 || ( $registry->page_number > $registry->total_pages && $registry->total_pages != 0 ) ) {
 	header("HTTP/1.1 404 Not Found");
 	$status_message->setStatuses( array( 'error', 'block-message', 'remain' ) );
@@ -37,24 +37,24 @@ $registry->prev_page = $registry->page_number != 1 ? $registry->page_number - 1 
 $registry->next_page = $registry->page_number + 1 <= $registry->total_pages ? $registry->page_number + 1 : null;
 
 if ( $registry->controller == 'list' ) {
-	$registry->stores = $stg->getStores( ($registry->page_number-1)*$config['stores_per_page'], $config['stores_per_page'] );
+	$registry->locations = $stg->getLocations( ($registry->page_number-1)*$config['locations_per_page'], $config['locations_per_page'] );
 }
 else {
-	$registry->stores = $stg->getStores( ($registry->page_number-1)*$config['stores_per_page'], $config['stores_per_page'], $registry->search_params, $registry->geocode_status );
+	$registry->locations = $stg->getLocations( ($registry->page_number-1)*$config['locations_per_page'], $config['locations_per_page'], $registry->search_params, $registry->geocode_status );
 }
 
-$registry->store_ids = array_map( function($s){return $s->getId();}, $registry->stores );
+$registry->location_ids = array_map( function($s){return $s->getId();}, $registry->locations );
 
-$registry->all_stores_geocoded = true;
-foreach( $registry->stores as $store ) {
-	if ( !$store->isGeocoded() ) {
-		$registry->all_stores_geocoded = false;
+$registry->all_locations_geocoded = true;
+foreach( $registry->locations as $location ) {
+	if ( !$location->isGeocoded() ) {
+		$registry->all_locations_geocoded = false;
 	}
 }
 
-$registry->page_store_count = count( $registry->stores );
+$registry->page_location_count = count( $registry->locations );
 
-$registry->page_store_first_num = ($registry->page_number-1)*$config['stores_per_page']+1;
-$registry->page_store_last_num = ($registry->page_number-1)*$config['stores_per_page'] + ( $registry->page_store_count < $config['stores_per_page'] ? $registry->page_store_count : $config['stores_per_page'] );
+$registry->page_location_first_num = ($registry->page_number-1)*$config['locations_per_page']+1;
+$registry->page_location_last_num = ($registry->page_number-1)*$config['locations_per_page'] + ( $registry->page_location_count < $config['locations_per_page'] ? $registry->page_location_count : $config['locations_per_page'] );
 
 require( DIR_VIEWS . '/pages/' . $registry->controller . '.php' );

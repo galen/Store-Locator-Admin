@@ -5,7 +5,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) {
 
 	if ( strpos( $address, '{' ) !== false ) {
 		header("HTTP/1.1 400 Error Parsing Address");
-		$json = array( 'message' => 'Error geocoding the store' );
+		$json = array( 'message' => 'Error geocoding the location' );
 		die( json_encode( $json ) );
 	}
 	
@@ -13,11 +13,11 @@ if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) {
 	$geocode = Geocoder::geocode( $address );
 	
 	if ( $geocode instanceof StdClass ) {
-		$json = array( 'lat' => round( $geocode->lat, 6 ), 'lng' => round( $geocode->lng, 6 ), 'message' => 'Store geocoded successfully' );
+		$json = array( 'lat' => round( $geocode->lat, 6 ), 'lng' => round( $geocode->lng, 6 ), 'message' => 'Location geocoded successfully' );
 	}
 	else {
 		header("HTTP/1.1 405 Geocode Failed");
-		$json = array( 'message' => 'Error geocoding the store' );
+		$json = array( 'message' => 'Error geocoding the location' );
 	}
 	
 	die( json_encode( $json ) );

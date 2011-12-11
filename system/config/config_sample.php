@@ -36,14 +36,17 @@ $config['column_map'] = array (
 	'name'		=> 'name'
 );
 
-$config['location_name'] = 'Elizabeth Arden';
+/**
+ * Application title
+ */
+$config['app_title'] = 'Locations Admin';
 
 /**
  * This gets translated into the address that will be geocoded
  *
  * Put table column names in {}
  */
-$config['geocode_string'] = '{address}, {city}, {state}';
+$config['geocode_string'] = '{address}, {city}, {state} {country}';
 
 /**
  * Time in milliseconds for the status messages to remain before being faded out

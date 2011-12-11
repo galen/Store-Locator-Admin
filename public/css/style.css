@@ -23,6 +23,9 @@ hr {
 .center {
 	text-align:center;
 }
+.right {
+	text-align:right;
+}
 
 h2 {
 	border-bottom: 1px solid #ccc;

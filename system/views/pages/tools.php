@@ -49,7 +49,7 @@
 	<dt>Geocoded</dt><dd id="geocode_stats_geocoded"><?php if( $registry->count_geocoded ): ?><a href="<?php e( sprintf( '%s?geocode_status=%s', URL_SEARCH, LocationTableGateway::GEOCODE_STATUS_TRUE ) ) ?>"><?php endif; ?><?php echo $registry->count_geocoded ?><?php if( $registry->count_geocoded ): ?></a><?php endif; ?></dd>
 	<dt>Ungeocoded</dt><dd id="geocode_stats_ungeocoded"><?php if( $registry->count_ungeocoded ): ?><a href="<?php e( sprintf( '%s?geocode_status=%s', URL_SEARCH, LocationTableGateway::GEOCODE_STATUS_FALSE ) ) ?>"><?php endif; ?><?php echo $registry->count_ungeocoded ?><?php if( $registry->count_ungeocoded ): ?></a><?php endif; ?></dd>
 </dl>
-<p><?php if( $registry->count_ungeocoded == 0 ): ?>All locations are geocoded!<?php endif; ?></p>
+<p><?php if( $registry->count_ungeocoded == 0 ): ?>All locations are geocoded<?php endif; ?></p>
 <form action="" method="post">
 	<input type="submit"<?php if( $registry->count_ungeocoded == 0 ): ?> disabled="true"<?php endif; ?> class="btn success<?php if( $registry->count_ungeocoded == 0 ): ?> disabled<?php endif; ?>" name="geocode_all" id="geocode_all" value="Geocode All">
 	<input type="submit"<?php if( $registry->count_geocoded == 0 ): ?> disabled="true"<?php endif; ?> class="btn error<?php if( $registry->count_geocoded == 0 ): ?> disabled<?php endif; ?>" name="ungeocode_all" id="ungeocode_all" value="Delete All Geocode Info">

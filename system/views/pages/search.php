@@ -1,7 +1,7 @@
 <?php require( DIR_VIEWS . '/header.php' ) ?>
 <?php require( DIR_VIEWS . '/widgets/navigation.php' ) ?>
 <div id="search_modal" class="modal<?php if( !isset( $registry->search_params ) && !isset( $registry->geocode_status ) || !count( $registry->locations ) ): ?> show_search_modal<?php endif; ?>">
-<div class="modal-header"><h2>Search Parameters</h2><?php if( $registry->search_results_exist ): ?><a href="" class="close">&times;</a><?php endif; ?></div>
+<div class="modal-header"><?php if( $registry->search_results_exist ): ?><a href="#" class="close">&times;</a><?php endif; ?><h3>Search Parameters</h3></div>
 <form action="<?php echo URL_SEARCH ?>" method="get" id="search_form">
 	<fieldset>
 		<div class="modal-body">
@@ -52,7 +52,7 @@
 			<?php else: ?>
 				<p id="search_modal_note">Enter your search terms and click Search</p>
 			<?php endif; ?>
-			<?php if( $registry->search_results_exist ): ?><a href="" class="close btn danger">Close</a><?php endif; ?>
+
 			<?php if( $registry->active_search ): ?><input type="reset" value="Reset" onclick="window.location='<?php echo URL_SEARCH ?>'" class="btn"><?php endif; ?>
 			<input type="submit" value="Search" class="btn primary">
 		</div>

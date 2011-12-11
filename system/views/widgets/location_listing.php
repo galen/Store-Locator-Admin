@@ -1,13 +1,13 @@
 <?php include( DIR_VIEWS . '/widgets/location_listing_table_actions.php' ) ?>
 
-<table id="location_table" data-ajax-loader-image="<?php echo URL_PUBLIC  ?>/images/ajax_loader.gif">
+<table id="location_table" data-ajax-loader-image="<?php echo URL_PUBLIC  ?>/images/ajax_loader.gif" class="bordered-table zebra-striped">
 	<thead>
 		<tr>
 			<?php foreach( $registry->columns_list as $tc ): ?>
-				<td><?php e( prettify_var( $tc ) ) ?></td>
+				<th><?php e( prettify_var( $tc ) ) ?></td>
 			<?php endforeach; ?>
-			<td class="center">Geocoded</td>
-			<td class="center">Actions</td>
+			<th class="center">Geocoded</td>
+			<th class="center">Actions</td>
 		</tr>
 	</thead>
 	<tbody>

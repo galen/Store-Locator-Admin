@@ -83,6 +83,9 @@ select {
 td.location_actions {
 	white-space:nowrap;
 }
+#location_table th {
+	font-size:1.1em;
+}
 #location_listing_header {
 	position:relative;
 	overflow:hidden;

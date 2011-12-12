@@ -210,4 +210,10 @@ $("#tools #geocode_all").click(function(){
 	$("#geocode_ajax_loader").show();
 });
 
+$(".clear_search_field").click(function(){
+	$(this).prev().val('').prev().val('');
+	$(this).blur();
+	return false;
+});
+
 });

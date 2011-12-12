@@ -137,6 +137,16 @@ td.location_actions {
 #search_modal form, #search_modal fieldset {
 	margin:0;
 }
+.clear_search_field {
+	font-weight:bold;
+	font-size:16px;
+	color: #ea5c58;
+	padding: 0 5px;
+}
+.clear_search_field:hover {
+	text-decoration:none;
+	color:#c63e37;
+}
 
 /* location edit/create */
 #form_fields {

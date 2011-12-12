@@ -33,7 +33,7 @@
 					<textarea name="search_params[<?php echo $registry->columns[$i] ?>][value]"><?php if( isset( $registry->search_params[$registry->columns[$i]]['value'] ) ): ?><?php echo $registry->search_params[$i]['value'] ?><?php endif; ?></textarea>
 				<?php else: ?>
 					<input type="text" name="search_params[<?php echo $registry->columns[$i] ?>][value]" value="<?php if( isset( $registry->search_params[$registry->columns[$i]]['value'] ) ): ?><?php echo $registry->search_params[$registry->columns[$i]]['value'] ?><?php endif; ?>">
-				<?php endif; ?>
+				<?php endif; ?><a href="#" class="clear_search_field" tabindex="-1">&times;</a>
 			</div>
 	<?php endfor; ?>
 			<div>
@@ -44,6 +44,7 @@
 					<option value="<?php echo LocationTableGateway::GEOCODE_STATUS_FALSE ?>"<?php if( $registry->geocode_status == LocationTableGateway::GEOCODE_STATUS_FALSE ): ?> selected="selected"<?php endif; ?>>No</option>
 				</select>
 			</div>
+
 		</div>
 		<div class="modal-footer">
 		
@@ -53,7 +54,7 @@
 				<p id="search_modal_note">Enter your search terms and click Search</p>
 			<?php endif; ?>
 
-			<?php if( $registry->active_search ): ?><input type="reset" value="Reset" onclick="window.location='<?php echo URL_SEARCH ?>'" class="btn"><?php endif; ?>
+			<input type="reset" value="Reset" onclick="window.location='<?php echo URL_SEARCH ?>'" class="btn" tabindex="2">
 			<input type="submit" value="Search" class="btn primary">
 		</div>
 	</fieldset>

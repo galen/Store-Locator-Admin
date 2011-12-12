@@ -326,10 +326,10 @@ class LocationTableGateway {
 	/**
 	 * Create a location
 	 * 
-	 * @param location$location
+	 * @param Location $location
 	 * @return boolean True on success, false on error
 	 */
-	function createLocation( location$location ) {
+	function createLocation( Location $location ) {
 		$vars = $location->getData();
 		unset( $vars['id'] );
 		$sql = sprintf( 'insert into %s (%s) values(%s)', $this->table, implode( ',', array_keys( $vars ) ), implode( ',', array_map( function( $v ) { return ':'.$v; }, array_keys( $vars ) ) ) );
@@ -346,21 +346,17 @@ class LocationTableGateway {
 	/**
 	 * Save a location
 	 * 
-	 * @param location$location locationto save
+	 * @param Location $location locationto save
 	 * @return boolean True on success, false on error
 	 */
-	function saveLocation( location$location ) {
+	function saveLocation( Location $location ) {
 		if ( !$this->getLocation( $location->getID() ) ) {
 			return false;
 		}
 		$id = $location->getID();
 		$location_array = $location->getData();
 		unset( $location_array['id'] );
-		//foreach( $location_array as $property => $value ) {
-			//if ( strpos( $property, '_' ) === 0 ) {
-				//unset( $location_array[$property] );
-			//}
-		//}
+
 		$cm = $this->column_map;
 		$sql = sprintf( 'update %s set %s where id = :id',
 			$this->table,

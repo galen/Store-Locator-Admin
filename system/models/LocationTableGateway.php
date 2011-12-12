@@ -107,7 +107,7 @@ class LocationTableGateway {
 		if ( is_array( $search_params ) ) {
 			foreach( $search_params as $sp ) {
 				if ( strtolower( $sp['value'] ) != 'null' && strtolower( $sp['value'] ) != 'not null' ) {
-					$stmnt->bindValue( ':'.$sp['variable'], $sp['value'] );
+					$stmnt->bindValue( ':'.$sp['variable'], $sp['compare'] == 'like' ? '%'.$sp['value'].'%' : $sp['value'] );
 				}
 			}
 		}
@@ -138,7 +138,7 @@ class LocationTableGateway {
 		}
 		if ( is_array( $search_params ) ) {
 			foreach( $search_params as $sp ) {
-				$stmnt->bindValue( ':'.$sp['variable'], $sp['value'] );
+				$stmnt->bindValue( ':'.$sp['variable'], $sp['compare'] == 'like' ? '%'.$sp['value'].'%' : $sp['value'] );
 			}
 		}
 		$stmnt->execute();

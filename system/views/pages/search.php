@@ -14,10 +14,10 @@
 					<select name="search_params[<?php echo $registry->columns[$i] ?>][compare]" class="search_compare">
 						<option value=""></option>
 						<option value="="<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == "=" ): ?> selected="selected"<?php endif; ?>>=</option>
-						<option value="like"<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == "like" ): ?> selected="selected"<?php endif; ?>>like</option>
+						<option value="like"<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == "like" ): ?> selected="selected"<?php endif; ?>>contains</option>
 						<option value="!="<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == "!==" ): ?> selected="selected"<?php endif; ?>>!=</option>
-						<option value="<"<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == "<" ): ?> selected="selected"<?php endif; ?>><</option>
-						<option value=">"<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == ">" ): ?> selected="selected"<?php endif; ?>>></option>
+						<option value="<"<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == "<" ): ?> selected="selected"<?php endif; ?>>is less than</option>
+						<option value=">"<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == ">" ): ?> selected="selected"<?php endif; ?>>is greater than</option>
 					</select>
 				<?php endif; ?>			
 	

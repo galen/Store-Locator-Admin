@@ -216,4 +216,52 @@ $(".clear_search_field").click(function(){
 	return false;
 });
 
+$("input").live( "keyup", function( event ){
+		td = $(this).parent();
+		tr = td.parent();
+		value = $(this).val();
+		textbox = $(this);
+		location_id = tr.data("location-id");
+		old_content = td.data('content');
+		if ( event.keyCode == 27 ) {
+			$(this).remove();
+			td.html(old_content);
+			td.removeData();
+		}
+		if ( event.keyCode == 13 ) {
+			if ( $(this).val() != td.data("content") ) {
+				$.ajax({
+					type: 'POST',
+					data: column_map.id + "=" + location_id + "&" + td.data("column") + "=" + escape( value ),
+					url: url_api_edit + '/' + location_id,
+					complete: function( jqxhr ) {
+						save_data = jQuery.parseJSON( jqxhr.responseText );
+						if ( jqxhr.status == 200 ) {
+							textbox.remove();
+							td.html(value);
+							td.removeData();
+						}
+						else {
+							alert( save_data.message );
+						}
+					},
+				});
+			}
+			else {
+				textbox.remove();
+				td.html(old_content);
+				td.removeData();
+			}
+		}
+});
+
+$("td.editable").dblclick(function(){
+	if( !$(this).data('content') ) {
+		$(this).data( 'content', $(this).html() ).html('');
+		$(this).append('<input type="text" style="width:' + ($(this).width()-20) + 'px" value="' + $(this).data( 'content' ) + '" class="quickedit_textbox">').children("input").focus();
+	}
+});
+
+
+
 });

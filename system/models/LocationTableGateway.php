@@ -357,7 +357,6 @@ class LocationTableGateway {
 		$location_array = $location->getData();
 		unset( $location_array['id'] );
 
-		$cm = $this->column_map;
 		$sql = sprintf( 'update %s set %s where id = :id',
 			$this->table,
 			implode( ', ', array_map( function( $c ) { return sprintf( '%1$s = :%1$s', $c ); }, array_keys( $location_array ) ) )

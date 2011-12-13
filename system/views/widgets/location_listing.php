@@ -14,7 +14,7 @@
 	<?php foreach( $registry->locations as $location ): ?>
 	<tr data-location-id="<?php e( $location->getID() ) ?>" data-geocode="<?php e( $location->getQueryString() ) ?>">
 		<?php foreach( $registry->columns_list as $tc ): ?>
-			<td<?php if( isset( $config['column_alignment'][$tc] ) && strcasecmp( $config['column_alignment'][$tc], 'left' ) != 0 ): ?> class="<?php e( $config['column_alignment'][$tc] ) ?>"<?php endif; ?>><?php e( $location->$tc ) ?></td>
+			<td data-column="<?php e( $tc ) ?>" class="editable<?php if( isset( $config['column_alignment'][$tc] ) && strcasecmp( $config['column_alignment'][$tc], 'left' ) != 0 ): ?> <?php e( $config['column_alignment'][$tc] ) ?><?php endif; ?>"><?php e( $location->$tc ) ?></td>
 		<?php endforeach; ?>
 		<td class="center"><?php if( $location->isGeocoded() ): ?>Yes<?php else: ?><a href="<?php e( URL_EDIT ) ?>/<?php e( $location->getID() ) ?>/" class="geocode_table btn small success" title="Click to geocode this location">No</a><?php endif; ?></td>
 		<td class="location_actions center">

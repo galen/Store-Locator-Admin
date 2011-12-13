@@ -17,7 +17,7 @@ class Location {
 	private $column_map = array();
 
 	/**
-	 * locationdata
+	 * location data
 	 *
 	 * @var array
 	 */
@@ -27,7 +27,7 @@ class Location {
 	 * Constructor
 	 *
 	 * @param array $column_map column map
-	 * @param array $data locationdata
+	 * @param array $data location data
 	 * @return Location
 	 */
 	function __construct( array $column_map, array $data = null ) {
@@ -35,24 +35,12 @@ class Location {
 		if ( $data ) {
 			$this->data = $data;
 		}
-		/*
-		 * These next lines set the lat/lng to '' if the lat/lng is null or 0.000000
-		 * This helps to account for the default values of more table structures
-		 *
-		 * Also assumes that there will be no locations at 0,0
-		 */
-		if ( !(int)$this->getLat() ) {
-			$this->setLat( '' );
-		}
-		if ( !(int)$this->getLng() ) {
-			$this->setLng( '' );
-		}
 	}
 
 	/**
-	 * Get locationgeocode status
+	 * Get location geocode status
 	 *
-	 * Returns true if the locationis geocoded, false otherwise
+	 * Returns true if the location is geocoded, false otherwise
 	 *
 	 * @return boolean
 	 */
@@ -80,16 +68,16 @@ class Location {
 	}
 
 	/**
-	 * Get the locationdata array
+	 * Get the location data array
 	 *
-	 * @return array Returns the array of locationdata
+	 * @return array Returns the array of location data
 	 */
 	function getData() {
 		return $this->data;
 	}
 
 	/**
-	 * Set locationdata
+	 * Set location data
 	 *
 	 * @param string $var Variable to set
 	 * @param mixed $val Value to set the variable to
@@ -103,29 +91,37 @@ class Location {
 	}
 
 	/**
-	 * Get locationdata
+	 * Get location data
+	 *
+	 * If retreiving the lat/lng this will check if the lat/lng is 0 or null and convert it to ''
 	 *
 	 * @param string $var Variable to set
 	 * @return mixed Returns the data
 	 */
 	function __get( $var ) {
 		$var = strtolower( $var );
+		if ( $var == 'lat' || $var == 'lng' ) {
+			if ( !(int)$this->data[$this->column_map[$var]] ) {
+				return '';
+			}
+			return $this->data[$this->column_map[$var]];
+		}
 		return isset( $this->data[$this->column_map[$var]] ) ? $this->data[$this->column_map[$var]] : null;
 	}
 
 	/**
-	 * Get editable locationproperties
+	 * Get editable location properties
 	 *
 	 * Id is not editable, we need a way to get all data except for the id
 	 *
-	 * @return array Returns an array of locationdata minus the id
+	 * @return array Returns an array of location data minus the id
 	 */
 	function getEditableProperties() {
 		return array_diff( array_keys( $this->data ), array( $this->column_map['id'], 'column_map' ) );
 	}
 
 	/**
-	 * Get the locationin CSV format
+	 * Get the location in CSV format
 	 *
 	 * @return string
 	 */
@@ -133,14 +129,19 @@ class Location {
 		return implode( ',', $this->getData() );
 	}
 
+	/**
+	 * Returns true/false depending on whether the current location can have a state
+	 *
+	 * @return boolean
+	 */
 	function hasState() {
 		return isset( $this->data[$this->column_map['state']] );
 	}
 
 	/**
-	 * Get the locationin query string format
+	 * Get the location in query string format
 	 *
-	 * @return string Returns the locationin query string format
+	 * @return string Returns the location in query string format
 	 */
 	function getQueryString() {
 		$str = '?';

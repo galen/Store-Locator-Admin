@@ -4,7 +4,7 @@
 	<thead>
 		<tr>
 			<?php foreach( $registry->columns_list as $tc ): ?>
-				<th<?php if( isset( $config['column_alignment'][$tc] ) && strcasecmp( $config['column_alignment'][$tc], 'left' ) != 0 ): ?> class="<?php e( $config['column_alignment'][$tc] ) ?>"<?php endif; ?>><?php e( prettify_var( $tc ) ) ?></td>
+				<th id="<?php e( $tc ) ?>-th" class="editable<?php if( isset( $config['column_alignment'][$tc] ) && strcasecmp( $config['column_alignment'][$tc], 'left' ) != 0 ): ?> <?php e( $config['column_alignment'][$tc] ) ?><?php endif; ?>"><?php e( prettify_var( $tc ) ) ?></td>
 			<?php endforeach; ?>
 			<th class="center">Geocoded</td>
 			<th class="center">Actions</td>

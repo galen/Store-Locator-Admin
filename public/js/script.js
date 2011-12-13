@@ -1,5 +1,11 @@
 $(document).ready(function(){
 
+if( $("th.editable").length ) {
+	$("th.editable").each(function(){
+		$(this).data("width", $(this).width() );
+	});
+}
+
 // Turns a form into an object
 $.fn.serializeObject = function()
 {
@@ -256,9 +262,10 @@ $("input").live( "keyup", function( event ){
 });
 
 $("td.editable").dblclick(function(){
+	width = $( "#" + $(this).data("column") + "-th" ).data("width");
 	if( !$(this).data('content') ) {
 		$(this).data( 'content', $(this).html() ).html('');
-		$(this).append('<input type="text" style="width:' + ($(this).width()-20) + 'px" value="' + $(this).data( 'content' ) + '" class="quickedit_textbox">').children("input").focus();
+		$(this).append('<input type="text" style="width:' + (width-20) + 'px" value="' + $(this).data( 'content' ) + '" class="quickedit_textbox">').children("input").focus().select();
 	}
 });
 

@@ -85,6 +85,7 @@ td.location_actions {
 }
 #location_table th {
 	font-size:1.1em;
+	cursor: default;
 }
 #location_listing_header {
 	position:relative;
@@ -96,6 +97,7 @@ td.location_actions {
 }
 #location_table td {
 	vertical-align:middle;
+	cursor:default;
 }
 
 /* Pagination */
@@ -120,6 +122,9 @@ td.location_actions {
 }
 .pagination a:hover {
 	background: #f7f7f7 !important;
+}
+td.editable {
+	cursor: text !important;
 }
 
 /* Search page */

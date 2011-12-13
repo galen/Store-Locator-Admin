@@ -126,8 +126,14 @@ class LocationTableGateway {
 	 * @param int $geocode_status geocode status (default: null)
 	 * @return void
 	 */
-	public function getLocations( $start=null, $length=null, array $search_params=null, $geocode_status=null ) {
+	public function getLocations( $start=null, $length=null, array $search_params=null, $geocode_status=null, $order_by = null, $order_dir = null ) {
 		$sql = sprintf( 'select * from %s %s', $this->table, isset( $search_params ) || isset( $geocode_status ) ? $this->buildSearchString( (array)$search_params, $geocode_status ) : '' );
+		if ( $order_by ) {
+			if ( $order_dir != 'asc' && $order_dir != 'desc' ) {
+				$order_dir = 'asc';
+			}
+			$sql .= sprintf( " order by %s %s", $order_by, $order_dir );
+		}
 		if ( $start !== null ) {
 			$sql .= ' limit :start, :length';
 		}
@@ -361,6 +367,7 @@ class LocationTableGateway {
 			$this->table,
 			implode( ', ', array_map( function( $c ) { return sprintf( '%1$s = :%1$s', $c ); }, array_keys( $location_array ) ) )
 		);
+		echo $sql;
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->bindValue( ':id', $id );
 		foreach( $location_array as $property => $value ) {

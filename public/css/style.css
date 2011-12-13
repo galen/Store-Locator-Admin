@@ -13,7 +13,8 @@ hr {
 }
 
 .topbar a:hover {
-	background-color:#333;background-color:rgba(255, 255, 255, 0.1);
+	background-color:#333;
+	background-color:rgba(255, 255, 255, 0.1);
 }
 
 #wrapper {
@@ -86,7 +87,26 @@ td.location_actions {
 #location_table th {
 	font-size:1.1em;
 	cursor: default;
+	padding: 0;
 }
+#location_table th a {
+	color:#404040;
+	background: url(/projects/Store-Locator-Admin/public/images/sort_arrows.gif) right 13px no-repeat;
+	display:block;
+	padding: 10px;
+	margin-right: 10px;
+}
+#location_table th.asc a {
+	background-position: right -12px;
+}
+#location_table th.desc a {
+	background-position: right -37px;
+}
+
+#location_table th a:hover {
+	text-decoration:none;
+}
+
 #location_listing_header {
 	position:relative;
 	overflow:hidden;

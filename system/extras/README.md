@@ -1,3 +1,3 @@
 #Extras
 
-**create_table.sql:** Create table SQL syntax
+**create_table.sql:** Sample create table SQL syntax

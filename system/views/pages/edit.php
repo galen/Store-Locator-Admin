@@ -30,7 +30,7 @@
 		<div id="map" style="width:550px;height:500px;"><p id="map_msg"><a href="http://www.activatejavascript.org/">Enable javascript</a> to view the map</p></div>	
 		<div class="well" id="location_edit_actions">
 			<input type="submit" class="btn primary" value="<?php if( $registry->controller == 'create' ): ?>Create<?php else: ?>Save<?php endif; ?>" name="<?php if( $registry->controller == 'create' ): ?>create<?php else: ?>save<?php endif; ?>">
-			<?php if( $registry->controller == 'edit' ): ?><input type="submit" class="geocode_form btn success" id="geocode_form_button" name="geocode" value="Geocode"><div id="geocode_ajax_status_wrapper"><span id="geocode_ajax_status_text"></span><span><a href="#" class="close">&times;</a></span></div><img src="<?php e(  URL_PUBLIC ) ?>/images/ajax_loader.gif" id="geocode_ajax_loader"><?php endif; ?>
+			<?php if( $registry->controller == 'edit' ): ?><input type="submit" class="geocode_form btn success" id="geocode_form_button" name="geocode" value="Geocode"><div id="geocode_ajax_status_wrapper"><span id="geocode_ajax_status_text"></span><a href="#" class="close">&times;</a></div><img src="<?php e(  URL_PUBLIC ) ?>/images/ajax_loader.gif" id="geocode_ajax_loader"><?php endif; ?>
 			<?php if( $registry->controller == 'edit' ): ?>
 				<a href="<?php e(  URL_DELETE ) ?>/<?php e(  $location->getID() ) ?>/?c=<?php e(  URL_ROOT . '/' . REQUEST ) ?>/" id="delete_location" class="btn danger">Delete Location</a>
 			<?php else: ?>

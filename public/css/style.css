@@ -181,6 +181,11 @@ td.location_actions {
 }
 #geocode_ajax_status_wrapper a.close {
 	margin-left: 5px;
+	float:none;
+	font-size: 16px;
+	font-weight:normal;
+	color:#aa0000;
+	opacity:1;
 }
 #location_lat_lng {
 	padding-top:10px;

@@ -55,7 +55,7 @@ select {
 }
 
 /* All maps */
-#map {
+#map, #fullmap {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -89,11 +89,14 @@ td.location_actions {
 	cursor: default;
 	padding: 0;
 }
+#location_table th.action {
+	padding: 10px;
+}
 #location_table th a {
 	color:#404040;
 	background: url(/projects/Store-Locator-Admin/public/images/sort_arrows.gif) right 13px no-repeat;
 	display:block;
-	padding: 10px;
+	padding: 10px 20px 10px 10px;
 	margin-right: 10px;
 }
 #location_table th.asc a {
@@ -248,7 +251,7 @@ td.editable {
 #footer {
 	border-top: 1px solid #eee;
 	overflow:hidden;
-	margin: 50px 0
+	margin: 20px 0 50px 0;
 }
 #footer ul {
 	list-style:none;

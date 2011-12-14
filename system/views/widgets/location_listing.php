@@ -6,8 +6,8 @@
 			<?php foreach( $registry->columns_list as $tc ): ?>
 				<th id="<?php e( $tc ) ?>-th" class="<?php e( isset( $_GET['order_dir'] ) && $_GET['order_by'] == $tc ? ( $_GET['order_dir'] == 'asc' ? 'asc' : 'desc' ) : '' ) ?> editable<?php if( isset( $config['column_alignment'][$tc] ) && strcasecmp( $config['column_alignment'][$tc], 'left' ) != 0 ): ?> <?php e( $config['column_alignment'][$tc] ) ?><?php endif; ?>"><a href="?<?php e( add_to_query( $registry->query, array( 'order_by' => $tc, 'order_dir' => isset( $_GET['order_dir'] ) && $_GET['order_by'] == $tc && $_GET['order_dir'] == 'asc' ? 'desc' : 'asc' ) ) ) ?>"><?php e( prettify_var( $tc ) ) ?></a></th>
 			<?php endforeach; ?>
-			<th class="center">Geocoded</th>
-			<th class="center">Actions</th>
+			<th class="action center">Geocoded</th>
+			<th class="action center">Actions</th>
 		</tr>
 	</thead>
 	<tbody>

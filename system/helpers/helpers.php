@@ -5,9 +5,9 @@ function get_search_params( $raw_search_params, $column_info ) {
 	foreach( $raw_search_params as $var => $vals ) {
 		if ( $column_info[$var]['type'] == 'select' && $vals["value"] != sprintf( 'select_%s', $var ) ) {
 			$search_params[$var] = array(
-				$var,
-				'=',
-				$vals["value"]
+				'variable' => $var,
+				'compare' => '=',
+				'value' => $vals["value"]
 			);
 		}
 		elseif ( !empty( $vals['compare'] ) ) {

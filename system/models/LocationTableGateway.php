@@ -367,7 +367,6 @@ class LocationTableGateway {
 			$this->table,
 			implode( ', ', array_map( function( $c ) { return sprintf( '%1$s = :%1$s', $c ); }, array_keys( $location_array ) ) )
 		);
-		echo $sql;
 		$stmnt = $this->db->prepare( $sql );
 		$stmnt->bindValue( ':id', $id );
 		foreach( $location_array as $property => $value ) {

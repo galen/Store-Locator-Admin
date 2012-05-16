@@ -127,7 +127,7 @@ class LocationTableGateway {
 	 * @return void
 	 */
 	public function getLocations( $start=null, $length=null, array $search_params=null, $geocode_status=null ) {
-		$sql = sprintf( 'select * from %s %s', $this->table, isset( $search_params ) || isset( $geocode_status ) ? $this->buildSearchString( (array)$search_params, $geocode_status ) : '' );
+		$sql = sprintf( 'select %s from %s %s', implode( ',', array_keys( $this->column_map ) ), $this->table, isset( $search_params ) || isset( $geocode_status ) ? $this->buildSearchString( (array)$search_params, $geocode_status ) : '' );
 		if ( $start !== null ) {
 			$sql .= ' limit :start, :length';
 		}

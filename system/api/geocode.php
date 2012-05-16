@@ -17,7 +17,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) {
 	}
 	else {
 		header("HTTP/1.1 405 Geocode Failed");
-		$json = array( 'message' => 'Error geocoding the location' );
+		$json = array( 'message' => 'Error geocoding the location', 'details' => $geocode );
 	}
 	
 	die( json_encode( $json ) );

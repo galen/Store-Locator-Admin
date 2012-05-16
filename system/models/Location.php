@@ -101,12 +101,12 @@ class Location {
 	function __get( $var ) {
 		$var = strtolower( $var );
 		if ( $var == 'lat' || $var == 'lng' ) {
-			if ( !(int)$this->data[$this->column_map[$var]] ) {
+			if ( !(int)$this->data[$var] ) {
 				return '';
 			}
-			return $this->data[$this->column_map[$var]];
+			return $this->data[$var];
 		}
-		return isset( $this->data[$this->column_map[$var]] ) ? $this->data[$this->column_map[$var]] : null;
+		return isset( $this->data[$var] ) ? $this->data[$var] : null;
 	}
 
 	/**

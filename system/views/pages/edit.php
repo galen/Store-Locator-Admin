@@ -13,15 +13,15 @@
 			<?php if( $registry->controller == 'edit' ): ?>
 				<input type="hidden" name="<?php e(  $config['column_map']['id'] ) ?>" value="<?php e(  $location->getID() ) ?>" id="location_id">
 			<?php endif; ?>
-			<?php foreach( $registry->columns_edit as $property ): ?>
-				<?php if( $property == $config['column_map']['lat'] ): ?>
+			<?php foreach( $config['column_map'] as $table_column => $property ): ?>
+				<?php if( $table_column == 'lat' ): ?>
 					<div id="location_lat_lng">
 				<?php endif; ?>
 					<div>
 						<label><?php e(  prettify_var( $property ) ) ?></label>
-						<input type="text" name="<?php e(  $property ) ?>" id="<?php e(  $property ) ?>" value="<?php if ( isset( $location ) ): ?><?php e( $location->$property ) ?><?php endif; ?>">
+						<input type="text" name="<?php e(  $table_column ) ?>" id="<?php e( $table_column ) ?>" value="<?php if ( isset( $location ) ): ?><?php e( $location->$property ) ?><?php endif; ?>">
 					</div>
-				<?php if( $property == $config['column_map']['lng'] ): ?>
+				<?php if( $table_column == 'lng' ): ?>
 				<?php if( $registry->controller == 'create' ): ?><p id="create_geocode_note">You will be able to geocode the location after creation</p><?php endif; ?>
 				</div>
 				<?php endif; ?>

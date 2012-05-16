@@ -152,7 +152,7 @@ $(".geocode_table").click(function( event, all ){
 			else {
 				obj.html("No");
 				if ( !all ) {
-					alert( data.message );
+					alert( data.message + ( data.details ? " (" + data.details + ")" : '' ) );
 				}
 			}
 		},

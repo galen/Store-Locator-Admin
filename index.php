@@ -79,8 +79,12 @@ if ( $registry->request = Router::route( REQUEST ) ) {
 	$registry->column_info = $stg->getColumns();
 
 	$registry->columns = array_keys( $registry->column_info );
-	$registry->columns_list = array_values( array_diff( $registry->columns, array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) );
-	$registry->columns_edit = array_merge( array_values( array_diff( $registry->columns, array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) ), array( $config['column_map']['lat'], $config['column_map']['lng'] ) );
+	$registry->columns_list = array_values( array_diff( array_keys( $config['column_map'] ), array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) );
+	$registry->columns_list_titles = array_values( array_diff( array_values( $config['column_map'] ), array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) );
+
+	$registry->columns_edit = array_merge( array_values( array_diff( array_keys( $config['column_map'] ), array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) ), array( $config['column_map']['lat'], $config['column_map']['lng'] ) );
+	$registry->columns_edit_titles = array_merge( array_values( array_diff( array_values( $config['column_map'] ), array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) ), array( $config['column_map']['lat'], $config['column_map']['lng'] ) );
+
 
 	if ( isset( $_GET['status'], $_GET['message'] ) ) {
 		$status_message->setStatus( $_GET['status'] );

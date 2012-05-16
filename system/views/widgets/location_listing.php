@@ -3,7 +3,7 @@
 <table id="location_table" data-ajax-loader-image="<?php e( URL_PUBLIC ) ?>/images/ajax_loader.gif" class="bordered-table zebra-striped">
 	<thead>
 		<tr>
-			<?php foreach( $registry->columns_list as $tc ): ?>
+			<?php foreach( $registry->columns_list_titles as $tc ): ?>
 				<th<?php if( isset( $config['column_alignment'][$tc] ) && strcasecmp( $config['column_alignment'][$tc], 'left' ) != 0 ): ?> class="<?php e( $config['column_alignment'][$tc] ) ?>"<?php endif; ?>><?php e( prettify_var( $tc ) ) ?></td>
 			<?php endforeach; ?>
 			<th class="center">Geocoded</td>

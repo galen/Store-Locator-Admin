@@ -48,6 +48,7 @@ $(".delete_location").click(function( event, all ){
 			data = jQuery.parseJSON( jqxhr.responseText );
 			if ( jqxhr.status == 200 ) {
 				tr.fadeOut();
+				window.location.reload(true);
 			}
 			else {
 				alert( data.message );

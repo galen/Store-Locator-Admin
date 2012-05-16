@@ -58,7 +58,7 @@ if ( $registry->request = Router::route( REQUEST ) ) {
 		exit;
 	}
 
-	// We will use a locationtable gateway on every page so we will create one here
+	// We will use a location table gateway on every page so we will create one here
 	require( DIR_MODELS . '/LocationTableGateway.php' );
 	require( DIR_MODELS . '/Location.php' );
 	$stg = new LocationTableGateway( $db, $config['db_table'], $config['column_map'] );
@@ -85,6 +85,7 @@ if ( $registry->request = Router::route( REQUEST ) ) {
 	$registry->columns_edit = array_merge( array_values( array_diff( array_keys( $config['column_map'] ), array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) ), array( $config['column_map']['lat'], $config['column_map']['lng'] ) );
 	$registry->columns_edit_titles = array_merge( array_values( array_diff( array_values( $config['column_map'] ), array( $config['column_map']['id'], $config['column_map']['lat'], $config['column_map']['lng'] ) ) ), array( $config['column_map']['lat'], $config['column_map']['lng'] ) );
 
+	$registry->geocode_status = null;
 
 	if ( isset( $_GET['status'], $_GET['message'] ) ) {
 		$status_message->setStatus( $_GET['status'] );

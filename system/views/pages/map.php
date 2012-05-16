@@ -27,6 +27,7 @@ this.initialize = function() {
 	this.event_listeners = [];
 	this.bounds = new google.maps.LatLngBounds();
 	<?php foreach( $registry->locations as $index => $location ): ?>
+	<?php if( $location->getLat() && $location->getLng() ): ?>
 	this.markers[<?php echo $index ?>] = new google.maps.Marker({
 		position: new google.maps.LatLng(<?php e( $location->getLat() ) ?>,<?php e( $location->getLng() ) ?>),
 		map: this.map,
@@ -35,6 +36,7 @@ this.initialize = function() {
 	this.bounds.extend(this.markers[<?php echo $index ?>].position);
 	this.map.fitBounds(this.bounds);
 	google.maps.event.addListener(this.markers[<?php echo $index ?>], 'click', function() { self.info_window.setContent(self.markers[<?php echo $index ?>].content);self.info_window.open(self.map,self.markers[<?php echo $index ?>]); });
+	<?php endif; ?>
 	<?php endforeach; ?>
 	<?php if( $config['map_cluster_limit'] === null || count( $registry->locations ) > $config['map_cluster_limit'] ): ?>
 	var markerCluster = new MarkerClusterer(self.map, self.markers, {"maxZoom":4,"gridSize":null});

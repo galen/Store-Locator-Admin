@@ -9,7 +9,10 @@
 			<div>
 				<label><?php e( prettify_var( $registry->columns[$i] ) ) ?></label>
 				<?php if( $registry->column_info[$registry->columns[$i]]['type'] == 'select' ): ?>
-					<div class="search_compare">=</div>
+					<select name="search_params[<?php echo $registry->columns[$i] ?>][compare]" class="search_compare">
+						<option value=""></option>
+						<option value="="<?php if( isset( $registry->search_params[$registry->columns[$i]] ) && $registry->search_params[$registry->columns[$i]]['compare'] == "=" ): ?> selected="selected"<?php endif; ?>>=</option>
+					</select>
 				<?php else: ?>
 					<select name="search_params[<?php echo $registry->columns[$i] ?>][compare]" class="search_compare">
 						<option value=""></option>
@@ -24,7 +27,7 @@
 				<?php if( $registry->column_info[$registry->columns[$i]]['type'] == 'select' ): ?>
 				<select name="search_params[<?php echo $registry->columns[$i] ?>][value]">
 					<option value="select_<?php e( $registry->columns[$i] ) ?>">Select <?php e( $registry->columns[$i] ) ?></option>
-					<option value=""<?php if( isset( $registry->search_params[$registry->columns[$i]]['value'] ) && $registry->search_params[$registry->columns[$i]]['value'] == '' ): ?> selected="selected"<?php endif; ?>></option>
+
 					<?php foreach( $registry->column_info[$registry->columns[$i]]['values'] as $option ): ?>
 					<option value="<?php echo $option ?>"<?php if( isset( $registry->search_params[$registry->columns[$i]]['value'] ) && $registry->search_params[$registry->columns[$i]]['value'] == $option ): ?> selected="selected"<?php endif; ?>><?php echo $option ?></option>
 					<?php endforeach; ?>

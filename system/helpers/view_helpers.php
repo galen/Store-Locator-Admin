@@ -19,3 +19,8 @@ function get_body_data( $config ) {
 	if ( $config['autoremove_statuses'] > 0 ) $data[] = sprintf('data-autoremove-statuses-time="%s"', (int)$config['autoremove_statuses'] );
 	return sprintf( "%s%s", count( $data ) ? ' ' : '', implode( ' ', $data ) );
 }
+
+function add_to_query( $query, array $add_to_query ) {
+	parse_str( trim( $query, '?' ), $a );
+	return http_build_query( array_merge( $a, $add_to_query ) );
+}

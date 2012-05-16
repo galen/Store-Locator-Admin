@@ -31,16 +31,16 @@ $end_page = min( $start_page + ( $config['pagination_viewport']*2 ), $registry->
 $start_page = max( $end_page - ( $config['pagination_viewport']*2 ), 1 );
 
 $registry->page_array = range($start_page,$end_page);
-$registry->search_query = $registry->controller == 'search' && isset( $registry->search_params ) ? '?' . $_SERVER['QUERY_STRING'] : '';
+$registry->query = '?' . $_SERVER['QUERY_STRING'];
 
 $registry->prev_page = $registry->page_number != 1 ? $registry->page_number - 1 : null;
 $registry->next_page = $registry->page_number + 1 <= $registry->total_pages ? $registry->page_number + 1 : null;
 
 if ( $registry->controller == 'list' ) {
-	$registry->locations = $stg->getLocations( ($registry->page_number-1)*$config['locations_per_page'], $config['locations_per_page'] );
+	$registry->locations = $stg->getLocations( ($registry->page_number-1)*$config['locations_per_page'], $config['locations_per_page'], null, null, isset( $_GET['order_by'] ) ? $_GET['order_by'] : null, isset( $_GET['order_dir'] ) ? $_GET['order_dir'] : null );
 }
 else {
-	$registry->locations = $stg->getLocations( ($registry->page_number-1)*$config['locations_per_page'], $config['locations_per_page'], $registry->search_params, $registry->geocode_status );
+	$registry->locations = $stg->getLocations( ($registry->page_number-1)*$config['locations_per_page'], $config['locations_per_page'], $registry->search_params, $registry->geocode_status, isset( $_GET['order_by'] ) ? $_GET['order_by'] : null, isset( $_GET['order_dir'] ) ? $_GET['order_dir'] : null  );
 }
 
 $registry->location_ids = array_map( function($s){return $s->getId();}, $registry->locations );

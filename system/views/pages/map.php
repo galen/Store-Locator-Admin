@@ -21,7 +21,7 @@ this.initialize = function() {
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
 
-	this.map = new google.maps.Map(document.getElementById("map_div"), this.map_options);
+	this.map = new google.maps.Map(document.getElementById("fullmap"), this.map_options);
 	this.info_window = new google.maps.InfoWindow();
 	this.markers = [];
 	this.event_listeners = [];
@@ -54,7 +54,7 @@ google.maps.event.addDomListener(window, "load", initialize_map );
 
 <?php require( DIR_VIEWS . '/widgets/navigation.php' ) ?>
 
-<h2>Map</h2>
-<div id="map_div" style="width:100%;height:500px;"><p id="map_msg"><a href="http://www.activatejavascript.org/">Enable javascript</a> to view the map</p></div>	
+<h2>Map <span>Showing <?php e( count( $registry->locations ) ) ?> locations</span></h2>
+<div id="fullmap" style="width:100%;height:500px;"><p id="map_msg"><a href="http://www.activatejavascript.org/">Enable javascript</a> to view the map</p></div>	
 
 <?php require( DIR_VIEWS . '/footer.php' ) ?>
